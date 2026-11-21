@@ -17,7 +17,7 @@ pub enum KernelError {
     /// Failure while validating or interpreting the loaded `Config`.
     #[error(
         "kernel config error: {reason} — \
-         re-run after correcting `.cc/config.toml` (see `cc init` for a \
+         re-run after correcting `.cc/config.toml` (see `ccv12 init` for a \
          valid template)"
     )]
     Config {

@@ -201,7 +201,7 @@ fn render_explanation(f: &Finding) -> String {
 fn render_remediation(f: &Finding) -> String {
     use crate::message::Remediation;
     match &f.message.remediation {
-        Remediation::AutoFix(_) => "  fix: auto-fix available — run `cc fix`".to_string(),
+        Remediation::AutoFix(_) => "  fix: auto-fix available — run `ccv12 fix`".to_string(),
         Remediation::SuggestedRewrite(s) => format!("  fix: {s}"),
         Remediation::DocLink(url) => format!("  docs: {url}"),
         Remediation::Multiple(items) => {

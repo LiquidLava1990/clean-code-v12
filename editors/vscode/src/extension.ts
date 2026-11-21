@@ -2,11 +2,11 @@
 //
 // Spawns the `cc-lsp` daemon over stdio and wires it to VS Code's
 // LanguageClient. The daemon is the same binary used by the CLI, so
-// findings, hovers, and code-actions are exactly what `cc check`
+// findings, hovers, and code-actions are exactly what `ccv12 check`
 // produces — no editor-specific lint logic lives here.
 //
 // Server discovery (in order):
-//   1. `cleanCodeV12.cli.path` + `lsp` subcommand   (e.g. `cc lsp`)
+//   1. `cleanCodeV12.cli.path` + `lsp` subcommand   (e.g. `ccv12 lsp`)
 //   2. `cleanCodeV12.server.path`                   (e.g. `cc-lsp`)
 // The first command whose binary resolves on PATH wins. The CLI does
 // NOT currently ship an `lsp` subcommand (verified against
@@ -36,14 +36,14 @@ const SUPPORTED_LANGUAGES: ReadonlyArray<string> = [
 /**
  * Build the ServerOptions describing how to launch cc-lsp.
  *
- * We prefer the `cc lsp` subcommand (so a single CLI binary covers
+ * We prefer the `ccv12 lsp` subcommand (so a single CLI binary covers
  * both batch and LSP use). If that subcommand is unavailable, callers
  * should set `cleanCodeV12.server.path` to point at the standalone
  * `cc-lsp` binary instead.
  */
 function buildServerOptions(): ServerOptions {
     const config = vscode.workspace.getConfiguration('cleanCodeV12');
-    const cliPath: string = config.get<string>('cli.path', 'cc');
+    const cliPath: string = config.get<string>('cli.path', 'ccv12');
     const serverPath: string = config.get<string>('server.path', 'cc-lsp');
     const severity: string = config.get<string>('severity', 'required');
 
@@ -72,7 +72,7 @@ function buildServerOptions(): ServerOptions {
     // vscode-languageclient does not natively support a "try A, fall
     // back to B" run config, so we resolve at activation time. The
     // chosen executable becomes both `run` and `debug`. Selection
-    // policy: if `cc lsp --help` exits 0 we use the CLI; otherwise we
+    // policy: if `ccv12 lsp --help` exits 0 we use the CLI; otherwise we
     // fall back to the daemon. We do that synchronously below in the
     // factory so the chosen command is fixed for the client's lifetime.
     return resolveExecutable(cliExecutable, daemonExecutable);
@@ -86,7 +86,7 @@ function buildServerOptions(): ServerOptions {
  *   - If `cleanCodeV12.cli.path` was customised AND `cleanCodeV12.server.path`
  *     left default, prefer the CLI.
  *   - Otherwise prefer the standalone daemon (the documented default
- *     while `cc lsp` does not yet exist).
+ *     while `ccv12 lsp` does not yet exist).
  */
 function resolveExecutable(cli: Executable, daemon: Executable): ServerOptions {
     const config = vscode.workspace.getConfiguration('cleanCodeV12');
@@ -138,7 +138,7 @@ async function startClient(context: vscode.ExtensionContext): Promise<void> {
         void vscode.window.showErrorMessage(
             `Clean Code V12: failed to start cc-lsp — ${message}. ` +
                 `Set "cleanCodeV12.server.path" to the cc-lsp binary, ` +
-                `or "cleanCodeV12.cli.path" to a cc CLI that supports the lsp subcommand.`,
+                `or "cleanCodeV12.cli.path" to a ccv12 CLI that supports the lsp subcommand.`,
         );
         client = undefined;
         return;

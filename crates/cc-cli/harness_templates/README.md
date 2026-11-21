@@ -1,7 +1,7 @@
 # Clean Code V12 pre-refactor harness
 
 Seven-layer guard against refactor regressions and slop accumulation,
-scaffolded by `cc harness init <repo>`. The harness is light on purpose
+scaffolded by `ccv12 harness init <repo>`. The harness is light on purpose
 -- no behavioural mocks, no service stand-ins -- so it stays fast and
 stable while a multi-file refactor is in flight.
 
@@ -93,13 +93,13 @@ stable while a multi-file refactor is in flight.
 ## Workflow
 
 ```bash
-cc harness init <repo>          # scaffold + baseline snapshot (all 7 layers)
+ccv12 harness init <repo>          # scaffold + baseline snapshot (all 7 layers)
 # ... fix findings, refactor ...
-cc harness verify <repo>        # confirm no drift across all 7 layers
-cc harness regenerate <repo>    # ratify deliberate changes (rebuilds all 7 snapshots)
+ccv12 harness verify <repo>        # confirm no drift across all 7 layers
+ccv12 harness regenerate <repo>    # ratify deliberate changes (rebuilds all 7 snapshots)
 ```
 
-The `cc harness regenerate` step MUST be paired with a commit message
+The `ccv12 harness regenerate` step MUST be paired with a commit message
 that describes the delta -- the snapshot diff is the source of truth
 for code review.
 

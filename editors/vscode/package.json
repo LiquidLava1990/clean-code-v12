@@ -54,19 +54,19 @@
       "properties": {
         "cleanCodeV12.cli.path": {
           "type": "string",
-          "default": "cc",
-          "markdownDescription": "Path to the `cc` CLI binary. The extension will try `<cli.path>` with the `lsp` subcommand first; if that fails it falls back to spawning `cc-lsp` (the standalone LSP daemon binary). Either binary must be on `PATH`, or this setting must point at the binary directly."
+          "default": "ccv12",
+          "markdownDescription": "Path to the `ccv12` CLI binary. The extension will try `<cli.path>` with the `lsp` subcommand first; if that fails it falls back to spawning `cc-lsp` (the standalone LSP daemon binary). Either binary must be on `PATH`, or this setting must point at the binary directly."
         },
         "cleanCodeV12.server.path": {
           "type": "string",
           "default": "cc-lsp",
-          "markdownDescription": "Path to the standalone `cc-lsp` daemon binary (used when the `cc lsp` subcommand is unavailable). Defaults to `cc-lsp` which must be on `PATH`."
+          "markdownDescription": "Path to the standalone `cc-lsp` daemon binary (used when the `ccv12 lsp` subcommand is unavailable). Defaults to `cc-lsp` which must be on `PATH`."
         },
         "cleanCodeV12.severity": {
           "type": "string",
           "enum": ["blocker", "required", "nit"],
           "default": "required",
-          "markdownDescription": "Minimum finding severity surfaced as a diagnostic. Mirrors the `--severity` flag on `cc check`."
+          "markdownDescription": "Minimum finding severity surfaced as a diagnostic. Mirrors the `--severity` flag on `ccv12 check`."
         },
         "cleanCodeV12.trace.server": {
           "type": "string",

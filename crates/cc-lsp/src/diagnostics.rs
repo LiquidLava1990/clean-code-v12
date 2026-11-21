@@ -22,7 +22,7 @@ use tower_lsp::lsp_types::{Diagnostic, DiagnosticSeverity, NumberOrString, Posit
 /// Editors render this as the prefix in the squiggly tooltip
 /// (e.g. `cc(R-FN-LEN): function exceeds 50 lines`). Stable across the
 /// lifetime of the daemon so config UIs can filter by it.
-pub const DIAGNOSTIC_SOURCE: &str = "cc";
+pub const DIAGNOSTIC_SOURCE: &str = "ccv12";
 
 /// Map a finding to an LSP diagnostic.
 ///
@@ -157,7 +157,7 @@ mod tests {
     #[test]
     fn source_and_code_set() {
         let diag = finding_to_diagnostic(&sample_finding(Severity::Blocker));
-        assert_eq!(diag.source.as_deref(), Some("cc"));
+        assert_eq!(diag.source.as_deref(), Some("ccv12"));
         match &diag.code {
             Some(NumberOrString::String(s)) => assert_eq!(s, "R-FN-LEN"),
             other => panic!("expected string code, got {other:?}"),

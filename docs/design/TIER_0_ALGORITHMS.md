@@ -482,5 +482,5 @@ Day 9:  R-REFACTOR, R-CLEAN-1                   (require baseline + git diff plu
 Day 10: R-ERR-ACTION                            (LLM probe — last because it requires API plumbing)
 ```
 
-Self-host gate: after Day 10, `cc check .` on clean-code-v12 source returns
+Self-host gate: after Day 10, `ccv12 check .` on clean-code-v12 source returns
 Tier-0 GREEN. If not, fix the rule or fix the code — not lower the threshold.

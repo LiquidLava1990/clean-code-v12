@@ -1,4 +1,4 @@
-//! [`ExitCode`] — explicit exit-code mapping for the `cc` binary.
+//! [`ExitCode`] — explicit exit-code mapping for the `ccv12` binary.
 //!
 //! Stable contract:
 //!
@@ -17,7 +17,7 @@ pub enum ExitCode {
     Clean = 0,
     /// At least one finding was emitted at or above the severity floor.
     Findings = 1,
-    /// Kernel / config / I/O failure — `cc` could not run to completion.
+    /// Kernel / config / I/O failure — `ccv12` could not run to completion.
     RuntimeError = 2,
     /// Argv parsing rejected the input. Reserved for `clap` failures.
     InvalidArgv = 3,

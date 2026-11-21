@@ -16,7 +16,7 @@ pub enum ConfigError {
     /// I/O error reading the config file.
     #[error(
         "could not read config at {path}: {source} — \
-         create the file via `cc init` or pass --config <path>"
+         create the file via `ccv12 init` or pass --config <path>"
     )]
     Io {
         /// Path that failed to read.
@@ -70,7 +70,7 @@ pub enum ConfigError {
     #[error(
         "rule '{id}' is a Tier-0 forever rule and cannot be disabled — \
          remove `enabled = false` from [rules.\"{id}\"], or override its \
-         severity downward instead (Required -> Nit). Use `cc explain {id}` \
+         severity downward instead (Required -> Nit). Use `ccv12 explain {id}` \
          to see why this rule is mandatory."
     )]
     CannotDisableTier0 {
@@ -96,7 +96,7 @@ pub enum ConfigError {
     /// The `rule_id` is not registered. Suggests close matches.
     #[error(
         "rule '{id}' is unknown{suggestion_blurb} — \
-         run `cc explain` for the full rule list, \
+         run `ccv12 explain` for the full rule list, \
          or check for typos in [rules.\"{id}\"]."
     )]
     UnknownRule {

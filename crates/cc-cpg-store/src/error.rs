@@ -38,7 +38,7 @@ pub enum StoreError {
     #[error(
         "schema mismatch in {path}: store has schema_version={found} but this \
          binary expects schema_version={expected}. \
-         Fix: rebuild the CPG with `cc check --rebuild` (caches are \
+         Fix: rebuild the CPG with `ccv12 check --rebuild` (caches are \
          invalidated whenever cc-cpg::SCHEMA_VERSION bumps)."
     )]
     SchemaMismatch {
@@ -79,7 +79,7 @@ pub enum StoreError {
     #[error(
         "redb table operation `{op}` failed: {source}. \
          Fix: this almost always means schema drift between writer and \
-         reader — rebuild the CPG with `cc check --rebuild`."
+         reader — rebuild the CPG with `ccv12 check --rebuild`."
     )]
     Table {
         /// Logical operation name.
@@ -145,7 +145,7 @@ pub enum StoreError {
     #[error(
         "bincode decode failed for {what}: {source}. \
          Fix: schema drift between writer and reader; rebuild the CPG with \
-         `cc check --rebuild`."
+         `ccv12 check --rebuild`."
     )]
     Decode {
         /// What was being decoded.

@@ -3,7 +3,7 @@
 Squiggles, hovers, and quick-fixes powered by the
 [Clean Code V12](https://github.com/LiquidLava1990/clean-code-v12) linter. The
 extension is a thin wrapper over the `cc-lsp` daemon: every diagnostic
-you see in the editor is the same finding `cc check` would emit on the
+you see in the editor is the same finding `ccv12 check` would emit on the
 command line.
 
 ## Features
@@ -29,9 +29,9 @@ supported deployment shapes:
    # or
    cargo build --release -p cc-lsp        # then copy target/release/cc-lsp
    ```
-2. **Unified CLI (future).** Once the `cc` CLI grows an `lsp`
+2. **Unified CLI (future).** Once the `ccv12` CLI grows an `lsp`
    subcommand, set `cleanCodeV12.cli.path` to a workspace-customised
-   value and the extension will spawn `cc lsp --stdio` instead. As of
+   value and the extension will spawn `ccv12 lsp --stdio` instead. As of
    v0.1.0 the CLI does **not** ship this subcommand (verified against
    `crates/cc-cli/src/args.rs`); the standalone daemon path is the
    active default.
@@ -40,7 +40,7 @@ supported deployment shapes:
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| `cleanCodeV12.cli.path` | `cc` | Path to the `cc` CLI. Used only when customised in workspace/user settings — see *Requirements* above. |
+| `cleanCodeV12.cli.path` | `ccv12` | Path to the `ccv12` CLI. Used only when customised in workspace/user settings — see *Requirements* above. |
 | `cleanCodeV12.server.path` | `cc-lsp` | Path to the standalone `cc-lsp` daemon binary. |
 | `cleanCodeV12.severity` | `required` | Minimum severity surfaced as a diagnostic (`blocker`, `required`, or `nit`). |
 | `cleanCodeV12.trace.server` | `off` | LSP trace verbosity (`off`, `messages`, `verbose`). |

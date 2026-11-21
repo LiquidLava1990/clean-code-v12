@@ -105,7 +105,7 @@ fn build_descriptor(rule_id: &str, sev: Severity, meta: &ToolMeta) -> ReportingD
         id: rule_id.to_owned(),
         name: Some(rule_id.to_owned()),
         short_description: Some(MultiformatMessageString {
-            text: format!("see `cc explain {rule_id}` for details"),
+            text: format!("see `ccv12 explain {rule_id}` for details"),
             markdown: None,
         }),
         full_description: None,

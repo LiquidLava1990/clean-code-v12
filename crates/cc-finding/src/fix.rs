@@ -27,10 +27,10 @@ pub struct TextEdit {
 #[serde(rename_all = "lowercase")]
 pub enum FixSafety {
     /// Behaviour-preserving with ≥ 99.9 % confidence (purely syntactic,
-    /// scoped). Auto-applied by `cc fix`.
+    /// scoped). Auto-applied by `ccv12 fix`.
     Safe,
     /// May change behaviour in edge cases — human must confirm.
-    /// Surfaced but never applied without `cc fix --unsafe`.
+    /// Surfaced but never applied without `ccv12 fix --unsafe`.
     Unsafe,
 }
 

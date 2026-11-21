@@ -1,8 +1,8 @@
-//! `cc fix` — apply machine-applicable [`FixProposal::Diff`] edits.
+//! `ccv12 fix` — apply machine-applicable [`FixProposal::Diff`] edits.
 //!
 //! Pipeline:
 //!
-//! 1. Run `cc check` over the supplied path (same kernel + default packs).
+//! 1. Run `ccv12 check` over the supplied path (same kernel + default packs).
 //! 2. Filter findings by `--severity` / `--rule`.
 //! 3. Keep only findings whose [`Finding::fix`] (or
 //!    [`Remediation::AutoFix`]) carries an *auto-applicable*
@@ -50,7 +50,7 @@ struct PlannedEdit {
     new_text: String,
 }
 
-/// Outcome counters surfaced in the `cc fix` summary line.
+/// Outcome counters surfaced in the `ccv12 fix` summary line.
 #[derive(Debug, Default, Clone, Copy)]
 struct FixCounts {
     fixed: usize,
@@ -60,12 +60,12 @@ struct FixCounts {
     io_errors: usize,
 }
 
-/// Top-level `cc fix` handler.
+/// Top-level `ccv12 fix` handler.
 ///
 /// # Errors
 ///
 /// Returns [`CliError::InvalidRoot`] / [`CliError::Config`] /
-/// [`CliError::Kernel`] when the underlying `cc check` plumbing rejects
+/// [`CliError::Kernel`] when the underlying `ccv12 check` plumbing rejects
 /// the run. Per-file I/O failures are *not* surfaced as `Err` — they are
 /// counted into `io_errors` and the resulting [`ExitCode`] reflects the
 /// outcome.

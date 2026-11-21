@@ -1,5 +1,5 @@
 name: 'Clean Code V12'
-description: 'Run cc check and upload SARIF to the GitHub Security tab.'
+description: 'Run ccv12 check and upload SARIF to the GitHub Security tab.'
 author: 'LiquidLava1990'
 
 branding:
@@ -24,7 +24,7 @@ inputs:
     required: false
     default: ''
   version:
-    description: 'cc release tag to install (e.g. v0.1.0), or latest.'
+    description: 'ccv12 release tag to install (e.g. v0.1.0), or latest.'
     required: false
     default: 'latest'
   upload-sarif:
@@ -44,22 +44,22 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Install cc (prebuilt release binary)
+    - name: Install ccv12 (prebuilt release binary)
       shell: bash
       env:
-        CC_VERSION: ${{ inputs.version }}
-        CC_INSTALL_DIR: ${{ runner.temp }}/cc-bin
-        CC_BIN_NAME: cc
-        CC_REPO: LiquidLava1990/clean-code-v12
+        CCV12_VERSION: ${{ inputs.version }}
+        CCV12_INSTALL_DIR: ${{ runner.temp }}/ccv12-bin
+        CCV12_NO_MODIFY_PATH: '1'
+        REPO: LiquidLava1990/clean-code-v12
       run: |
         if [ "$RUNNER_OS" = Windows ]; then
-          pwsh -NoProfile -Command "irm https://github.com/$CC_REPO/releases/latest/download/install.ps1 | iex"
+          pwsh -NoProfile -Command "irm https://github.com/$REPO/releases/latest/download/install.ps1 | iex"
         else
-          curl -fsSL "https://github.com/$CC_REPO/releases/latest/download/install.sh" | sh
+          curl -fsSL "https://github.com/$REPO/releases/latest/download/install.sh" | sh
         fi
-        echo "$CC_INSTALL_DIR" >> "$GITHUB_PATH"
+        echo "$CCV12_INSTALL_DIR" >> "$GITHUB_PATH"
 
-    - name: Run cc check
+    - name: Run ccv12 check
       id: run
       shell: bash
       run: |
@@ -82,7 +82,7 @@ runs:
           BASELINE_ARG="--baseline ${{ inputs.baseline }}"
         fi
 
-        "$RUNNER_TEMP/cc-bin/cc" check '${{ inputs.path }}' \
+        "$RUNNER_TEMP/ccv12-bin/ccv12" check '${{ inputs.path }}' \
           --format "$FORMAT" \
           --output "$OUT" \
           $BASELINE_ARG || true

@@ -76,7 +76,7 @@ fn fix_summary(fix: &FixProposal) -> String {
     match fix {
         FixProposal::Diff { safety, edits, .. } => match safety {
             FixSafety::Safe => format!("auto-fix available ({} edit(s))", edits.len()),
-            FixSafety::Unsafe => "unsafe fix available — run `cc fix --unsafe`".to_owned(),
+            FixSafety::Unsafe => "unsafe fix available — run `ccv12 fix --unsafe`".to_owned(),
         },
         FixProposal::Codemod { engine, scope, .. } => {
             format!("codemod available (engine={engine:?}, scope={scope:?})")

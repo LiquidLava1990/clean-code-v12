@@ -1,5 +1,5 @@
 # Clean Code V12 — repo self-host configuration
-# Loaded by `cc check .` to scope which paths the kernel scans.
+# Loaded by `ccv12 check .` to scope which paths the kernel scans.
 
 [project]
 name = "clean-code-v12"
@@ -20,14 +20,14 @@ paths = [
     # rather than the Rust-kernel discipline this project's self-host gates;
     # they ship with their own per-language linters configured in their dirs.
     "editors/**",
-    # `cc harness` ships its Python templates as embedded string literals
+    # `ccv12 harness` ships its Python templates as embedded string literals
     # (`include_str!`) inside the cc-cli binary. They are payloads, not
     # source — the runtime equivalents are scanned in the host repo where
-    # `cc harness init` was run.
+    # `ccv12 harness init` was run.
     "crates/cc-cli/harness_templates/**",
 ]
 generated = true
 vendored = true
 extensions = ["lock", "snap"]
 
-# [baseline] — opt-in. Run with `cc check --baseline <ref>` to enable diff mode.
+# [baseline] — opt-in. Run with `ccv12 check --baseline <ref>` to enable diff mode.

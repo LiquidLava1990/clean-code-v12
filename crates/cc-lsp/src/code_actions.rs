@@ -279,7 +279,7 @@ mod tests {
             severity: Some(DiagnosticSeverity::WARNING),
             code: Some(NumberOrString::String(rule_id.to_owned())),
             code_description: None,
-            source: Some("cc".to_owned()),
+            source: Some("ccv12".to_owned()),
             message: "x".to_owned(),
             related_information: None,
             tags: None,

@@ -4,7 +4,7 @@ For every in-scope ``.py`` file we capture the set of TOP-LEVEL imports
 (``import x`` and ``from x.y import z`` -> ``x``; relative imports
 ignored) and assert the live walk matches the snapshot exactly. New
 imports OR removed imports both fail; ratify intentional changes via
-``cc harness regenerate <repo>``.
+``ccv12 harness regenerate <repo>``.
 """
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ def _load_snapshot() -> dict[str, list[str]]:
 def test_dependencies_snapshot_exists() -> None:
     assert SNAPSHOT_PATH.exists(), (
         f"dependency snapshot missing at {SNAPSHOT_PATH}. "
-        "Run `cc harness regenerate <repo>` to create it."
+        "Run `ccv12 harness regenerate <repo>` to create it."
     )
 
 
@@ -69,7 +69,7 @@ def _format_drift(drift: list[str]) -> str:
     return (
         "module dependency drift:\n"
         f"{joined}{more}\n\n"
-        "If intentional, run `cc harness regenerate <repo>` and recommit."
+        "If intentional, run `ccv12 harness regenerate <repo>` and recommit."
     )
 
 

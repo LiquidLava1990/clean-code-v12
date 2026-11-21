@@ -47,7 +47,7 @@ impl BaselineRepo {
     }
 
     /// Bulk-accept every finding in `findings`. Used by
-    /// `cc check --baseline-create`.
+    /// `ccv12 check --baseline-create`.
     #[must_use]
     pub fn create(findings: &[Finding], git_ref: Option<&str>, who: Option<&str>) -> Self {
         let mut repo = Self {
@@ -140,7 +140,7 @@ impl BaselineRepo {
     /// Remove a single entry by `key`. Returns the dropped
     /// [`BaselineEntry`] when the key was present, `None` otherwise.
     ///
-    /// Used by `cc baseline sync` (CLI) to drop resolved findings
+    /// Used by `ccv12 baseline sync` (CLI) to drop resolved findings
     /// without taking the temporal `last_seen_at` round-trip that
     /// [`Self::prune_unseen_since`] uses.
     pub fn remove(&mut self, key: &SuppressKey) -> Option<BaselineEntry> {

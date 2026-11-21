@@ -18,7 +18,7 @@ expression: json
               "id": "cc.docs.missing",
               "name": "cc.docs.missing",
               "shortDescription": {
-                "text": "see `cc explain cc.docs.missing` for details"
+                "text": "see `ccv12 explain cc.docs.missing` for details"
               },
               "helpUri": "https://cleancode.dev/docs/rules/docs/cc.docs.missing.md",
               "defaultConfiguration": {
@@ -30,7 +30,7 @@ expression: json
               "id": "cc.shape.fn_length",
               "name": "cc.shape.fn_length",
               "shortDescription": {
-                "text": "see `cc explain cc.shape.fn_length` for details"
+                "text": "see `ccv12 explain cc.shape.fn_length` for details"
               },
               "helpUri": "https://cleancode.dev/docs/rules/shape/cc.shape.fn_length.md",
               "defaultConfiguration": {
@@ -42,7 +42,7 @@ expression: json
               "id": "cc.slop.duplication",
               "name": "cc.slop.duplication",
               "shortDescription": {
-                "text": "see `cc explain cc.slop.duplication` for details"
+                "text": "see `ccv12 explain cc.slop.duplication` for details"
               },
               "helpUri": "https://cleancode.dev/docs/rules/slop/cc.slop.duplication.md",
               "defaultConfiguration": {

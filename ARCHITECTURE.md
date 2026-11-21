@@ -1,6 +1,6 @@
 # Clean Code V12 — Architecture
 
-This document is the technical reference for how `cc` is wired
+This document is the technical reference for how `ccv12` is wired
 together. It complements [`README.md`](./README.md) (mission + rule
 catalog) and [`USER_GUIDE.md`](./USER_GUIDE.md) (operator-level usage).
 
@@ -36,7 +36,7 @@ enforced (Layer N may import Layer N-1, never the other way).
 
 ```text
                                 +--------------+
-                                |    cc-cli    |        --> binary `cc`
+                                |    cc-cli    |        --> binary `ccv12`
                                 +-------+------+
                                         |
                                 +-------v------+
@@ -112,9 +112,9 @@ registers a pack, the registry rejects:
 - duplicate `pack_id` values,
 - duplicate `rule_id` values across packs.
 
-Today every built-in pack is **statically linked** into the `cc`
+Today every built-in pack is **statically linked** into the `ccv12`
 binary. The `with_default_packs` helper registers all 25 packs in
-phase order; a custom `cc` build can call `with_pack` to add
+phase order; a custom `ccv12` build can call `with_pack` to add
 out-of-tree packs.
 
 ### OCI distribution
@@ -126,7 +126,7 @@ the pack as a CodeQL-style OCI artifact. See
 [`packs/README.md`](./packs/README.md) for the publish flow and the
 third-party-pack contract.
 
-Dynamic loading from a registry (so end-users could `cc check --pack
+Dynamic loading from a registry (so end-users could `ccv12 check --pack
 ghcr.io/foo/lint:1.2.3`) is `Status: planned` — it requires
 a stable C ABI for the `RulePack` trait, which is on the Phase-6
 roadmap.
@@ -152,7 +152,7 @@ vectors are concatenated in the walker's deterministic file order.
 
 ## 5. Performance characteristics (G3)
 
-Phase-1 exit gate measured `cc check` against five public reference repos
+Phase-1 exit gate measured `ccv12 check` against five public reference repos
 (listed in [`examples/reference_repos.toml`](./examples/reference_repos.toml)).
 
 | Repo                | Lang   | Files  | Findings | Elapsed | Files/s |
@@ -183,7 +183,7 @@ backlog (see Phase-6 in the roadmap).
 3. **Implement `RulePack`**. Pick a namespaced `pack_id` and unique
    `rule_id`s. Pin `kernel_api_min` to the `KERNEL_API_VERSION`
    constant your crate built against.
-4. **Wire it into a custom `cc` build** via `Kernel::with_pack`. Until
+4. **Wire it into a custom `ccv12` build** via `Kernel::with_pack`. Until
    the dynamic loader ships, this is the supported on-ramp.
 5. **Generate an OCI manifest** by adapting
    `tools/gen-pack-manifests/src/main.rs` to register your pack

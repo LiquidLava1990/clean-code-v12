@@ -185,7 +185,7 @@ impl ProjectFingerprint {
 
 /// Kernel-side metadata accompanying every rule run.
 ///
-/// Captured once per `cc check` invocation and shared with every rule
+/// Captured once per `ccv12 check` invocation and shared with every rule
 /// in that run. Used to stamp findings with the producing kernel
 /// version and to correlate logs by `run_id`.
 #[derive(Debug, Clone)]

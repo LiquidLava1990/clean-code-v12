@@ -51,7 +51,7 @@ def _load_snapshot() -> dict[str, dict[str, int]]:
 def test_slop_marker_snapshot_exists() -> None:
     assert SNAPSHOT_PATH.exists(), (
         f"slop-marker snapshot missing at {SNAPSHOT_PATH}. "
-        "Run `cc harness regenerate <repo>` to create it."
+        "Run `ccv12 harness regenerate <repo>` to create it."
     )
 
 
@@ -77,7 +77,7 @@ def _format_drift(drift: list[str]) -> str:
     return (
         "new slop markers detected:\n"
         f"{joined}{more}\n\n"
-        "Either fix the marker, OR run `cc harness regenerate <repo>` to "
+        "Either fix the marker, OR run `ccv12 harness regenerate <repo>` to "
         "acknowledge the debt explicitly."
     )
 

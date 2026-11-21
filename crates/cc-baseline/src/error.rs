@@ -57,7 +57,7 @@ pub enum BaselineError {
     #[error(
         "JSON (de)serialisation failed for baseline at `{path}`: {source}; \
          verify `schema_version` matches the kernel \
-         (run `cc baseline migrate` if it lags)"
+         (run `ccv12 baseline migrate` if it lags)"
     )]
     Serde {
         /// Path the kernel was (de)serialising.
@@ -71,7 +71,7 @@ pub enum BaselineError {
     #[error(
         "baseline at `{path}` has schema_version {found}, \
          this kernel supports up to {supported}; \
-         upgrade the kernel or regenerate the baseline with `cc baseline create`"
+         upgrade the kernel or regenerate the baseline with `ccv12 baseline create`"
     )]
     UnsupportedSchema {
         /// Path the kernel was reading.

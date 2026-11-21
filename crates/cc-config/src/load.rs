@@ -71,7 +71,7 @@ impl Config {
 
     /// Render a human-readable diff between two configs.
     ///
-    /// Used by `cc check --explain-config`. Format is intentionally
+    /// Used by `ccv12 check --explain-config`. Format is intentionally
     /// loose — TOML round-trip with a `< / >` prefix per differing
     /// line. A pretty unified-diff is a P2 enhancement.
     #[must_use]
@@ -145,7 +145,7 @@ fn diff_lines(lhs: &str, rhs: &str) -> String {
 
 /// Drop a fully-commented default config at `path`.
 ///
-/// Used by `cc init`.
+/// Used by `ccv12 init`.
 ///
 /// # Errors
 ///

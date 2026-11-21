@@ -4,8 +4,8 @@
 # Usage: bash tools/verify_phase_exit.sh phase-1
 #
 # Phase 1 gates (PHASE_1_PLAN.md):
-#   G1: cc check . returns Tier-0 GREEN against own source
-#   G2: cc check on 5 reference repos returns findings + score
+#   G1: ccv12 check . returns Tier-0 GREEN against own source
+#   G2: ccv12 check on 5 reference repos returns findings + score
 #   G3: p95 latency < 5s on 100k-LOC repo (warm)
 #   G4: Health score reproducible across machines
 #   G5: SARIF passes microsoft/sarif-tools validate
@@ -31,7 +31,7 @@ phase_1_g1_self_host() {
         skip "G1 self-host (cc-cli not yet buildable)"
         return
     fi
-    if ./target/release/cc check . --severity=blocker 2>/dev/null; then
+    if ./target/release/ccv12 check . --severity=blocker 2>/dev/null; then
         pass "G1 self-host: Tier-0 GREEN against own source"
     else
         fail "G1 self-host: Tier-0 violations against own source"
@@ -43,8 +43,8 @@ phase_1_g2_reference_corpus() {
         skip "G2 reference-corpus (examples/reference_repos.toml missing)"
         return
     fi
-    if [ ! -x ./target/release/cc ]; then
-        skip "G2 reference-corpus (cc binary not built)"
+    if [ ! -x ./target/release/ccv12 ]; then
+        skip "G2 reference-corpus (ccv12 binary not built)"
         return
     fi
     pass "G2 reference-corpus: stub — Phase 1 Wave 4 will run real corpus"

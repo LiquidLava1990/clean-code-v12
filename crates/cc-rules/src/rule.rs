@@ -40,7 +40,7 @@ pub trait Rule: Send + Sync + 'static {
     /// the finding, not here.
     fn default_confidence(&self) -> Confidence;
 
-    /// One-line human description, displayed in `cc check --rules`.
+    /// One-line human description, displayed in `ccv12 check --rules`.
     fn description(&self) -> &'static str;
 
     /// Run the probe and return its findings. Empty vec = clean.

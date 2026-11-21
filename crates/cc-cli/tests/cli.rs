@@ -1,6 +1,6 @@
 //! Integration tests for `cc-cli`.
 //!
-//! Spawns the built `cc` binary against `tempfile::TempDir` fixtures.
+//! Spawns the built `ccv12` binary against `tempfile::TempDir` fixtures.
 //! Each test asserts the trio: exit code + observable output + side
 //! effects on disk.
 
@@ -13,7 +13,7 @@ use tempfile::TempDir;
 fn cc_binary() -> PathBuf {
     // `CARGO_BIN_EXE_<name>` is set by Cargo when running integration
     // tests for a binary crate.
-    PathBuf::from(env!("CARGO_BIN_EXE_cc"))
+    PathBuf::from(env!("CARGO_BIN_EXE_ccv12"))
 }
 
 fn write_file(dir: &Path, rel: &str, contents: &str) {
@@ -35,7 +35,7 @@ fn check_clean_python_repo_exits_zero() {
         .arg("blocker")
         .arg(dir.path())
         .output()
-        .expect("spawn cc check");
+        .expect("spawn ccv12 check");
 
     assert!(
         output.status.success(),
@@ -60,12 +60,12 @@ fn check_long_function_emits_finding_and_exits_one() {
         .arg("check")
         .arg(dir.path())
         .output()
-        .expect("spawn cc check");
+        .expect("spawn ccv12 check");
 
     let code = output.status.code().unwrap_or(-1);
     assert!(
         code == 0 || code == 1,
-        "expected exit 0 or 1 from cc check; got {code}\nstderr: {}",
+        "expected exit 0 or 1 from ccv12 check; got {code}\nstderr: {}",
         String::from_utf8_lossy(&output.stderr)
     );
 }
@@ -87,7 +87,7 @@ fn check_json_format_emits_parseable_lines() {
         .arg("json")
         .arg(dir.path())
         .output()
-        .expect("spawn cc check --format json");
+        .expect("spawn ccv12 check --format json");
 
     let stdout = String::from_utf8_lossy(&output.stdout);
     for line in stdout.lines().filter(|l| !l.is_empty()) {
@@ -107,7 +107,7 @@ fn check_sarif_format_round_trips() {
         .arg("sarif")
         .arg(dir.path())
         .output()
-        .expect("spawn cc check --format sarif");
+        .expect("spawn ccv12 check --format sarif");
 
     let stdout = String::from_utf8_lossy(&output.stdout);
     let value: serde_json::Value = serde_json::from_str(stdout.trim())
@@ -124,7 +124,7 @@ fn init_creates_config_and_baseline() {
         .arg("init")
         .arg(dir.path())
         .output()
-        .expect("spawn cc init");
+        .expect("spawn ccv12 init");
 
     assert!(
         output.status.success(),
@@ -140,12 +140,12 @@ fn version_prints_string() {
     let output = Command::new(cc_binary())
         .arg("version")
         .output()
-        .expect("spawn cc version");
+        .expect("spawn ccv12 version");
 
     assert!(output.status.success());
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(
-        stdout.starts_with("cc "),
+        stdout.starts_with("ccv12 "),
         "unexpected version output: {stdout}"
     );
     assert!(stdout.contains("kernel "));
@@ -200,7 +200,7 @@ fn baseline_create_persists_findings_and_check_silences_them() {
         .arg("create")
         .arg(dir.path())
         .output()
-        .expect("spawn cc baseline create");
+        .expect("spawn ccv12 baseline create");
     assert!(
         create.status.success(),
         "baseline create failed: {}",
@@ -218,19 +218,19 @@ fn baseline_create_persists_findings_and_check_silences_them() {
     assert!(parsed.get("schema_version").is_some());
     assert!(parsed.get("entries").is_some());
 
-    // Step 2: `cc check --baseline <FILE>` must silence baselined finding.
+    // Step 2: `ccv12 check --baseline <FILE>` must silence baselined finding.
     let check = Command::new(cc_binary())
         .arg("check")
         .arg("--baseline")
         .arg(&baseline_path)
         .arg(dir.path())
         .output()
-        .expect("spawn cc check --baseline");
+        .expect("spawn ccv12 check --baseline");
     let code = check.status.code().unwrap_or(-1);
     assert_eq!(
         code,
         0,
-        "cc check should exit clean once findings are baselined; \
+        "ccv12 check should exit clean once findings are baselined; \
          got {code}\nstderr: {}",
         String::from_utf8_lossy(&check.stderr)
     );

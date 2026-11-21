@@ -3,7 +3,7 @@
 For every imported module we capture either explicit ``__all__`` or an
 implicit list (top-level public names defined in that module). The test
 asserts live == snapshot. Adding or removing a public export fails;
-ratify intentional changes with ``cc harness regenerate <repo>``.
+ratify intentional changes with ``ccv12 harness regenerate <repo>``.
 """
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ def _capture_live(
 def test_public_api_snapshot_exists() -> None:
     assert SNAPSHOT_PATH.exists(), (
         f"public-API snapshot missing at {SNAPSHOT_PATH}. "
-        "Run `cc harness regenerate <repo>` to create it."
+        "Run `ccv12 harness regenerate <repo>` to create it."
     )
 
 
@@ -73,7 +73,7 @@ def _format_drift(drift: list[str]) -> str:
     return (
         "public-API drift:\n"
         f"{joined}{more}\n\n"
-        "If intentional, run `cc harness regenerate <repo>` and recommit."
+        "If intentional, run `ccv12 harness regenerate <repo>` and recommit."
     )
 
 

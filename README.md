@@ -4,7 +4,7 @@
 [![release](https://img.shields.io/github/v/release/LiquidLava1990/clean-code-v12?include_prereleases)](https://github.com/LiquidLava1990/clean-code-v12/releases)
 [![license](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
 
-**Clean Code V12 (`cc`) is a fast, open-source code quality linter and static
+**Clean Code V12 (`ccv12`) is a fast, open-source code quality linter and static
 analysis tool written in Rust.** It helps developers and teams find bugs,
 security issues, and technical debt in **Python, JavaScript, TypeScript, Go,
 and Rust** codebases — god functions, deep nesting, bare `except`, missing type
@@ -44,16 +44,11 @@ irm https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/in
 
 ```sh
 cd your-repo
-cc check .
+ccv12 check .
 ```
 
-That's it. `cc check` exits `0` when the repo is clean and `1` when it finds
+That's it. `ccv12 check` exits `0` when the repo is clean and `1` when it finds
 anything, so the same command works as a CI gate.
-
-> **Linux/macOS note:** most systems already have a C compiler called `cc`. If the
-> installer sees one on your `PATH`, it installs the linter as **`ccv12`** instead
-> so your C toolchain keeps working — run `ccv12 check .`. Set `CC_BIN_NAME=cc` to
-> force the short name.
 
 ## Example output
 
@@ -80,7 +75,7 @@ def total(orders, tax, discount, shipping, currency, region):
     return result
 ```
 
-`cc check .` prints (abridged):
+`ccv12 check .` prints (abridged):
 
 ```text
 [BLOCKER] cc.shape.nesting_depth: function `total` nests 5 deep (threshold 3)
@@ -109,7 +104,7 @@ Scanned 1 files in 0.01s (0 skipped)
 |---|---|
 | **Linux / macOS installer** | `curl -fsSL https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/install.sh \| sh` |
 | **Windows installer** | `irm https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/install.ps1 \| iex` |
-| **Prebuilt archive** | Download `cc-<target>.tar.gz` / `.zip` from [Releases](https://github.com/LiquidLava1990/clean-code-v12/releases) (Windows x64, Linux x64/arm64, macOS arm64/x64) |
+| **Prebuilt archive** | Download `ccv12-<target>.tar.gz` / `.zip` from [Releases](https://github.com/LiquidLava1990/clean-code-v12/releases) (Windows x64, Linux x64/arm64, macOS arm64/x64) |
 | **Cargo (from source)** | `cargo install --locked --git https://github.com/LiquidLava1990/clean-code-v12 cc-cli` |
 | **pre-commit** | see [pre-commit](#pre-commit) below |
 | **GitHub Action** | see [CI](#ci-github-actions) below |
@@ -118,36 +113,36 @@ Installer options (environment variables, both scripts):
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `CC_VERSION` | `latest` | Release tag to install, e.g. `v0.1.0` |
-| `CC_INSTALL_DIR` | `~/.local/bin` (Unix), `%LOCALAPPDATA%\Programs\clean-code\bin` (Windows) | Where the binaries go |
-| `CC_BIN_NAME` | `cc` (or `ccv12` if another `cc` is on `PATH`) | Installed command name |
+| `CCV12_VERSION` | `latest` | Release tag to install, e.g. `v0.1.0` |
+| `CCV12_INSTALL_DIR` | `~/.local/bin` (Unix), `%LOCALAPPDATA%\Programs\ccv12\bin` (Windows) | Where the binaries go |
+| `CCV12_DOWNLOAD_URL` | GitHub Releases | Base URL of a mirror holding the release assets |
+| `CCV12_NO_MODIFY_PATH` | unset | Windows only: `1` leaves the user `PATH` untouched |
 
 Both installers verify the SHA-256 checksum published with each release.
-Every archive contains `cc` (the CLI) and `cc-lsp` (the language server).
+Every archive contains `ccv12` (the CLI) and `cc-lsp` (the language server).
 
-> `cargo install` puts `cc` in `~/.cargo/bin`, which usually comes before
-> `/usr/bin` on `PATH` and therefore shadows the system C compiler. Prefer the
-> installer on Linux/macOS, or rename the binary after installing.
+The binary is called `ccv12` on every platform, so it never collides with the
+system C compiler (`cc`) — not even when `cargo install` puts it first on `PATH`.
 
 Building from a clone (Rust 1.85+, pinned by `rust-toolchain.toml`):
 
 ```sh
 git clone https://github.com/LiquidLava1990/clean-code-v12
 cd clean-code-v12
-cargo build --release -p cc-cli -p cc-lsp     # -> target/release/cc, target/release/cc-lsp
+cargo build --release -p cc-cli -p cc-lsp     # -> target/release/ccv12, target/release/cc-lsp
 ```
 
 ## Everyday use
 
 ```sh
-cc check .                          # scan, colored output, exit 1 on findings
-cc check . --severity blocker       # only Blocker findings (CI merge gate)
-cc check . --format sarif --output cc.sarif   # GitHub code scanning
-cc check . --rules cc.shape.fn_length,cc.error.bare
-cc init                             # write a default .cc/config.toml
-cc baseline create                  # accept today's findings -> .cc-baseline.json
-cc check . --baseline .cc-baseline.json   # fail only on new findings
-cc fix .                            # apply machine-safe auto-fixes in place
+ccv12 check .                          # scan, colored output, exit 1 on findings
+ccv12 check . --severity blocker       # only Blocker findings (CI merge gate)
+ccv12 check . --format sarif --output cc.sarif   # GitHub code scanning
+ccv12 check . --rules cc.shape.fn_length,cc.error.bare
+ccv12 init                             # write a default .cc/config.toml
+ccv12 baseline create                  # accept today's findings -> .cc-baseline.json
+ccv12 check . --baseline .cc-baseline.json   # fail only on new findings
+ccv12 fix .                            # apply machine-safe auto-fixes in place
 ```
 
 Full reference — configuration, output formats, baselines, suppression, LSP —
@@ -161,8 +156,8 @@ repos:
   - repo: https://github.com/LiquidLava1990/clean-code-v12
     rev: v0.1.0
     hooks:
-      - id: cc-lint           # fails on Required + Blocker findings
-      # - id: cc-lint-blocker # fails on Blocker findings only
+      - id: ccv12-lint           # fails on Required + Blocker findings
+      # - id: ccv12-lint-blocker # fails on Blocker findings only
 ```
 
 The first run compiles the linter inside pre-commit's cache (a few minutes);
@@ -218,10 +213,10 @@ Before fixing findings in a Python repo, install a safety harness that catches
 behavior drift:
 
 ```sh
-cc harness init <repo>          # scaffold + baseline snapshots
+ccv12 harness init <repo>          # scaffold + baseline snapshots
 # ...fix findings with any tooling...
-cc harness verify <repo>        # confirm nothing drifted
-cc harness regenerate <repo>    # ratify deliberate API changes
+ccv12 harness verify <repo>        # confirm nothing drifted
+ccv12 harness regenerate <repo>    # ratify deliberate API changes
 ```
 
 The harness has seven layers: **imports**, **signatures**, **exception shapes**,
@@ -291,7 +286,7 @@ cargo fmt --all -- --check
 ```
 
 The repo dogfoods itself: [`dogfood.yml`](./.github/workflows/dogfood.yml) runs
-`cc check` on every PR. Report security issues privately — see [`SECURITY.md`](./SECURITY.md).
+`ccv12 check` on every PR. Report security issues privately — see [`SECURITY.md`](./SECURITY.md).
 
 ## License
 

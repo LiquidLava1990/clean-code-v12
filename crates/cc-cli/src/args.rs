@@ -2,18 +2,18 @@
 //!
 //! Three subcommands: `check` (default when a path is supplied alone),
 //! `init`, and `version`. Every option carries a short doc-comment so
-//! `cc --help` is self-documenting.
+//! `ccv12 --help` is self-documenting.
 
 use camino::Utf8PathBuf;
 use clap::{Parser, Subcommand, ValueEnum};
 
 /// Top-level CLI entry parsed by `clap`.
 ///
-/// `cc <PATH>` is sugar for `cc check <PATH>` — the legacy short form
+/// `ccv12 <PATH>` is sugar for `ccv12 check <PATH>` — the legacy short form
 /// keeps muscle-memory from prior tools.
 #[derive(Debug, Parser)]
 #[command(
-    name = "cc",
+    name = "ccv12",
     version,
     about = "Clean Code V12 — find blockers, required fixes, and nits.",
     propagate_version = true,
@@ -46,7 +46,7 @@ pub enum Cmd {
     Version,
 }
 
-/// Arguments accepted by `cc harness <SUB>`.
+/// Arguments accepted by `ccv12 harness <SUB>`.
 ///
 /// The harness is the test-first / pre-refactor gate: scaffold the
 /// seven-layer drift + slop safety net (imports, public signatures,
@@ -60,7 +60,7 @@ pub struct HarnessArgs {
     pub cmd: HarnessCmd,
 }
 
-/// `cc harness` subcommands.
+/// `ccv12 harness` subcommands.
 #[derive(Debug, Subcommand)]
 pub enum HarnessCmd {
     /// Scaffold `tests/cc_harness/` and capture the baseline snapshot.
@@ -71,7 +71,7 @@ pub enum HarnessCmd {
     Regenerate(HarnessRegenerateArgs),
 }
 
-/// Arguments accepted by `cc harness init`.
+/// Arguments accepted by `ccv12 harness init`.
 #[derive(Debug, Parser)]
 pub struct HarnessInitArgs {
     /// Repository root to scaffold. Defaults to the current directory.
@@ -79,7 +79,7 @@ pub struct HarnessInitArgs {
     pub path: Utf8PathBuf,
 }
 
-/// Arguments accepted by `cc harness verify`.
+/// Arguments accepted by `ccv12 harness verify`.
 #[derive(Debug, Parser)]
 pub struct HarnessVerifyArgs {
     /// Repository root to verify. Defaults to the current directory.
@@ -87,7 +87,7 @@ pub struct HarnessVerifyArgs {
     pub path: Utf8PathBuf,
 }
 
-/// Arguments accepted by `cc harness regenerate`.
+/// Arguments accepted by `ccv12 harness regenerate`.
 #[derive(Debug, Parser)]
 pub struct HarnessRegenerateArgs {
     /// Repository root containing the harness. Defaults to `.`.
@@ -95,7 +95,7 @@ pub struct HarnessRegenerateArgs {
     pub path: Utf8PathBuf,
 }
 
-/// Arguments accepted by `cc check`.
+/// Arguments accepted by `ccv12 check`.
 #[derive(Debug, Parser)]
 pub struct CheckArgs {
     /// Repository root to scan. Defaults to the current directory.
@@ -109,7 +109,7 @@ pub struct CheckArgs {
     /// Diff-mode: silence findings already accepted in the baseline JSON.
     ///
     /// `--baseline-from` is an alias accepted for symmetry with
-    /// `cc baseline create --output` and parity with Semgrep's
+    /// `ccv12 baseline create --output` and parity with Semgrep's
     /// `--baseline-commit` ergonomics.
     #[arg(long, alias = "baseline-from", value_name = "BASELINE_PATH")]
     pub baseline: Option<Utf8PathBuf>,
@@ -131,9 +131,9 @@ pub struct CheckArgs {
     pub output: Option<Utf8PathBuf>,
 }
 
-/// Arguments accepted by `cc fix`.
+/// Arguments accepted by `ccv12 fix`.
 ///
-/// Mirrors `cc check`'s `--severity` / `--rule` filters so operators can
+/// Mirrors `ccv12 check`'s `--severity` / `--rule` filters so operators can
 /// scope a repair pass to a single rule (`--rule cc.shape.fn_length`)
 /// or severity floor without learning a new flag surface.
 #[derive(Debug, Parser)]
@@ -159,7 +159,7 @@ pub struct FixArgs {
     pub no_default_pack: bool,
 }
 
-/// Arguments accepted by `cc init`.
+/// Arguments accepted by `ccv12 init`.
 #[derive(Debug, Parser)]
 pub struct InitArgs {
     /// Directory in which to create `.cc/config.toml` + `.cc/baseline.json`.
@@ -171,7 +171,7 @@ pub struct InitArgs {
     pub force: bool,
 }
 
-/// Output format for `cc check`.
+/// Output format for `ccv12 check`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum)]
 pub enum OutputFormat {
     /// Colored, human-readable terminal output (default).
@@ -207,7 +207,7 @@ impl SeverityFilter {
     }
 }
 
-/// Arguments accepted by `cc baseline <SUB>`.
+/// Arguments accepted by `ccv12 baseline <SUB>`.
 ///
 /// The subcommand mirrors `Semgrep --baseline-commit` ergonomics + the
 /// `detect-secrets baseline {scan,audit}` workflow: a small CRUD surface
@@ -219,24 +219,24 @@ pub struct BaselineArgs {
     pub cmd: BaselineCmd,
 }
 
-/// `cc baseline` subcommands.
+/// `ccv12 baseline` subcommands.
 #[derive(Debug, Subcommand)]
 pub enum BaselineCmd {
-    /// Run `cc check` and persist every observed finding as the new
+    /// Run `ccv12 check` and persist every observed finding as the new
     /// baseline file. Findings already in the file are kept (with their
     /// acceptance metadata); new findings get freshly-stamped entries.
     Create(BaselineCreateArgs),
     /// Print "X in baseline, Y still present, Z resolved since last sync"
     /// without mutating the file. Read-only — safe in CI.
     Status(BaselineStatusArgs),
-    /// Re-run `cc check` and prune resolved entries from the baseline
+    /// Re-run `ccv12 check` and prune resolved entries from the baseline
     /// file in place. Atomic — temp-then-rename.
     Sync(BaselineSyncArgs),
     /// Wipe the baseline file. Prompts for confirmation unless `--yes`.
     Clear(BaselineClearArgs),
 }
 
-/// Arguments accepted by `cc baseline create`.
+/// Arguments accepted by `ccv12 baseline create`.
 #[derive(Debug, Parser)]
 pub struct BaselineCreateArgs {
     /// Repository root to scan. Defaults to the current directory.
@@ -246,7 +246,7 @@ pub struct BaselineCreateArgs {
     /// `<PATH>/.cc-baseline.json` (Semgrep-style root sentinel).
     #[arg(long, short = 'o', value_name = "FILE")]
     pub output: Option<Utf8PathBuf>,
-    /// Skip registration of `BuiltinTier0Pack` (mirrors `cc check`).
+    /// Skip registration of `BuiltinTier0Pack` (mirrors `ccv12 check`).
     #[arg(long)]
     pub no_default_pack: bool,
     /// Free-form note recorded on every newly accepted entry
@@ -259,7 +259,7 @@ pub struct BaselineCreateArgs {
     pub who: Option<String>,
 }
 
-/// Arguments accepted by `cc baseline status`.
+/// Arguments accepted by `ccv12 baseline status`.
 #[derive(Debug, Parser)]
 pub struct BaselineStatusArgs {
     /// Repository root to scan. Defaults to the current directory.
@@ -268,12 +268,12 @@ pub struct BaselineStatusArgs {
     /// Path to the baseline file. Defaults to `<PATH>/.cc-baseline.json`.
     #[arg(long, value_name = "FILE")]
     pub baseline: Option<Utf8PathBuf>,
-    /// Skip registration of `BuiltinTier0Pack` (mirrors `cc check`).
+    /// Skip registration of `BuiltinTier0Pack` (mirrors `ccv12 check`).
     #[arg(long)]
     pub no_default_pack: bool,
 }
 
-/// Arguments accepted by `cc baseline sync`.
+/// Arguments accepted by `ccv12 baseline sync`.
 #[derive(Debug, Parser)]
 pub struct BaselineSyncArgs {
     /// Repository root to scan. Defaults to the current directory.
@@ -282,7 +282,7 @@ pub struct BaselineSyncArgs {
     /// Path to the baseline file. Defaults to `<PATH>/.cc-baseline.json`.
     #[arg(long, value_name = "FILE")]
     pub baseline: Option<Utf8PathBuf>,
-    /// Skip registration of `BuiltinTier0Pack` (mirrors `cc check`).
+    /// Skip registration of `BuiltinTier0Pack` (mirrors `ccv12 check`).
     #[arg(long)]
     pub no_default_pack: bool,
     /// Print the planned diff but do NOT mutate the baseline file.
@@ -290,7 +290,7 @@ pub struct BaselineSyncArgs {
     pub dry_run: bool,
 }
 
-/// Arguments accepted by `cc baseline clear`.
+/// Arguments accepted by `ccv12 baseline clear`.
 #[derive(Debug, Parser)]
 pub struct BaselineClearArgs {
     /// Repository root containing the baseline. Defaults to `.`.

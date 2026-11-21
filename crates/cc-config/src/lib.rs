@@ -7,7 +7,7 @@
 //! - The hardcoded Tier-0 [`registry::RULE_REGISTRY`].
 //! - Validation (Tier-0 cannot be disabled, severity overrides cannot upgrade).
 //! - Layered merge semantics (`global -> user -> repo`).
-//! - A `cc init` helper ([`load::write_default`]).
+//! - A `ccv12 init` helper ([`load::write_default`]).
 //!
 //! # Quick start
 //!

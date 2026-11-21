@@ -182,8 +182,8 @@ pub enum FixSafety {
 }
 ```
 
-`FixSafety::Safe` fixes auto-apply with `cc fix`. `Unsafe` fixes are surfaced
-but never applied without explicit `cc fix --unsafe`.
+`FixSafety::Safe` fixes auto-apply with `ccv12 fix`. `Unsafe` fixes are surfaced
+but never applied without explicit `ccv12 fix --unsafe`.
 
 ## SuppressKey (the core of stable baselines)
 

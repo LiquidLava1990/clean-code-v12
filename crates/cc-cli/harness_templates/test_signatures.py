@@ -3,7 +3,7 @@
 Captures ``inspect.signature`` for every public callable in every imported
 module, compares against ``snapshots/signatures.json``. Drift fails.
 
-After a deliberate API change, regenerate via ``cc harness regenerate <repo>``.
+After a deliberate API change, regenerate via ``ccv12 harness regenerate <repo>``.
 """
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ SNAPSHOT_PATH: Path = (
 def test_signatures_snapshot_exists() -> None:
     assert SNAPSHOT_PATH.exists(), (
         f"signature snapshot missing at {SNAPSHOT_PATH}. "
-        "Run `cc harness regenerate <repo>` to create it."
+        "Run `ccv12 harness regenerate <repo>` to create it."
     )
 
 
@@ -35,7 +35,7 @@ def _format_drift(drift: list[str]) -> str:
         "signature drift detected:\n"
         f"{joined}{more}\n\n"
         "If the change is intentional run "
-        "`cc harness regenerate <repo>` and recommit the snapshot."
+        "`ccv12 harness regenerate <repo>` and recommit the snapshot."
     )
 
 

@@ -1,6 +1,6 @@
 # Clean Code V12 — User Guide
 
-This guide walks through installing the `cc` binary, configuring it
+This guide walks through installing the `ccv12` binary, configuring it
 for a repo, the four output formats, the baseline workflow, the LSP
 daemon, the GitHub Actions integration, and finding suppression. Every
 flag and feature documented here is shipped today; anything still in
@@ -20,17 +20,16 @@ curl -fsSL https://github.com/LiquidLava1990/clean-code-v12/releases/latest/down
 irm https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/install.ps1 | iex
 ```
 
-Both install `cc` and `cc-lsp`, verify the release SHA-256 checksum,
-and accept `CC_VERSION`, `CC_INSTALL_DIR`, and `CC_BIN_NAME`
-environment overrides. If another `cc` (usually the system C compiler)
-is already on `PATH`, the CLI is installed as `ccv12` so the C
-toolchain keeps working; every `cc ...` command below then reads
-`ccv12 ...`.
+Both install `ccv12` and `cc-lsp`, verify the release SHA-256 checksum,
+and accept `CCV12_VERSION`, `CCV12_INSTALL_DIR`, `CCV12_DOWNLOAD_URL`
+(mirror) and, on Windows, `CCV12_NO_MODIFY_PATH=1` environment
+overrides. The CLI is named `ccv12` on every platform so it never
+collides with the system C compiler `cc`.
 
 ### Prebuilt archives
 
 Every [GitHub Release](https://github.com/LiquidLava1990/clean-code-v12/releases)
-carries `cc-<target>.tar.gz` (Linux, macOS) or `cc-<target>.zip`
+carries `ccv12-<target>.tar.gz` (Linux, macOS) or `ccv12-<target>.zip`
 (Windows) for `x86_64-pc-windows-msvc`, `x86_64-unknown-linux-musl`,
 `aarch64-unknown-linux-musl`, `aarch64-apple-darwin`, and
 `x86_64-apple-darwin`, plus a `.sha256` per archive and a combined
@@ -39,13 +38,9 @@ carries `cc-<target>.tar.gz` (Linux, macOS) or `cc-<target>.zip`
 ### `cargo install`
 
 ```bash
-cargo install --locked --git https://github.com/LiquidLava1990/clean-code-v12 cc-cli   # `cc`
+cargo install --locked --git https://github.com/LiquidLava1990/clean-code-v12 cc-cli   # `ccv12`
 cargo install --locked --git https://github.com/LiquidLava1990/clean-code-v12 cc-lsp   # `cc-lsp`
 ```
-
-`~/.cargo/bin` usually precedes `/usr/bin` on `PATH`, so on Linux/macOS
-this `cc` shadows the C compiler; rename it (e.g. to `ccv12`) if you
-build C code on the same machine.
 
 ### From source
 
@@ -60,11 +55,11 @@ it automatically.
 
 ## 2. Configuration via `.cc/config.toml`
 
-Drop `cc init` in any repo to scaffold a default config:
+Drop `ccv12 init` in any repo to scaffold a default config:
 
 ```bash
 cd /path/to/repo
-cc init
+ccv12 init
 ```
 
 That creates `.cc/config.toml` and an empty `.cc/baseline.json`. The
@@ -111,7 +106,7 @@ path = ".cc/baseline.json"
 
 ### Validation
 
-`cc check` validates the config on every run. Validation errors
+`ccv12 check` validates the config on every run. Validation errors
 include the offending rule id, the unsupported severity transition, or
 the malformed glob — and the actionable next step.
 
@@ -122,13 +117,13 @@ second.** Before touching code, scaffold the three-layer pre-refactor
 safety net:
 
 ```bash
-cc harness init <repo>          # scaffold + baseline
+ccv12 harness init <repo>          # scaffold + baseline
 # ... fix findings, refactor ...
-cc harness verify <repo>        # confirm no drift
-cc harness regenerate <repo>    # ratify deliberate API changes
+ccv12 harness verify <repo>        # confirm no drift
+ccv12 harness regenerate <repo>    # ratify deliberate API changes
 ```
 
-`cc harness init` scaffolds the harness package under
+`ccv12 harness init` scaffolds the harness package under
 `<repo>/tests/cc_harness/` and captures a baseline of six JSON
 snapshots. The seven layers are:
 
@@ -152,8 +147,8 @@ EXTRA_EXTERNAL_DEPS = ("my_proprietary_sdk",)
 EXTRA_SKIP_BASENAMES = ("custom_entrypoint.py",)
 ```
 
-`cc harness verify` runs `python -m pytest tests/cc_harness/` and
-passes the exit code through (0 on green, 1 on drift). `cc harness
+`ccv12 harness verify` runs `python -m pytest tests/cc_harness/` and
+passes the exit code through (0 on green, 1 on drift). `ccv12 harness
 regenerate` re-runs the snapshot capture so a deliberate API change
 becomes the new baseline; commit the snapshot diff with a message that
 describes the API delta — that diff is the source of truth for code
@@ -161,10 +156,10 @@ review.
 
 ### Idempotency
 
-`cc harness init` is idempotent. A second run prints:
+`ccv12 harness init` is idempotent. A second run prints:
 
 ```
-harness already initialized at <repo>/tests/cc_harness — run `cc harness verify <repo>` instead
+harness already initialized at <repo>/tests/cc_harness — run `ccv12 harness verify <repo>` instead
 ```
 
 and exits clean. To upgrade an existing harness, delete
@@ -173,9 +168,9 @@ and exits clean. To upgrade an existing harness, delete
 ### Python is required
 
 The harness is Python-only today; Rust / Go / TypeScript layers are
-planned. If `cc harness init` reports `python` not found, install
+planned. If `ccv12 harness init` reports `python` not found, install
 Python 3.10+ and ensure `python` (or `python3`) is on `PATH`, then
-retry. Pytest is required for `cc harness verify` (`pip install
+retry. Pytest is required for `ccv12 harness verify` (`pip install
 pytest` if missing).
 
 ## 3. Output formats
@@ -192,10 +187,10 @@ pytest` if missing).
 Examples:
 
 ```bash
-cc check . --format tty
-cc check . --format sarif --output cc-results.sarif
-cc check . --format rdjson > cc-diff.rdjson
-cc check . --format json | jq '.rule_id' | sort | uniq -c
+ccv12 check . --format tty
+ccv12 check . --format sarif --output cc-results.sarif
+ccv12 check . --format rdjson > cc-diff.rdjson
+ccv12 check . --format json | jq '.rule_id' | sort | uniq -c
 ```
 
 ## 4. Baseline workflow
@@ -208,10 +203,10 @@ the baseline, so you only see new findings.
 
 ```bash
 # Run on the current state, write the result as the baseline.
-cc check . --format json --output .cc/baseline.json
+ccv12 check . --format json --output .cc/baseline.json
 
 # Subsequent runs silence everything in the baseline.
-cc check . --baseline .cc/baseline.json
+ccv12 check . --baseline .cc/baseline.json
 ```
 
 ### Ratcheting forward
@@ -219,7 +214,7 @@ cc check . --baseline .cc/baseline.json
 When a finding gets fixed, regenerate:
 
 ```bash
-cc check . --format json --output .cc/baseline.json
+ccv12 check . --format json --output .cc/baseline.json
 git commit -m "ratchet baseline" .cc/baseline.json
 ```
 
@@ -230,7 +225,7 @@ The baseline is committed; ratcheting is reviewable in PR diffs.
 Today the CLI's `--baseline` accepts a path, not a git ref. The
 [`.github/workflows/cc-check.yml`](./.github/workflows/cc-check.yml)
 review job synthesises a baseline at runtime by checking out the merge
-base, running `cc check --format json` against it, and feeding the
+base, running `ccv12 check --format json` against it, and feeding the
 output back into the PR-head invocation. See the workflow for the
 canonical recipe.
 
@@ -332,7 +327,7 @@ these keys.
 
 Two routes:
 
-1. **Add it to the baseline.** Re-run `cc check . --format json
+1. **Add it to the baseline.** Re-run `ccv12 check . --format json
    --output .cc/baseline.json` and commit the diff. This is the
    recommended path — the suppression is reviewable, dated, and
    ratcheting forward later requires regenerating the baseline.

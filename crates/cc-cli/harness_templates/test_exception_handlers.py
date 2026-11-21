@@ -50,7 +50,7 @@ def _load_snapshot() -> dict[str, list[dict[str, Any]]]:
 def test_exception_snapshot_exists() -> None:
     assert SNAPSHOT_PATH.exists(), (
         f"exception-shape snapshot missing at {SNAPSHOT_PATH}. "
-        "Run `cc harness regenerate <repo>` to create it."
+        "Run `ccv12 harness regenerate <repo>` to create it."
     )
 
 
@@ -139,7 +139,7 @@ def _format_drift_message(drift: list[str]) -> str:
     return (
         "exception-handler shape drift:\n"
         f"{joined}{more}\n\n"
-        "If intentional, run `cc harness regenerate <repo>` to update the "
+        "If intentional, run `ccv12 harness regenerate <repo>` to update the "
         "snapshots and commit them."
     )
 

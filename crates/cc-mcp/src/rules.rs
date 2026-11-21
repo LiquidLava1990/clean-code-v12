@@ -1,7 +1,7 @@
 //! `cc_list_rules` and `cc_get_rule` tool implementations.
 //!
 //! Both tools share a freshly-built registry populated with the
-//! default pack set so the listing mirrors what `cc check` would run.
+//! default pack set so the listing mirrors what `ccv12 check` would run.
 //! We rebuild per call (cheap — pack registration is just pointer
 //! copying) to keep the surface stateless. The pack-registration
 //! plumbing lives in `crate::_packs` so this file is not a god

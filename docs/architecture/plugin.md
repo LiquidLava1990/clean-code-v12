@@ -2,7 +2,7 @@
 
 > **Status: design document.** This describes the planned dynamic-pack
 > workflow. Today every pack is a Rust crate implementing `cc_rules::RulePack`,
-> statically linked into `cc` and registered via `Kernel::with_pack`; the
+> statically linked into `ccv12` and registered via `Kernel::with_pack`; the
 > `cc pack ...` subcommands and `--pack-dir` flag below are not shipped yet.
 > See [`packs/README.md`](../../packs/README.md) for what works now.
 
@@ -132,7 +132,7 @@ license is **rejected at install time** — no override available.
 
 | Phase | What |
 |---|---|
-| `draft` | Local development; `cc check --pack-dir ./my-pack` for testing |
+| `draft` | Local development; `ccv12 check --pack-dir ./my-pack` for testing |
 | `published` | Pushed to OCI; auto-discoverable via `cc pack search` |
 | `verified` | Reviewed by maintainers, eligible for the Recommended Packs list |
 | `deprecated` | Marked superseded; install warns but still works |

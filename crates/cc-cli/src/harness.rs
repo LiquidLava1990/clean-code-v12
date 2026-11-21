@@ -1,14 +1,14 @@
-//! `cc harness` — scaffold + verify the 7-layer pre-refactor safety net.
+//! `ccv12 harness` — scaffold + verify the 7-layer pre-refactor safety net.
 //!
 //! The harness is the test-first / pre-refactor gate that ships with V12.
 //! Three subcommands:
 //!
-//! - `cc harness init <PATH>` — write the helper modules, test modules,
+//! - `ccv12 harness init <PATH>` — write the helper modules, test modules,
 //!   and a baseline snapshot under `<PATH>/tests/cc_harness/`. Idempotent;
 //!   re-running prints "already initialised" and exits clean.
-//! - `cc harness verify <PATH>` — invoke `python -m pytest` against the
+//! - `ccv12 harness verify <PATH>` — invoke `python -m pytest` against the
 //!   harness package and pass through the exit code.
-//! - `cc harness regenerate <PATH>` — re-run `regenerate_signatures.py`
+//! - `ccv12 harness regenerate <PATH>` — re-run `regenerate_signatures.py`
 //!   to ratify deliberate API changes, then prompt the operator to commit
 //!   the new snapshots.
 //!
@@ -154,7 +154,7 @@ impl HarnessPaths {
     }
 }
 
-/// Top-level dispatcher for `cc harness <SUB>`.
+/// Top-level dispatcher for `ccv12 harness <SUB>`.
 ///
 /// # Errors
 /// Surfaces every [`CliError`] variant — invalid root, I/O failure,
@@ -167,7 +167,7 @@ pub fn run_harness(args: &HarnessArgs) -> Result<ExitCode> {
     }
 }
 
-/// Implements `cc harness init <PATH>`.
+/// Implements `ccv12 harness init <PATH>`.
 ///
 /// 1. Validate `<PATH>` exists.
 /// 2. If `tests/cc_harness/` already exists, print and exit clean.
@@ -186,7 +186,7 @@ pub fn run_harness_init(path: &Utf8Path) -> Result<ExitCode> {
     if paths.harness_dir.exists() {
         let _ = writeln!(
             io::stderr(),
-            "harness already initialized at {} — run `cc harness verify {}` instead",
+            "harness already initialized at {} — run `ccv12 harness verify {}` instead",
             paths.harness_dir,
             paths.root
         );
@@ -203,7 +203,7 @@ pub fn run_harness_init(path: &Utf8Path) -> Result<ExitCode> {
     Ok(ExitCode::Clean)
 }
 
-/// Implements `cc harness verify <PATH>` — pytest pass-through.
+/// Implements `ccv12 harness verify <PATH>` — pytest pass-through.
 ///
 /// # Errors
 /// Returns [`CliError::Harness`] when python is unavailable or pytest
@@ -215,7 +215,7 @@ pub fn run_harness_verify(path: &Utf8Path) -> Result<ExitCode> {
     if !paths.harness_dir.exists() {
         return Err(harness_error(
             format!("harness not initialised at {}", paths.harness_dir),
-            "run `cc harness init <repo>` to scaffold the harness first",
+            "run `ccv12 harness init <repo>` to scaffold the harness first",
         ));
     }
     let mut cmd = python_command()?;
@@ -232,7 +232,7 @@ pub fn run_harness_verify(path: &Utf8Path) -> Result<ExitCode> {
     })
 }
 
-/// Implements `cc harness regenerate <PATH>`.
+/// Implements `ccv12 harness regenerate <PATH>`.
 ///
 /// # Errors
 /// Returns [`CliError::Harness`] when python is unavailable or the
@@ -243,7 +243,7 @@ pub fn run_harness_regenerate(path: &Utf8Path) -> Result<ExitCode> {
     if !paths.regenerate_script.exists() {
         return Err(harness_error(
             format!("regenerate script missing at {}", paths.regenerate_script),
-            "run `cc harness init <repo>` first to scaffold the harness",
+            "run `ccv12 harness init <repo>` first to scaffold the harness",
         ));
     }
     let _ = run_regenerate(&paths)?;

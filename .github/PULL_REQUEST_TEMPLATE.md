@@ -14,7 +14,7 @@
 - [ ] All error messages include WHAT happened AND HOW to fix (`R-ERR-ACTION`)
 - [ ] Touched files cleaner than I found them (`R-REFACTOR`)
 - [ ] New files clean from line 1 (`R-CLEAN-1`)
-- [ ] `cc check . --severity blocker` reports no new Blocker findings
+- [ ] `ccv12 check . --severity blocker` reports no new Blocker findings
 
 ## Test plan
 

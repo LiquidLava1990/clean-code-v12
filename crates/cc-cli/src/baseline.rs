@@ -1,22 +1,22 @@
-//! `cc baseline` subcommand — Section-4 Tooling-Gap-#18 helper.
+//! `ccv12 baseline` subcommand — Section-4 Tooling-Gap-#18 helper.
 //!
 //! Mirrors the Semgrep `--baseline-commit` workflow plus the
 //! `detect-secrets baseline {scan,audit}` ergonomics: a 4-verb CRUD over
 //! a JSON file the operator commits next to `.cc/config.toml`.
 //!
-//! - `cc baseline create [PATH]` — run `cc check`, persist every
+//! - `ccv12 baseline create [PATH]` — run `ccv12 check`, persist every
 //!   observed finding into `<root>/.cc-baseline.json`. Already-accepted
 //!   entries keep their reviewer / reason / `accepted_at` metadata.
-//! - `cc baseline status` — read-only report: total entries, still
+//! - `ccv12 baseline status` — read-only report: total entries, still
 //!   present, resolved-since-last-sync. Safe in CI.
-//! - `cc baseline sync` — rerun + drop resolved entries (atomic write).
+//! - `ccv12 baseline sync` — rerun + drop resolved entries (atomic write).
 //!   `--dry-run` prints the diff without mutating the file.
-//! - `cc baseline clear` — wipe the file (interactive confirm unless
+//! - `ccv12 baseline clear` — wipe the file (interactive confirm unless
 //!   `--yes`).
 //!
-//! # Baseline integration in `cc check`
+//! # Baseline integration in `ccv12 check`
 //!
-//! `cc check --baseline <FILE>` (alias `--baseline-from`) ALREADY filters
+//! `ccv12 check --baseline <FILE>` (alias `--baseline-from`) ALREADY filters
 //! findings whose `SuppressKey` is present in the baseline file — see
 //! [`crate::runner::run_check`] → `apply_baseline`. This module is a CLI
 //! wrapper around the same `cc-baseline` repo type; it does **not**
@@ -48,7 +48,7 @@ use crate::runner::{build_kernel, canonicalise_root, load_or_default_config};
 /// a single-file root sentinel.
 pub const DEFAULT_BASELINE_FILE: &str = ".cc-baseline.json";
 
-/// Plain summary printed by `cc baseline status` and returned by
+/// Plain summary printed by `ccv12 baseline status` and returned by
 /// [`baseline_status_for`]. Public so library callers can drive the
 /// status check without spawning the binary.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -63,7 +63,7 @@ pub struct BaselineStatus {
     pub new_findings: usize,
 }
 
-/// Top-level dispatcher for `cc baseline <SUB>`.
+/// Top-level dispatcher for `ccv12 baseline <SUB>`.
 ///
 /// # Errors
 /// Surfaces every [`CliError`] variant — invalid root, config load
@@ -119,7 +119,7 @@ fn run_kernel(root: &Utf8Path, no_default_pack: bool) -> Result<KernelRunReport>
         .map_err(|source| CliError::Kernel { source })
 }
 
-/// Implements `cc baseline create`.
+/// Implements `ccv12 baseline create`.
 ///
 /// Strategy: open existing baseline (or empty), accept every finding,
 /// then save atomically. Existing entries are touched (`seen_count++`,
@@ -194,7 +194,7 @@ fn scan_for(
     })
 }
 
-/// Implements `cc baseline status`. Read-only — never mutates the file.
+/// Implements `ccv12 baseline status`. Read-only — never mutates the file.
 ///
 /// # Errors
 /// Surfaces the kernel + baseline I/O errors verbatim.
@@ -243,7 +243,7 @@ fn print_status_summary(path: &Utf8Path, s: &BaselineStatus) {
     );
 }
 
-/// Implements `cc baseline sync`.
+/// Implements `ccv12 baseline sync`.
 ///
 /// Touches every persisted entry, then removes resolved entries and
 /// writes the baseline back atomically. `--dry-run` prints the diff
@@ -298,7 +298,7 @@ fn print_sync_summary(
     );
 }
 
-/// Implements `cc baseline clear`. Refuses to act on a non-TTY without
+/// Implements `ccv12 baseline clear`. Refuses to act on a non-TTY without
 /// `--yes` so a stuck CI pipeline cannot lose data on a hung prompt.
 ///
 /// # Errors
@@ -335,7 +335,7 @@ fn confirm_clear(path: &Utf8Path) -> Result<bool> {
                 io::ErrorKind::Other,
                 format!(
                     "stdin is not a TTY but `--yes` was not supplied; \
-                     re-run `cc baseline clear --yes` to wipe `{path}` non-interactively"
+                     re-run `ccv12 baseline clear --yes` to wipe `{path}` non-interactively"
                 ),
             ),
         });
@@ -543,7 +543,7 @@ mod tests {
     fn cc_check_apply_filters_baselined_findings() {
         // Documents the load+filter integration that already lives in
         // `runner::apply_baseline`. `cc_baseline::apply` (the function
-        // `cc check --baseline` calls) silences baselined findings while
+        // `ccv12 check --baseline` calls) silences baselined findings while
         // letting fresh ones through.
         let tmp = TempDir::new().expect("tempdir");
         let baselined = synth_finding(

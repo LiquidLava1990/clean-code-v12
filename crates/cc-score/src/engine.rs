@@ -18,7 +18,7 @@ use crate::counts::FindingCounts;
 use crate::deduction::Deduction;
 use crate::weights::Weights;
 
-/// Outcome of [`ScoreEngine::score`] — what `cc check` prints and what
+/// Outcome of [`ScoreEngine::score`] — what `ccv12 check` prints and what
 /// the ratchet writes to `.cc/score.json`.
 ///
 /// Implements [`Serialize`] / [`Deserialize`] with deterministic field

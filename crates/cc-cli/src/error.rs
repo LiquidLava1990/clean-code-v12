@@ -1,4 +1,4 @@
-//! [`CliError`] — actionable error surface for the `cc` binary.
+//! [`CliError`] — actionable error surface for the `ccv12` binary.
 //!
 //! Every variant follows the R-ERR-ACTION dogfood: it states **what**
 //! went wrong and **how** the operator should fix it.
@@ -9,24 +9,24 @@ use thiserror::Error;
 /// Crate-wide alias.
 pub type Result<T> = std::result::Result<T, CliError>;
 
-/// Errors surfaced by the `cc` binary.
+/// Errors surfaced by the `ccv12` binary.
 #[derive(Debug, Error)]
 #[non_exhaustive]
 pub enum CliError {
     /// The supplied repo root does not exist or is not a directory.
     #[error(
         "repo root `{path}` is not a directory — \
-         pass an existing directory or run `cc init <PATH>` first"
+         pass an existing directory or run `ccv12 init <PATH>` first"
     )]
     InvalidRoot {
         /// The path that failed validation.
         path: Utf8PathBuf,
     },
 
-    /// `.cc/config.toml` already exists during `cc init` without `--force`.
+    /// `.cc/config.toml` already exists during `ccv12 init` without `--force`.
     #[error(
         "config already exists at `{path}` — \
-         re-run `cc init --force` to overwrite, or edit the file in place"
+         re-run `ccv12 init --force` to overwrite, or edit the file in place"
     )]
     ConfigExists {
         /// Path of the existing config.
@@ -49,7 +49,7 @@ pub enum CliError {
     /// `cc-config` rejected the loaded `.cc/config.toml`.
     #[error(
         "config error: {source} — \
-         fix `.cc/config.toml` and re-run; `cc init --force` regenerates a valid template"
+         fix `.cc/config.toml` and re-run; `ccv12 init --force` regenerates a valid template"
     )]
     Config {
         /// Underlying config error.
@@ -82,7 +82,7 @@ pub enum CliError {
     /// Baseline file could not be loaded or parsed.
     #[error(
         "baseline error at `{path}`: {source} — \
-         re-run `cc init` to regenerate, or fix the JSON manually"
+         re-run `ccv12 init` to regenerate, or fix the JSON manually"
     )]
     Baseline {
         /// Path of the baseline file.
@@ -105,7 +105,7 @@ pub enum CliError {
         source: std::io::Error,
     },
 
-    /// `cc harness` could not complete its scaffold / verify / regenerate run.
+    /// `ccv12 harness` could not complete its scaffold / verify / regenerate run.
     #[error("{message} — {action}")]
     Harness {
         /// What broke (filled by the harness handler).

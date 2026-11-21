@@ -2,14 +2,14 @@
 #
 # Drop this file at <repo-root>/.cc/config.toml. Every field below is
 # OPTIONAL — an empty file is a valid config. The defaults shown here
-# are exactly what `cc init` writes.
+# are exactly what `ccv12 init` writes.
 #
 # Tier-0 (Family 0) rules are forever-on. They cannot be disabled.
 # You CAN downgrade their severity from Blocker -> Required, but never
 # all the way to Nit (that would be effectively "off"). See the
 # [rules] section near the bottom for examples.
 #
-# Run `cc explain <rule-id>` for the rationale + threshold of any rule.
+# Run `ccv12 explain <rule-id>` for the rationale + threshold of any rule.
 
 # ---------------------------------------------------------------------------
 # Project metadata

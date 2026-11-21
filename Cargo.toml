@@ -1,9 +1,9 @@
 # Root package: exists only so pre-commit's `language: rust` hook
 # (`cargo install --path .`) can build the CLI. End users install the
-# `cc` binary from `crates/cc-cli` or a prebuilt release instead.
+# `ccv12` binary from `crates/cc-cli` or a prebuilt release instead.
 [package]
 name = "clean-code-v12"
-description = "pre-commit shim for the Clean Code V12 `cc` linter."
+description = "pre-commit shim for the Clean Code V12 `ccv12` linter."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -16,7 +16,7 @@ autotests = false
 autobenches = false
 
 [[bin]]
-name = "cc-pre-commit"
+name = "ccv12-pre-commit"
 path = "tools/pre-commit/main.rs"
 
 [dependencies]

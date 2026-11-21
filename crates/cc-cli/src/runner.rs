@@ -76,7 +76,7 @@ fn report_error(err: &CliError) -> ExitCode {
     ExitCode::RuntimeError
 }
 
-/// Run `cc check`.
+/// Run `ccv12 check`.
 ///
 /// # Errors
 ///
@@ -243,13 +243,13 @@ fn classify_exit(report: &KernelRunReport, severity: SeverityFilter) -> ExitCode
     }
 }
 
-/// Print `cc <cli-version> (kernel <kernel-version>)`.
+/// Print `ccv12 <cli-version> (kernel <kernel-version>)`.
 fn print_version() {
     let cli_version = env!("CARGO_PKG_VERSION");
-    let _ = writeln!(io::stdout(), "cc {cli_version} (kernel {cli_version})");
+    let _ = writeln!(io::stdout(), "ccv12 {cli_version} (kernel {cli_version})");
 }
 
-/// Run `cc init`.
+/// Run `ccv12 init`.
 ///
 /// # Errors
 ///

@@ -1,7 +1,7 @@
-//! Integration tests for the `cc harness` subcommand.
+//! Integration tests for the `ccv12 harness` subcommand.
 //!
 //! Ten contract tests that lock in the test-first / pre-refactor safety
-//! net behaviour of `cc harness init|verify|regenerate` across all
+//! net behaviour of `ccv12 harness init|verify|regenerate` across all
 //! seven layers:
 //!
 //! 1. `init` scaffolds the seven layers (helpers + tests + snapshots).
@@ -17,7 +17,7 @@
 //! 10. Layer 7 — new `# noqa: <rule>` triggers suppression drift.
 //!
 //! Each test seeds a `tempfile::TempDir` with the smallest possible
-//! Python project (one module, no externals) and exec's the built `cc`
+//! Python project (one module, no externals) and exec's the built `ccv12`
 //! binary. Tests are pure black-box — they only assert on filesystem
 //! state, exit codes, and human-readable stderr.
 
@@ -26,10 +26,10 @@ use std::process::Command;
 
 use tempfile::TempDir;
 
-/// Resolve the path to the `cc` binary. Cargo populates
+/// Resolve the path to the `ccv12` binary. Cargo populates
 /// `CARGO_BIN_EXE_<name>` for integration tests of binary crates.
 fn cc_binary() -> PathBuf {
-    PathBuf::from(env!("CARGO_BIN_EXE_cc"))
+    PathBuf::from(env!("CARGO_BIN_EXE_ccv12"))
 }
 
 /// Write `contents` to `<dir>/<rel>`, creating parent dirs as needed.
@@ -56,7 +56,7 @@ fn seed_python_project(dir: &Path) {
 }
 
 /// True when `python` (or `python3`) is on PATH AND can import pytest.
-/// `cc harness` shells out to the interpreter for both `init` (snapshot
+/// `ccv12 harness` shells out to the interpreter for both `init` (snapshot
 /// regen) and `verify` (pytest run); without pytest the harness cannot
 /// complete a real run, only the python-missing error path.
 fn python_with_pytest_available() -> bool {
@@ -84,7 +84,7 @@ fn python_available() -> bool {
     false
 }
 
-/// Harness helper modules `cc harness init` must scaffold (one per layer
+/// Harness helper modules `ccv12 harness init` must scaffold (one per layer
 /// plus discovery).
 const HARNESS_HELPERS: &[&str] = &[
     "_discovery.py",
@@ -97,7 +97,7 @@ const HARNESS_HELPERS: &[&str] = &[
     "_suppression_capture.py",
 ];
 
-/// Harness test + support files `cc harness init` must scaffold.
+/// Harness test + support files `ccv12 harness init` must scaffold.
 const HARNESS_TEST_FILES: &[&str] = &[
     "test_imports.py",
     "test_signatures.py",
@@ -112,7 +112,7 @@ const HARNESS_TEST_FILES: &[&str] = &[
     "README.md",
 ];
 
-/// Baseline snapshots `cc harness init` must write.
+/// Baseline snapshots `ccv12 harness init` must write.
 const HARNESS_SNAPSHOTS: &[&str] = &[
     "signatures.json",
     "exception_shapes.json",
@@ -159,7 +159,7 @@ fn test_harness_init_scaffolds_seven_layers() {
         .arg("init")
         .arg(dir.path())
         .output()
-        .expect("spawn cc harness init");
+        .expect("spawn ccv12 harness init");
 
     assert!(
         output.status.success(),
@@ -195,7 +195,7 @@ fn test_harness_init_idempotent() {
         .arg("init")
         .arg(dir.path())
         .output()
-        .expect("spawn cc harness init #1");
+        .expect("spawn ccv12 harness init #1");
     assert!(first.status.success(), "first init must succeed");
 
     // Tag a sentinel byte in one helper so we can detect destructive overwrite.
@@ -207,7 +207,7 @@ fn test_harness_init_idempotent() {
         .arg("init")
         .arg(dir.path())
         .output()
-        .expect("spawn cc harness init #2");
+        .expect("spawn ccv12 harness init #2");
     assert!(
         second.status.success(),
         "second init must exit 0 (no-op): {}",
@@ -346,7 +346,7 @@ fn test_harness_regenerate_updates_snapshots_and_passes_verify() {
     );
 }
 
-/// Run `cc harness init` then assert it succeeded — small helper for
+/// Run `ccv12 harness init` then assert it succeeded — small helper for
 /// the layer-specific drift tests so each one stays focused on its
 /// one mutation.
 fn init_or_panic(dir: &Path) {
@@ -355,7 +355,7 @@ fn init_or_panic(dir: &Path) {
         .arg("init")
         .arg(dir)
         .output()
-        .expect("spawn cc harness init");
+        .expect("spawn ccv12 harness init");
     assert!(
         init.status.success(),
         "init failed: stdout={} stderr={}",
@@ -364,14 +364,14 @@ fn init_or_panic(dir: &Path) {
     );
 }
 
-/// Run `cc harness verify <dir>` and return (exit_code, stdout, stderr).
+/// Run `ccv12 harness verify <dir>` and return (exit_code, stdout, stderr).
 fn verify_capture(dir: &Path) -> (i32, String, String) {
     let v = Command::new(cc_binary())
         .arg("harness")
         .arg("verify")
         .arg(dir)
         .output()
-        .expect("spawn cc harness verify");
+        .expect("spawn ccv12 harness verify");
     (
         v.status.code().unwrap_or(-1),
         String::from_utf8_lossy(&v.stdout).into_owned(),
@@ -507,7 +507,7 @@ fn test_harness_init_skips_if_python_unavailable() {
         .arg("init")
         .arg(dir.path())
         .output()
-        .expect("spawn cc harness init");
+        .expect("spawn ccv12 harness init");
 
     let code = output.status.code().unwrap_or(-1);
     assert_ne!(code, 0, "init without python must not exit 0");

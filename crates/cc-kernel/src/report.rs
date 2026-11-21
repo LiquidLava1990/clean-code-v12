@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 /// Per-rule wall-clock total across the whole run, keyed by `rule_id`.
 pub type PerRuleTiming = BTreeMap<String, Duration>;
 
-/// Outcome of a single `cc check` invocation.
+/// Outcome of a single `ccv12 check` invocation.
 ///
 /// Serde-friendly so the CLI / LSP can dump the report verbatim to disk
 /// or stream it to a daemon. `started_at` is wall-clock; `elapsed` is a

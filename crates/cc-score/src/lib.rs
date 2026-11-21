@@ -3,7 +3,7 @@
 //! The kernel runs every probe pack against a repo, drains a stream of
 //! [`cc_finding::Finding`]s, and asks this crate: *"what is the repo's
 //! health right now, on a 0..=100 scale?"*. The number is what
-//! `cc check` prints at the end of a run (`Health 87/100`) and what the
+//! `ccv12 check` prints at the end of a run (`Health 87/100`) and what the
 //! ratchet uses to gate pull requests — a regression blocks the merge.
 //!
 //! # Design tenets

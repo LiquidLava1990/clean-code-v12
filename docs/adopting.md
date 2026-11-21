@@ -14,15 +14,14 @@ curl -fsSL https://github.com/LiquidLava1990/clean-code-v12/releases/latest/down
 irm https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/install.ps1 | iex
 ```
 
-Verify with `cc --version`. (If the installer reported it used the name
-`ccv12` because a C compiler already owns `cc`, use `ccv12` everywhere below.)
+Verify with `ccv12 --version`.
 
 ## 2. First run
 
 ```bash
 cd path/to/your/repo
-cc init        # drops .cc/config.toml + an empty baseline
-cc check .     # full repo scan, colored output, health score
+ccv12 init        # drops .cc/config.toml + an empty baseline
+ccv12 check .     # full repo scan, colored output, health score
 ```
 
 Exit code `0` = clean, `1` = findings. Tier-0 violations surface as Blocker
@@ -33,11 +32,11 @@ findings.
 Accept today's findings so legacy violations don't block PRs but new ones do:
 
 ```bash
-cc baseline create --reason "initial adoption"   # writes .cc-baseline.json
+ccv12 baseline create --reason "initial adoption"   # writes .cc-baseline.json
 git add .cc/ .cc-baseline.json
-cc check . --baseline .cc-baseline.json          # reports only new findings
-cc baseline status                               # what's left, what's resolved
-cc baseline sync                                 # prune resolved entries
+ccv12 check . --baseline .cc-baseline.json          # reports only new findings
+ccv12 baseline status                               # what's left, what's resolved
+ccv12 baseline sync                                 # prune resolved entries
 ```
 
 ## 4. Gate it
@@ -50,7 +49,7 @@ repos:
   - repo: https://github.com/LiquidLava1990/clean-code-v12
     rev: v0.1.0
     hooks:
-      - id: cc-lint-blocker
+      - id: ccv12-lint-blocker
 ```
 
 **GitHub Actions**
@@ -73,7 +72,7 @@ jobs:
 ```
 
 **Any other CI**: install with the one-liner, then run
-`cc check . --severity blocker --format sarif --output cc.sarif`.
+`ccv12 check . --severity blocker --format sarif --output cc.sarif`.
 
 ## 5. Editor
 
@@ -90,7 +89,7 @@ for the full schema and examples.
 
 ## 7. Probe packs
 
-All 29 built-in packs (385 probes) are compiled into the `cc` binary — nothing
+All 29 built-in packs (385 probes) are compiled into the `ccv12` binary — nothing
 extra to install. Each pack's manifest is published as an OCI artifact at
 `ghcr.io/liquidlava1990/<pack-id>:<version>` for inventory and pinning; see
 [`packs/README.md`](../packs/README.md). Dynamic loading of third-party packs

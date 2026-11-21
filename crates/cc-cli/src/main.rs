@@ -1,4 +1,4 @@
-//! `cc` — Phase-1 user-facing binary entry point.
+//! `ccv12` — Phase-1 user-facing binary entry point.
 //!
 //! Parses argv via clap, dispatches into [`cc_cli::run`], and surfaces
 //! the resulting [`cc_cli::ExitCode`] to the OS.

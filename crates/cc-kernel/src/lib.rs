@@ -1,6 +1,6 @@
 //! `cc-kernel` — Clean Code V12 orchestration crate.
 //!
-//! The kernel is what `cc check` invokes: walk the repo, parse + lift
+//! The kernel is what `ccv12 check` invokes: walk the repo, parse + lift
 //! every supported file, run every registered rule, score the result,
 //! emit findings to a sink, and return a structured report.
 //!

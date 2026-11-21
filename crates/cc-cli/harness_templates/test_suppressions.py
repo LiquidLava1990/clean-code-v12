@@ -51,7 +51,7 @@ def _load_snapshot() -> dict[str, dict[str, int]]:
 def test_suppression_snapshot_exists() -> None:
     assert SNAPSHOT_PATH.exists(), (
         f"suppression snapshot missing at {SNAPSHOT_PATH}. "
-        "Run `cc harness regenerate <repo>` to create it."
+        "Run `ccv12 harness regenerate <repo>` to create it."
     )
 
 
@@ -78,7 +78,7 @@ def _format_drift(drift: list[str]) -> str:
         "new suppression comments detected:\n"
         f"{joined}{more}\n\n"
         "Either remove the suppression (fix the underlying issue) OR run "
-        "`cc harness regenerate <repo>` to acknowledge it explicitly."
+        "`ccv12 harness regenerate <repo>` to acknowledge it explicitly."
     )
 
 

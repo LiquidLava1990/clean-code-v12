@@ -32,7 +32,7 @@ forever-rules table in `README.md`.
 
 | Crate | Role |
 |---|---|
-| `cc-cli` | Binary entry point (`cc` command) |
+| `cc-cli` | Binary entry point (`ccv12` command) |
 | `cc-kernel` | Orchestration — runs probes against a CPG |
 | `cc-cpg` | Schema (24 node + 12 edge types) |
 | `cc-cpg-store` | redb-backed graph store |
@@ -47,7 +47,7 @@ forever-rules table in `README.md`.
 | `cc-runtime` | L0 runtime-data ingest (Phase 4) |
 | `cc-llm` | L3 LLM probe infra (Phase 5) |
 | `cc-config` | `.cc/config.toml` parsing |
-| `cc-diagnostics` | `cc explain <rule>` rule-catalog rendering |
+| `cc-diagnostics` | `ccv12 explain <rule>` rule-catalog rendering |
 | `cc-lsp` | Language Server Protocol (Phase 1 Wave 4) |
 | `cc-test-fixtures` | Golden corpus (positives + negatives per rule) |
 
