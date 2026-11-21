@@ -93,7 +93,7 @@ Anyone can ship their own pack:
 
 ## Built-in pack catalog
 
-The following packs ship in the default `cc` build, in registration
+The following packs ship in the default `ccv12` build, in registration
 order. Probe counts come from `gen-pack-manifests`'s output:
 
 | Pack id | Probes |
@@ -104,12 +104,13 @@ order. Probe counts come from `gen-pack-manifests`'s output:
 | `cc-builtin-perf` | 24 |
 | `cc-builtin-completeness` | 30 |
 | `cc-builtin-bugs` | 51 |
-| `cc-builtin-concurrency` | 8 |
+| `cc-builtin-concurrency` | 9 |
 | `cc-builtin-time-math` | 5 |
 | `cc-builtin-taint` | 15 |
 | `cc-builtin-memory` | 5 |
 | `cc-builtin-types` | 23 |
 | `cc-builtin-architecture` | 8 |
+| `cc-builtin-conventions` | 5 |
 | `cc-builtin-tests` | 10 |
 | `cc-builtin-database` | 6 |
 | `cc-builtin-anti-fragility` | 4 |
@@ -127,7 +128,7 @@ order. Probe counts come from `gen-pack-manifests`'s output:
 | `cc-builtin-supplychain` | 10 |
 | `cc-builtin-formatting` | 10 |
 | `cc-builtin-iac` | 20 |
-| **total** | **385** |
+| **total** | **391** |
 
 ## Planned
 

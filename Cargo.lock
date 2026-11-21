@@ -491,6 +491,7 @@ dependencies = [
  "cc-rules-completeness",
  "cc-rules-compliance",
  "cc-rules-concurrency",
+ "cc-rules-conventions",
  "cc-rules-database",
  "cc-rules-deploy",
  "cc-rules-docs",
@@ -582,6 +583,7 @@ dependencies = [
  "cc-rules-completeness",
  "cc-rules-compliance",
  "cc-rules-concurrency",
+ "cc-rules-conventions",
  "cc-rules-database",
  "cc-rules-deploy",
  "cc-rules-docs",
@@ -767,6 +769,23 @@ dependencies = [
  "cc-frontend",
  "cc-rules",
  "serde",
+ "thiserror",
+ "tracing",
+]
+
+[[package]]
+name = "cc-rules-conventions"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "camino",
+ "cc-config",
+ "cc-cpg",
+ "cc-finding",
+ "cc-frontend",
+ "cc-rules",
+ "serde",
+ "serde_json",
  "thiserror",
  "tracing",
 ]
@@ -1574,6 +1593,7 @@ dependencies = [
  "cc-rules-completeness",
  "cc-rules-compliance",
  "cc-rules-concurrency",
+ "cc-rules-conventions",
  "cc-rules-database",
  "cc-rules-deploy",
  "cc-rules-docs",

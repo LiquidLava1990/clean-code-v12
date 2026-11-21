@@ -60,6 +60,8 @@ pub enum Category {
     Type,
     /// Fragility — flaky tests, brittle assertions.
     Fragile,
+    /// Project layout conventions (boot path, manifests, typed events).
+    Convention,
     /// Self-referential — findings about cc-finding itself.
     Meta,
 }
@@ -94,6 +96,7 @@ impl Category {
             Self::Compliance => "compliance",
             Self::Type => "type",
             Self::Fragile => "fragile",
+            Self::Convention => "convention",
             Self::Meta => "meta",
         }
     }

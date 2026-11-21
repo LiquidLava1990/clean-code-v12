@@ -1,9 +1,10 @@
-//! [`BuiltinConcurrencyPack`] — registers the eight Family-5 probes.
+//! [`BuiltinConcurrencyPack`] — registers the nine Family-5 probes.
 
 use cc_rules::{Rule, RulePack, KERNEL_API_VERSION};
 
 use crate::context_no_propagate::ContextNoPropagateRule;
 use crate::copy_loop_var::CopyLoopVarRule;
+use crate::file_claim_bypass::FileClaimBypassRule;
 use crate::leaked_task::LeakedTaskRule;
 use crate::lock_inversion::LockInversionRule;
 use crate::race::RaceRule;
@@ -11,7 +12,7 @@ use crate::signal_unbuffered::SignalUnbufferedRule;
 use crate::toctou::ToctouRule;
 use crate::waitgroup_add_in_goroutine::WaitgroupAddInGoroutineRule;
 
-/// Built-in Family-5 [`RulePack`] — eight probes registered at boot.
+/// Built-in Family-5 [`RulePack`] — nine probes registered at boot.
 ///
 /// `R-ERR-ACTION`: registry rejection of this pack means the kernel API
 /// drifted; bump `kernel_api_min` and re-vendor.
@@ -32,6 +33,7 @@ static RACE: RaceRule = RaceRule;
 static LOCK_INVERSION: LockInversionRule = LockInversionRule;
 static LEAKED_TASK: LeakedTaskRule = LeakedTaskRule;
 static TOCTOU: ToctouRule = ToctouRule;
+static FILE_CLAIM_BYPASS: FileClaimBypassRule = FileClaimBypassRule;
 static WAITGROUP_ADD_IN_GOROUTINE: WaitgroupAddInGoroutineRule = WaitgroupAddInGoroutineRule;
 static SIGNAL_UNBUFFERED: SignalUnbufferedRule = SignalUnbufferedRule;
 
@@ -44,6 +46,7 @@ static RULES: &[&'static dyn Rule] = &[
     &LOCK_INVERSION,
     &LEAKED_TASK,
     &TOCTOU,
+    &FILE_CLAIM_BYPASS,
     &WAITGROUP_ADD_IN_GOROUTINE,
     &SIGNAL_UNBUFFERED,
     // Phase 9 (Go).

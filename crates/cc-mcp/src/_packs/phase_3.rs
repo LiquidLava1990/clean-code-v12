@@ -1,10 +1,11 @@
 //! Phase 3: bugs, concurrency, time-math, taint, memory, types,
-//! architecture.
+//! architecture, layout conventions.
 
 use cc_rules::RuleRegistry;
 use cc_rules_architecture::BuiltinArchitecturePack;
 use cc_rules_bugs::BuiltinBugsPack;
 use cc_rules_concurrency::BuiltinConcurrencyPack;
+use cc_rules_conventions::BuiltinConventionsPack;
 use cc_rules_memory::BuiltinMemoryPack;
 use cc_rules_taint::BuiltinTaintPack;
 use cc_rules_time_math::BuiltinTimeMathPack;
@@ -31,6 +32,9 @@ pub fn register(registry: &mut RuleRegistry) -> Result<(), String> {
         .map_err(pack_err)?;
     registry
         .register_pack(&BuiltinArchitecturePack)
+        .map_err(pack_err)?;
+    registry
+        .register_pack(&BuiltinConventionsPack)
         .map_err(pack_err)?;
     Ok(())
 }

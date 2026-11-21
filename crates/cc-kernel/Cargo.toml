@@ -32,6 +32,7 @@ cc-rules-taint = { path = "../cc-rules-taint" }
 cc-rules-memory = { path = "../cc-rules-memory" }
 cc-rules-types = { path = "../cc-rules-types" }
 cc-rules-architecture = { path = "../cc-rules-architecture" }
+cc-rules-conventions = { path = "../cc-rules-conventions" }
 cc-rules-tests = { path = "../cc-rules-tests" }
 cc-rules-database = { path = "../cc-rules-database" }
 cc-rules-anti-fragility = { path = "../cc-rules-anti-fragility" }

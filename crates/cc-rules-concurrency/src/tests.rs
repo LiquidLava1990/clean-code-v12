@@ -10,6 +10,7 @@ use cc_rules::{
     InMemorySourceTable, KernelMeta, ProjectFingerprint, Rule, RuleContext, RuleRegistry,
 };
 
+use crate::file_claim_bypass::FileClaimBypassRule;
 use crate::leaked_task::LeakedTaskRule;
 use crate::lock_inversion::LockInversionRule;
 use crate::race::RaceRule;
@@ -280,6 +281,62 @@ fn toctou_silent_on_different_paths() {
     assert!(ToctouRule.run(&fx.ctx()).is_empty());
 }
 
+// ---------- file_claim_bypass --------------------------------------------
+
+#[test]
+fn file_claim_bypass_flags_data_write_without_claim() {
+    let mut fx = Fixture::new();
+    let file = push_file(&mut fx.batch, SAMPLE_PATH);
+    let fun = push_function(&mut fx.batch, file, "save", false);
+    push_call(
+        &mut fx.batch,
+        fun,
+        "open",
+        Some("data/state.yaml"),
+        range(2, 2, 0, 28),
+    );
+    let findings = FileClaimBypassRule.run(&fx.ctx());
+    assert_eq!(findings.len(), 1, "got {findings:?}");
+    assert_eq!(findings[0].rule_id, "cc.concurrent.file_claim_bypass");
+}
+
+#[test]
+fn file_claim_bypass_silent_with_claim_scope() {
+    let mut fx = Fixture::new();
+    let file = push_file(&mut fx.batch, SAMPLE_PATH);
+    let fun = push_function(&mut fx.batch, file, "save", false);
+    push_call(
+        &mut fx.batch,
+        fun,
+        "FileClaimRegistry.sync_claim_scope",
+        None,
+        range(2, 2, 100, 138),
+    );
+    push_call(
+        &mut fx.batch,
+        fun,
+        "open",
+        Some("data/state.yaml"),
+        range(3, 3, 200, 228),
+    );
+    assert!(FileClaimBypassRule.run(&fx.ctx()).is_empty());
+}
+
+#[test]
+fn file_claim_bypass_silent_outside_data_dir() {
+    let mut fx = Fixture::new();
+    let file = push_file(&mut fx.batch, SAMPLE_PATH);
+    let fun = push_function(&mut fx.batch, file, "save", false);
+    push_call(
+        &mut fx.batch,
+        fun,
+        "open",
+        Some("/tmp/scratch.txt"),
+        range(2, 2, 0, 28),
+    );
+    assert!(FileClaimBypassRule.run(&fx.ctx()).is_empty());
+}
+
 // ---------- waitgroup_add_in_goroutine (Phase 7) -------------------------
 
 use crate::signal_unbuffered::SignalUnbufferedRule;
@@ -464,16 +521,17 @@ fn copy_loop_var_silent_in_test_files() {
 // ---------- registry integration -----------------------------------------
 
 #[test]
-fn builtin_pack_registers_eight_rules() {
+fn builtin_pack_registers_nine_rules() {
     let mut reg = RuleRegistry::new();
     reg.register_pack(&BuiltinConcurrencyPack)
         .expect("Family-5 pack registers without error");
-    assert_eq!(reg.rules().count(), 8);
+    assert_eq!(reg.rules().count(), 9);
     for slug in [
         "cc.concurrent.race",
         "cc.concurrent.lock_inversion",
         "cc.concurrent.leaked_task",
         "cc.concurrent.toctou",
+        "cc.concurrent.file_claim_bypass",
         "cc.concurrent.waitgroup_add_in_goroutine",
         "cc.concurrent.signal_unbuffered",
         // Phase 9 (Go).

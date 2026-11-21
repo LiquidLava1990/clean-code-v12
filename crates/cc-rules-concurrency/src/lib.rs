@@ -1,8 +1,8 @@
 //! `cc-rules-concurrency` — Family 5 (concurrency) probe pack.
 //!
-//! Phases 3 + 7 + 9 of Clean Code V12. Ships eight probes.
+//! Phases 3 + 7 + 9 of Clean Code V12. Ships nine probes.
 //!
-//! Phase 3 (original four):
+//! Phase 3 (original five):
 //!
 //! - [`race`] — shared mutable state mutated under async / spawn without
 //!   a surrounding `Mutex` / `RwLock` / `with_lock` guard.
@@ -13,6 +13,8 @@
 //!   never awaited.
 //! - [`toctou`] — check-then-use across a syscall boundary
 //!   (`os.path.exists(p)` followed by `open(p)` in the same function).
+//! - [`file_claim_bypass`] — writes to a shared `data/...` tree without
+//!   a preceding `FileClaimRegistry::sync_claim_scope` call.
 //!
 //! Phase 7 (Batch E — concurrency probes mined from the OSS delta study):
 //!
@@ -41,6 +43,7 @@
 
 pub mod context_no_propagate;
 pub mod copy_loop_var;
+pub mod file_claim_bypass;
 mod helpers;
 pub mod leaked_task;
 pub mod lock_inversion;

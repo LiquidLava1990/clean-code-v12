@@ -38,6 +38,7 @@ use cc_rules_ci::BuiltinCiPack;
 use cc_rules_completeness::BuiltinCompletenessPack;
 use cc_rules_compliance::BuiltinCompliancePack;
 use cc_rules_concurrency::BuiltinConcurrencyPack;
+use cc_rules_conventions::BuiltinConventionsPack;
 use cc_rules_database::BuiltinDatabasePack;
 use cc_rules_deploy::BuiltinDeployPack;
 use cc_rules_docs::BuiltinDocsPack;
@@ -192,6 +193,7 @@ static TAINT: BuiltinTaintPack = BuiltinTaintPack;
 static MEMORY: BuiltinMemoryPack = BuiltinMemoryPack;
 static TYPES: BuiltinTypesPack = BuiltinTypesPack;
 static ARCH: BuiltinArchitecturePack = BuiltinArchitecturePack;
+static CONVENTIONS: BuiltinConventionsPack = BuiltinConventionsPack;
 static TESTS: BuiltinTestsPack = BuiltinTestsPack;
 static DATABASE: BuiltinDatabasePack = BuiltinDatabasePack;
 static ANTI_FRAGILITY: BuiltinAntiFragilityPack = BuiltinAntiFragilityPack;
@@ -224,6 +226,7 @@ fn all_packs() -> Vec<&'static dyn RulePack> {
         &MEMORY,
         &TYPES,
         &ARCH,
+        &CONVENTIONS,
         &TESTS,
         &DATABASE,
         &ANTI_FRAGILITY,

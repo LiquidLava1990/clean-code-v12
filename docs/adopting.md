@@ -89,7 +89,7 @@ for the full schema and examples.
 
 ## 7. Probe packs
 
-All 29 built-in packs (385 probes) are compiled into the `ccv12` binary — nothing
+All 30 built-in packs (391 probes) are compiled into the `ccv12` binary — nothing
 extra to install. Each pack's manifest is published as an OCI artifact at
 `ghcr.io/liquidlava1990/<pack-id>:<version>` for inventory and pinning; see
 [`packs/README.md`](../packs/README.md). Dynamic loading of third-party packs

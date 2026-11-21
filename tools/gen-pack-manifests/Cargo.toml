@@ -29,6 +29,7 @@ cc-rules-taint = { path = "../../crates/cc-rules-taint" }
 cc-rules-memory = { path = "../../crates/cc-rules-memory" }
 cc-rules-types = { path = "../../crates/cc-rules-types" }
 cc-rules-architecture = { path = "../../crates/cc-rules-architecture" }
+cc-rules-conventions = { path = "../../crates/cc-rules-conventions" }
 cc-rules-tests = { path = "../../crates/cc-rules-tests" }
 cc-rules-database = { path = "../../crates/cc-rules-database" }
 cc-rules-anti-fragility = { path = "../../crates/cc-rules-anti-fragility" }

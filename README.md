@@ -9,7 +9,7 @@ analysis tool written in Rust.** It helps developers and teams find bugs,
 security issues, and technical debt in **Python, JavaScript, TypeScript, Go,
 and Rust** codebases — god functions, deep nesting, bare `except`, missing type
 hints, hardcoded secrets, SQL injection and other taint flows, race conditions,
-slow code, and Terraform / Kubernetes / Docker misconfigurations — with 385
+slow code, and Terraform / Kubernetes / Docker misconfigurations — with 391
 checks in one static binary. It prints a single repository health score and
 plugs into CI with SARIF, pre-commit, and a GitHub Action.
 
@@ -227,7 +227,7 @@ and pytest on `PATH`; Rust / Go / TypeScript support is planned.
 
 ## Pack catalog
 
-The default build registers 29 packs / 385 probes. `cargo run -p gen-pack-manifests -- --out packs`
+The default build registers 30 packs / 391 probes. `cargo run -p gen-pack-manifests -- --out packs`
 regenerates the OCI manifests in [`packs/`](./packs/); each release pushes them to
 `ghcr.io/liquidlava1990/<pack>:<version>`.
 
@@ -239,12 +239,13 @@ regenerates the OCI manifests in [`packs/`](./packs/); each release pushes them 
 | `cc-builtin-perf` | 24 | Static performance smells |
 | `cc-builtin-completeness` | 30 | Structural completeness (errors, registries, events) |
 | `cc-builtin-bugs` | 51 | Off-by-one, null-deref, common correctness traps |
-| `cc-builtin-concurrency` | 8 | Lock-order, races, async correctness |
+| `cc-builtin-concurrency` | 9 | Lock-order, races, async correctness, unclaimed shared-`data/` writes |
 | `cc-builtin-time-math` | 5 | Time + arithmetic correctness |
 | `cc-builtin-taint` | 15 | Taint flow, injection, SSRF, path traversal |
 | `cc-builtin-memory` | 5 | Allocation hotspots, leak smells |
 | `cc-builtin-types` | 23 | Type coverage, `Any` in public API |
 | `cc-builtin-architecture` | 8 | Layering, dependency direction, cycles |
+| `cc-builtin-conventions` | 5 | Opt-in `platform/` service layout: one boot path, module manifests, typed events, auth-only `config.json` |
 | `cc-builtin-tests` | 10 | Test smells, brittle asserts |
 | `cc-builtin-database` | 6 | N+1, schema drift, transaction misuse |
 | `cc-builtin-anti-fragility` | 4 | Retry storms, fallback inversion |

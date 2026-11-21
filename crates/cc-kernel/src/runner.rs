@@ -33,6 +33,7 @@ use cc_rules_ci::BuiltinCiPack;
 use cc_rules_completeness::BuiltinCompletenessPack;
 use cc_rules_compliance::BuiltinCompliancePack;
 use cc_rules_concurrency::BuiltinConcurrencyPack;
+use cc_rules_conventions::BuiltinConventionsPack;
 use cc_rules_database::BuiltinDatabasePack;
 use cc_rules_deploy::BuiltinDeployPack;
 use cc_rules_docs::BuiltinDocsPack;
@@ -153,7 +154,7 @@ impl Kernel {
     }
 
     /// Phase 3: bugs, concurrency, time-math, taint, memory, types,
-    /// architecture.
+    /// architecture, layout conventions.
     fn register_phase_3_packs(&mut self) -> KernelResult<()> {
         self.registry.register_pack(&BuiltinBugsPack)?;
         self.registry.register_pack(&BuiltinConcurrencyPack)?;
@@ -162,6 +163,7 @@ impl Kernel {
         self.registry.register_pack(&BuiltinMemoryPack)?;
         self.registry.register_pack(&BuiltinTypesPack)?;
         self.registry.register_pack(&BuiltinArchitecturePack)?;
+        self.registry.register_pack(&BuiltinConventionsPack)?;
         Ok(())
     }
 

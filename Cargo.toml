@@ -53,6 +53,7 @@ members = [
     "crates/cc-rules-memory",
     "crates/cc-rules-types",
     "crates/cc-rules-architecture",
+    "crates/cc-rules-conventions",
     "crates/cc-rules-tests",
     "crates/cc-rules-database",
     "crates/cc-rules-anti-fragility",
