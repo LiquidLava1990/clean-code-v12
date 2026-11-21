@@ -8,7 +8,7 @@
 //!   (Phase 5).
 //! - [`partial_rewrites`] — STUB; needs cross-revision diff (Phase 5).
 //! - [`todo_aging`] — REAL but non-aging variant: flags every TODO /
-//!   FIXME / XXX / HACK comment as [`Severity::Nit`]. The semantic
+//!   FIXME / XXX / HACK comment as [`cc_finding::Severity::Nit`]. The semantic
 //!   "older than 90d" requires git-blame plumbing; the non-aging
 //!   variant is the closest signal we can ship today.
 //! - [`bus_factor`] — STUB; needs blame-author histogram (Phase 5).

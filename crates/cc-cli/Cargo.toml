@@ -4,7 +4,12 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-description = "Clean Code V12 — `cc check <repo>` CLI."
+description = "Fast code quality linter and static analysis CLI for Python, JavaScript, TypeScript, Go and Rust: 385 checks, SARIF output, baselines, pre-commit."
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["linter", "static-analysis", "code-quality", "sast", "cli"]
+categories = ["command-line-utilities", "development-tools"]
 
 [[bin]]
 name = "cc"

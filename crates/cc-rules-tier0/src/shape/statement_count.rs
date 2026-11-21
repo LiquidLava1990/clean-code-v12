@@ -1,6 +1,6 @@
 //! Tier-0 forever rule R-STATEMENT-COUNT.
 //!
-//! Flag a function whose body has more than [`MAX_STATEMENTS`] top-level
+//! Flag a function whose body has more than `MAX_STATEMENTS` top-level
 //! statements (statement-shaped AST nodes whose AST parent is the
 //! function itself or its top-level block). Threshold cited from Ruff
 //! `PLR0915 too-many-statements` (default 50). Mirrors the per-function

@@ -2,10 +2,10 @@
 //!
 //! Heuristic: enumerate every [`NodeKind::Function`] / [`NodeKind::Method`]
 //! node whose enclosing file is a test file (per
-//! [`crate::helpers::is_test_file_path`]) AND whose name / decorator
+//! `crate::helpers::is_test_file_path`) AND whose name / decorator
 //! signature looks like a test. For each such function, count
 //! [`NodeKind::Call`] descendants whose callee text contains any
-//! [`crate::helpers::ASSERT_CALLEES`] needle. Zero hits ⇒ finding.
+//! `crate::helpers::ASSERT_CALLEES` needle. Zero hits ⇒ finding.
 //!
 //! Function descendants are enumerated transitively via the
 //! `AST_PARENT` chain: every Call whose ancestor chain includes the

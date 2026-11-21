@@ -3,7 +3,7 @@
 //!
 //! Phase-4 simplification: every [`NodeKind::Call`] whose callee text
 //! matches one of the destructive APIs in
-//! [`crate::helpers::DESTRUCTIVE_CALLEES`] is flagged at
+//! `crate::helpers::DESTRUCTIVE_CALLEES` is flagged at
 //! `Severity::Required`. Test files and rule-pack source (which embeds
 //! the needle list) are skipped.
 //!

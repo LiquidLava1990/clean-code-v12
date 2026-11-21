@@ -10,7 +10,7 @@
 //! Phase-10 source-byte detector: `.py` files only. Find every
 //! `with pytest.raises(...):` line, count non-blank / non-comment lines
 //! at one deeper indent level until the indent unwinds, fire when the
-//! count exceeds [`MAX_BODY_STATEMENTS`].
+//! count exceeds `MAX_BODY_STATEMENTS`.
 
 use camino::Utf8PathBuf;
 use cc_cpg::NodeKind;

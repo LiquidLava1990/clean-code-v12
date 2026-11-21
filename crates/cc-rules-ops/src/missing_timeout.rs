@@ -1,8 +1,8 @@
 //! `cc.ops.missing_timeout` — network call without explicit timeout.
 //!
 //! Heuristic: enumerate every [`NodeKind::Call`] node, match the callee
-//! against [`HTTP_CLIENT_CALLEES`], then inspect the call's argument
-//! text for any of [`TIMEOUT_NEEDLES`]. A miss flags the call.
+//! against `HTTP_CLIENT_CALLEES`, then inspect the call's argument
+//! text for any of `TIMEOUT_NEEDLES`. A miss flags the call.
 //!
 //! Family-25 ships a sibling `cc.decoration.timeout_missing` probe with
 //! a broader callee table. Phase-4 simplification: emit independently;

@@ -2,7 +2,7 @@
 //! Dependabot config.
 //!
 //! Heuristic: collect every [`NodeKind::File`] path in the batch. If
-//! the repo carries any of [`MANIFEST_FILES`] but none of the accepted
+//! the repo carries any of `MANIFEST_FILES` but none of the accepted
 //! Dependabot config locations, emit a single repo-level Nit. A repo
 //! without automated dependency PRs accumulates CVE exposure quietly.
 

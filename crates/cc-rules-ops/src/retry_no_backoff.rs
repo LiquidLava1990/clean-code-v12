@@ -1,10 +1,10 @@
 //! `cc.ops.retry_no_backoff` — retry loop with constant interval.
 //!
 //! Heuristic: walk every [`NodeKind::Loop`]; inspect its descendant
-//! `Call` nodes for sleep callees ([`SLEEP_CALLEES`]). If the sleep
+//! `Call` nodes for sleep callees (`SLEEP_CALLEES`). If the sleep
 //! argument text resolves to a numeric literal (matches
-//! [`is_numeric_literal_arg`]) and no retry-library callee
-//! ([`RETRY_LIB_CALLEES`]) appears in the loop body, flag the loop as
+//! `is_numeric_literal_arg`) and no retry-library callee
+//! (`RETRY_LIB_CALLEES`) appears in the loop body, flag the loop as
 //! missing exponential / jittered backoff.
 
 use cc_cpg::{NodeId, NodeKind};

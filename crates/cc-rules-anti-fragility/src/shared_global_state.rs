@@ -1,8 +1,8 @@
 //! `cc.fragile.shared_global_state` — tests mutating module-level state.
 //!
 //! Heuristic: in test files, walk every [`NodeKind::Write`] whose
-//! `target` resolves to a top-level (Module / File parent) [`Variable`]
-//! [`NodeKind`]. Cross-test mutation of shared globals is the
+//! `target` resolves to a top-level (Module / File parent) [`NodeKind::Variable`].
+//! Cross-test mutation of shared globals is the
 //! second-most-common test-flake pattern after timing — Test B sees
 //! whatever Test A left behind.
 //!

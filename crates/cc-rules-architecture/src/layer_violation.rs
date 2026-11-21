@@ -3,7 +3,7 @@
 //! For every [`NodeKind::Import`] in the batch we resolve the
 //! source-module (the file *doing* the import) and the target-module
 //! (the import's own resolved target). If the per-batch
-//! [`crate::helpers::ImportGraph`] reports the edge would close a cycle
+//! `crate::helpers::ImportGraph` reports the edge would close a cycle
 //! — i.e. it is *not* downward-only — we flag the Import.
 //!
 //! Phase-3 conservatism: the rule is silent for any Import whose

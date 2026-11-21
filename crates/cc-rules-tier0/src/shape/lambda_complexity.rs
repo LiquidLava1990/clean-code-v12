@@ -1,8 +1,8 @@
 //! Tier-0 forever rule R-LAMBDA-COMPLEXITY.
 //!
 //! Flag lambdas / arrow functions / closures whose bodies exceed
-//! [`MAX_STATEMENTS`] top-level statements OR
-//! [`MAX_CYCLOMATIC`] McCabe cyclomatic complexity. Detekt's
+//! `MAX_STATEMENTS` top-level statements OR
+//! `MAX_CYCLOMATIC` McCabe cyclomatic complexity. Detekt's
 //! `LongLambda` rule defaults to ~10 statements; we adopt the same plus
 //! a complexity ceiling of 4 (a single decision tree is fine; two
 //! branches with a loop is not).

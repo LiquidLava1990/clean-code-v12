@@ -1,6 +1,6 @@
 //! Tier-0 forever rule R-RETURN-COUNT.
 //!
-//! Flag functions whose body contains more than [`MAX_RETURNS`] explicit
+//! Flag functions whose body contains more than `MAX_RETURNS` explicit
 //! `return` / `yield` / `throw` nodes at any nesting. PMD
 //! `CyclomaticComplexity` lists return-point count as a component;
 //! golangci's `nakedret` clamps at 5 by default. We pick 6 for parity

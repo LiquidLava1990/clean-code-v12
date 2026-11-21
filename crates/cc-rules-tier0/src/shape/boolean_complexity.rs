@@ -1,6 +1,6 @@
 //! Tier-0 forever rule R-BOOL-COMPLEXITY.
 //!
-//! Flag a single boolean expression chaining more than [`MAX_OPERANDS`]
+//! Flag a single boolean expression chaining more than `MAX_OPERANDS`
 //! operands joined by `&&` / `||` (Rust/Go/TS) or ` and ` / ` or `
 //! (Python). Threshold mirrors Ruff's `PLR0916 too-many-boolean-expressions`
 //! ceiling of 5: a sixth operand is the line at which the boolean

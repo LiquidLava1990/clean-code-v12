@@ -2,8 +2,9 @@
 //! `visibility` props every frontend stamps on Function / Method / Class /
 //! Variable / Module nodes.
 //!
-//! Each frontend invokes [`detect_visibility`] (or one of the language-
-//! specific helpers) and stamps the resulting [`Visibility`] onto the
+//! Each frontend invokes its language-specific helper
+//! ([`python_visibility`], [`go_visibility`], [`rust_visibility`], or
+//! [`typescript_visibility`]) and stamps the resulting [`Visibility`] onto the
 //! [`cc_cpg::NodeBuilder`] before pushing.
 //!
 //! ## Why this lives in the shared crate

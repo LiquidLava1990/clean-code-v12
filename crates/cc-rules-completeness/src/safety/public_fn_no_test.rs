@@ -8,7 +8,7 @@
 //!    methods / non-`pub` Rust fns).
 //! 3. Look across the *same batch* for any function whose name contains
 //!    the public function's name AND lives in a path the
-//!    [`crate::helpers::is_test_file_path`]-equivalent matches. If
+//!    `crate::helpers::is_test_file_path`-equivalent matches. If
 //!    none, emit a finding.
 //!
 //! Cross-file aggregation is deferred to a Phase-12 follow-up that

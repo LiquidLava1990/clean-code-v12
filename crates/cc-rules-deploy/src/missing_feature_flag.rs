@@ -3,10 +3,10 @@
 //!
 //! Heuristic: walk every [`NodeKind::Function`] / [`NodeKind::Method`]
 //! whose `name` starts with one of the
-//! [`crate::helpers::RISKY_NAME_PREFIXES`] markers (`experimental_`,
+//! `crate::helpers::RISKY_NAME_PREFIXES` markers (`experimental_`,
 //! `beta_`, `new_`, `v2_`). For each, descend the AST and look for any
 //! [`NodeKind::Call`] whose callee text contains a flag-library marker
-//! ([`crate::helpers::FLAG_LIBRARY_CALLEES`]). Functions that
+//! (`crate::helpers::FLAG_LIBRARY_CALLEES`). Functions that
 //! self-classify as risky but evaluate no flag are flagged at
 //! `Severity::Nit` so adoption is gradual.
 

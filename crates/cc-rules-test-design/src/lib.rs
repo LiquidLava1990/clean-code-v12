@@ -4,7 +4,7 @@
 //! Phase-4 [`cc-rules-tests`] pack does NOT touch — fused from the
 //! testifylint / jest-extended / pytest-style / mutation-testing OSS
 //! delta. Every rule in this pack is gated on
-//! [`helpers::is_test_file_path`]; non-test files are silent.
+//! `helpers::is_test_file_path`; non-test files are silent.
 //!
 //! - [`unconditional_assert_true`]   — REAL.  `assert!(true)` etc.
 //! - [`disabled_test`]                — REAL.  skip / ignore / xit without reason.

@@ -4,7 +4,7 @@
 //!
 //! Phase-5 simplification: only `:param <name>:` (Sphinx) is parsed.
 //! `@param` (JSDoc / JavaDoc) and `* @param` are recognised as future
-//! patterns in [`crate::helpers::DOCSTRING_PARAM_PATTERNS`] but the
+//! patterns in `crate::helpers::DOCSTRING_PARAM_PATTERNS` but the
 //! Phase-5 implementation skips them — those languages' docstring
 //! conventions vary too much for a single regex pass.
 

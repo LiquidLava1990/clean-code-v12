@@ -19,7 +19,7 @@
 //! supplies `..` segments to escape the intended directory. CLI tools
 //! reading the file the user explicitly named on argv are exhibiting
 //! the *feature*, not a vulnerability. This rule therefore consumes
-//! [`SOURCES_WEB`] only — `os.Args`, `std::env::args`, `process.argv`
+//! `SOURCES_WEB` only — `os.Args`, `std::env::args`, `process.argv`
 //! and friends are deliberately excluded.
 
 use cc_finding::{Category, Confidence, Finding, Severity};

@@ -10,7 +10,7 @@
 use serde::{Deserialize, Serialize};
 
 /// One reviewdog diagnostic — corresponds to a single `cc-finding`
-/// [`cc_finding::Finding`] after [`crate::to_rdjson`] mapping.
+/// [`cc_finding::Finding`] after [`fn@crate::to_rdjson`] mapping.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RdJsonDiagnostic {
     /// Headline + remediation summary (R-ERR-ACTION dogfood).
@@ -109,7 +109,7 @@ pub struct RdSuggestion {
 /// Identity of the producing tool, plumbed into every diagnostic.
 ///
 /// Held by [`crate::sink::RdJsonSink`] and threaded through
-/// [`crate::to_rdjson`]. `'static` borrowed strings keep the
+/// [`fn@crate::to_rdjson`]. `'static` borrowed strings keep the
 /// hot-path zero-alloc.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct SourceMeta {

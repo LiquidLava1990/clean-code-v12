@@ -2,7 +2,7 @@
 //! `lifecycle { prevent_destroy = true }`.
 //!
 //! Heuristic: scan `*.tf` files for `resource "<type>" "<name>"` blocks
-//! whose type is in [`TF_HIGH_RISK_RESOURCES`]. A `terraform apply` that
+//! whose type is in `TF_HIGH_RISK_RESOURCES`. A `terraform apply` that
 //! recreates one of these (because of an attribute change in a previous
 //! resource) silently destroys data — production RDS, DynamoDB tables,
 //! S3 buckets. `prevent_destroy = true` makes Terraform refuse the

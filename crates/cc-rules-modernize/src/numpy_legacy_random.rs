@@ -8,7 +8,7 @@
 //! Mirrors ruff `NPY002` (numpy-legacy-random).
 //!
 //! Phase-10 detector: scan every `.py` file once for the legacy
-//! callees in [`LEGACY_RANDOM_CALLEES`]. Receiver may be `np.random`
+//! callees in `LEGACY_RANDOM_CALLEES`. Receiver may be `np.random`
 //! or `numpy.random`; aliasing is allowed via the standard `as np`
 //! convention (the canonical alias enforced by
 //! `cc.modernize.banned_import_alias`).

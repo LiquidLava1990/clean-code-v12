@@ -1,7 +1,7 @@
 //! `cc.ops.unbounded_queue` — producer/consumer without max size.
 //!
 //! Heuristic: enumerate every [`NodeKind::Call`] node and match the
-//! callee against [`QUEUE_CONSTRUCTOR_CALLEES`]. The constructor names
+//! callee against `QUEUE_CONSTRUCTOR_CALLEES`. The constructor names
 //! in the table are the *unbounded* spellings; bounded variants
 //! (`Queue(maxsize=N)`, `mpsc::channel(N)`, `make(chan T, N)`) lift
 //! into a different callee text and so escape the match.

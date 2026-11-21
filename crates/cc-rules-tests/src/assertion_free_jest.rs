@@ -7,7 +7,7 @@
 //! frontend lifts the *callback* but not always the framework-style
 //! `test('name', () => { ... })` wrapper itself, so the existing probe
 //! misses Jest tests when the frontend stamps the body as a
-//! [`cc_cpg::NodeKind::Lambda`].
+//! `cc_cpg::NodeKind::Lambda`.
 //!
 //! This probe is a source-byte safety net: scan every JS / TS file
 //! whose path looks like a test file, find each `test(` / `it(`

@@ -1,10 +1,14 @@
 {
   "name": "clean-code-v12",
   "displayName": "Clean Code V12",
-  "description": "Squiggles, hovers, and quick-fixes from the Clean Code V12 linter (cc-lsp).",
+  "description": "Code quality linter and static analysis for Python, JavaScript, TypeScript, Go and Rust: inline diagnostics, hovers and quick-fixes from the Clean Code V12 language server.",
   "version": "0.1.0",
   "publisher": "clean-code",
   "license": "MIT OR Apache-2.0",
+  "homepage": "https://github.com/LiquidLava1990/clean-code-v12#readme",
+  "bugs": {
+    "url": "https://github.com/LiquidLava1990/clean-code-v12/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/LiquidLava1990/clean-code-v12"
@@ -17,11 +21,16 @@
     "Programming Languages"
   ],
   "keywords": [
-    "lint",
     "linter",
-    "clean-code",
-    "static-analysis",
-    "lsp"
+    "static analysis",
+    "code quality",
+    "clean code",
+    "lsp",
+    "python",
+    "typescript",
+    "javascript",
+    "go",
+    "rust"
   ],
   "activationEvents": [
     "onLanguage:python",

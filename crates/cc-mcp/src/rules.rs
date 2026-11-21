@@ -4,7 +4,7 @@
 //! default pack set so the listing mirrors what `cc check` would run.
 //! We rebuild per call (cheap — pack registration is just pointer
 //! copying) to keep the surface stateless. The pack-registration
-//! plumbing lives in [`crate::_packs`] so this file is not a god
+//! plumbing lives in `crate::_packs` so this file is not a god
 //! module of pack imports.
 
 use cc_rules::{Rule, RuleRegistry};

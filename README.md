@@ -1,20 +1,34 @@
-# Clean Code V12
+# Clean Code V12 — code quality linter and static analysis for Python, JavaScript, TypeScript, Go and Rust
 
 [![ci](https://github.com/LiquidLava1990/clean-code-v12/actions/workflows/ci.yml/badge.svg)](https://github.com/LiquidLava1990/clean-code-v12/actions/workflows/ci.yml)
 [![release](https://img.shields.io/github/v/release/LiquidLava1990/clean-code-v12?include_prereleases)](https://github.com/LiquidLava1990/clean-code-v12/releases)
 [![license](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
 
-**One fast binary that scores the health of any codebase.** `cc` scans Python,
-TypeScript/JavaScript, Go, and Rust for god functions, deep nesting, bare
-`except`, missing types, leaked secrets, slow code, unsafe concurrency, taint
-flows, IaC misconfigurations, and ~380 other problems — then gives the repo one
-health score you can ratchet in CI.
+**Clean Code V12 (`cc`) is a fast, open-source code quality linter and static
+analysis tool written in Rust.** It helps developers and teams find bugs,
+security issues, and technical debt in **Python, JavaScript, TypeScript, Go,
+and Rust** codebases — god functions, deep nesting, bare `except`, missing type
+hints, hardcoded secrets, SQL injection and other taint flows, race conditions,
+slow code, and Terraform / Kubernetes / Docker misconfigurations — with 385
+checks in one static binary. It prints a single repository health score and
+plugs into CI with SARIF, pre-commit, and a GitHub Action.
 
-- **Single static binary** — no runtime, no daemon, no config required.
-- **385 probes in 29 built-in packs**, from Tier-0 "forever rules" to supply-chain and IaC checks.
-- **CI-native output** — SARIF (GitHub code scanning), rdjson (reviewdog PR comments), JSON, or colored terminal.
-- **Baselines** — adopt on a legacy repo without drowning in findings; only new problems fail the build.
-- **Editor support** — `cc-lsp` language server + a VS Code extension.
+```sh
+curl -fsSL https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/install.sh | sh   # Linux / macOS
+irm https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/install.ps1 | iex        # Windows PowerShell
+```
+
+## Features
+
+- **Multi-language static analysis** — one linter for Python, JavaScript, TypeScript, Go and Rust (tree-sitter parsing plus a code-property graph for dataflow).
+- **Code quality and clean-code rules** — function length, cyclomatic and cognitive complexity, nesting depth, duplication, dead code, naming, type coverage.
+- **Security scanning (SAST)** — secret detection, taint analysis for SQL injection, command injection, SSRF and path traversal, supply-chain checks.
+- **Bug and performance detection** — 51 correctness probes, concurrency and race checks, N+1 queries, performance smells.
+- **Infrastructure-as-code checks** — Terraform, Kubernetes and Dockerfile misconfigurations.
+- **Technical-debt tracking** — one health score per repo, baselines so only new findings fail CI, git-history hotspots.
+- **CI/CD integration** — SARIF for GitHub code scanning, reviewdog rdjson for PR comments, JSON, pre-commit hooks, a GitHub Action.
+- **Editor integration** — `cc-lsp` language server and a VS Code extension.
+- **Single static binary** — prebuilt for Windows, Linux (x64/arm64) and macOS (Intel/Apple Silicon); no runtime, no config required.
 
 ## 30-second quick start
 

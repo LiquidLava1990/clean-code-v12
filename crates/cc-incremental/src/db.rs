@@ -120,7 +120,7 @@ impl CcDatabase {
     }
 
     /// Register a rule pack — the rules are run in-order against every
-    /// file's CPG batch in [`crate::queries::findings_for`].
+    /// file's CPG batch in [`fn@crate::queries::findings_for`].
     pub fn register_rules(&mut self, pack_id: &'static str, rules: Vec<&'static dyn Rule>) {
         if let Ok(mut state) = self.state.lock() {
             state.rule_pack_id = pack_id;

@@ -14,11 +14,11 @@
 //!
 //! OSS source: clippy `boxed_local`.
 //!
-//! Phase-9 source-byte heuristic: scan `.rs` files for `fn <name>(...
-//! <param>: Box<<concrete>>...)` shapes where `<concrete>` does NOT
-//! start with `dyn ` and is not one of the redundant collection types
-//! covered by `cc.perf.box_collection`. Skip test files and rule-pack
-//! source.
+//! Phase-9 source-byte heuristic: scan `.rs` files for
+//! `fn name(..., param: Box<Concrete>, ...)` shapes where `Concrete`
+//! does NOT start with `dyn ` and is not one of the redundant collection
+//! types covered by `cc.perf.box_collection`. Skip test files and
+//! rule-pack source.
 //!
 //! Confidence 0.9.
 

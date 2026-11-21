@@ -4,7 +4,7 @@
 //! text inspected. If that text contains a log-error call (e.g.
 //! `log.error`, `tracing::error`, `console.error`, `slog::error`) AND
 //! does NOT contain any of the canonical re-raise / propagation markers
-//! ([`crate::helpers::RERAISE_MARKERS`]) downstream of the log call, the
+//! (`crate::helpers::RERAISE_MARKERS`) downstream of the log call, the
 //! handler is "silently catching" — visible only as a stranded log line.
 
 use camino::Utf8PathBuf;

@@ -1,6 +1,6 @@
 //! `cc-frontend-go` — Clean Code V12 Go language frontend.
 //!
-//! Mirrors [`cc_frontend_python`] in shape: parses Go source via
+//! Mirrors `cc_frontend_python` in shape: parses Go source via
 //! `tree-sitter-go` and lifts the resulting concrete syntax tree into a
 //! [`cc_cpg::CpgWriteBatch`].
 //!

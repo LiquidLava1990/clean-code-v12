@@ -2,7 +2,7 @@
 //! modules (god dispatchers).
 //!
 //! Counts outgoing edges per source-module in the per-batch
-//! [`crate::helpers::ImportGraph`]; threshold defaults to
+//! `crate::helpers::ImportGraph`; threshold defaults to
 //! [`DEFAULT_FAN_OUT_THRESHOLD`].
 
 use cc_finding::{Category, Confidence, Finding, Remediation, Severity};

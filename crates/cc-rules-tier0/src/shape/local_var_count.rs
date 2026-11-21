@@ -1,6 +1,6 @@
 //! Tier-0 forever rule R-LOCAL-VAR-COUNT.
 //!
-//! Flag a function declaring more than [`MAX_LOCALS`] distinct local
+//! Flag a function declaring more than `MAX_LOCALS` distinct local
 //! variables. Threshold cited from Ruff `PLR0914 too-many-locals`
 //! (default 15). Above that, a function is bookkeeping its own
 //! intermediate state — extract a struct or split the function.

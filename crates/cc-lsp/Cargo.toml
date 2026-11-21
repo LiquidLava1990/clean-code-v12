@@ -4,7 +4,12 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-description = "Clean Code V12 — Language Server Protocol daemon (stdio)."
+description = "Language server (LSP) for the Clean Code V12 linter: code quality and static analysis diagnostics for Python, JavaScript, TypeScript, Go and Rust in any editor."
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["lsp", "linter", "static-analysis", "code-quality", "language-server"]
+categories = ["command-line-utilities", "development-tools"]
 
 [[bin]]
 name = "cc-lsp"

@@ -233,8 +233,8 @@ impl StyleCounts {
     }
 
     /// Dominant style if any single bucket holds at least
-    /// [`DOMINANCE_THRESHOLD`] of the total and the total is at least
-    /// [`MIN_SAMPLES_FOR_DOMINANCE`].
+    /// `DOMINANCE_THRESHOLD` of the total and the total is at least
+    /// `MIN_SAMPLES_FOR_DOMINANCE`.
     #[must_use]
     pub fn dominant(&self) -> Option<NamingStyle> {
         let total = self.total();

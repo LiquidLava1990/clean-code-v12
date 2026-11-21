@@ -5,16 +5,16 @@
 //!
 //! 1. **Known-vendor patterns** — AWS / GitHub / Slack / Stripe / JWT /
 //!    private-key headers. Cheap byte-level prefix + charset checks
-//!    via [`crate::helpers::match_known_secret`]. Always fires
+//!    via `crate::helpers::match_known_secret`. Always fires
 //!    regardless of surrounding identifier.
 //! 2. **Generic high-entropy** — Shannon entropy ≥
-//!    [`MIN_ENTROPY_BITS`](crate::helpers::MIN_ENTROPY_BITS) and
-//!    length ≥ [`MIN_GENERIC_LEN`](crate::helpers::MIN_GENERIC_LEN),
+//!    `MIN_ENTROPY_BITS` and
+//!    length ≥ `MIN_GENERIC_LEN`,
 //!    *and* the literal is the RHS of an assignment to a credential-
 //!    bearing variable name (`*_key` / `*_secret` / `*_token` / …).
 //!
 //! Findings are skipped whenever the enclosing file is a test fixture
-//! (heuristic — see [`crate::helpers::is_test_file_path`]); test
+//! (heuristic — see `crate::helpers::is_test_file_path`); test
 //! fixtures legitimately contain canonical example tokens.
 
 use cc_cpg::{NodeId, NodeKind};

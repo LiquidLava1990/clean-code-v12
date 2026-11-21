@@ -5,7 +5,7 @@
 //! `fr_FR`, `de_DE`, `ja_JP`, `zh_CN`, `pt_BR`) or canonical IANA
 //! timezone identifiers (`Europe/Paris`, `America/New_York`). Skips
 //! test files and the rule-pack's own source so the
-//! [`crate::helpers::LOCALE_PATTERN_TABLE`] does not self-flag.
+//! `crate::helpers::LOCALE_PATTERN_TABLE` does not self-flag.
 
 use cc_cpg::{NodeId, NodeKind};
 use cc_finding::{Category, Confidence, Finding, Remediation, Severity};

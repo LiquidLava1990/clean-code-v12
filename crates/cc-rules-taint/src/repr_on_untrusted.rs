@@ -15,12 +15,12 @@
 //!
 //! The rule therefore splits its sinks into two tables:
 //!
-//! - [`UNCONDITIONAL_SINKS`] — `repr`, `builtins.repr`, `JSON.stringify`,
+//! - `UNCONDITIONAL_SINKS` — `repr`, `builtins.repr`, `JSON.stringify`,
 //!   `inspect` — every call is a debug leak by definition.
-//! - [`CONDITIONAL_SINKS`] — `format!`, `println!`, `tracing::info!`,
+//! - `CONDITIONAL_SINKS` — `format!`, `println!`, `tracing::info!`,
 //!   `log::warn`, `console.log`, … — these are debug-or-display
 //!   depending on the format string. The
-//!   [`crate::helpers::call_uses_debug_format`] predicate inspects the
+//!   `crate::helpers::call_uses_debug_format` predicate inspects the
 //!   call's source span; if no debug-format placeholder appears the
 //!   sink is skipped silently.
 

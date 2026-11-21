@@ -1,6 +1,6 @@
 //! Tier-0 forever rule R-PUBLIC-SURFACE-SIZE.
 //!
-//! Flag a class / struct / module declaring more than [`MAX_PUBLIC`]
+//! Flag a class / struct / module declaring more than `MAX_PUBLIC`
 //! public methods. Threshold cited from PMD `TooManyMethods` and detekt
 //! `TooManyFunctions` — both default to ~20. Above that, the type owns
 //! too many concerns; split it.

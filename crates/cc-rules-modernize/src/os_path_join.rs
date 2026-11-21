@@ -2,7 +2,7 @@
 //!
 //! Mirrors ruff `PTH118` (and the broader `PTH*` family). Detects calls
 //! whose canonical callee text matches anything in
-//! [`crate::helpers::OS_PATH_CALLEES`] and points the user at `pathlib`.
+//! `crate::helpers::OS_PATH_CALLEES` and points the user at `pathlib`.
 //!
 //! Severity: `Nit` — both spellings are correct; pathlib is just the
 //! modern idiom.

@@ -8,7 +8,7 @@
 //! [`crate::docstring_first_line_period`]; once the first content line
 //! is found, take its leading word and apply a heuristic — words ending
 //! in `s` / `ed` / `ing` are flagged unless they appear in the
-//! [`IMPERATIVE_ALLOWLIST`] (linking verbs / state verbs that are
+//! `IMPERATIVE_ALLOWLIST` (linking verbs / state verbs that are
 //! grammatically imperative even though they end in `s`).
 //!
 //! Severity: `Nit`. Confidence 0.8 — heuristic, English-only, blind to

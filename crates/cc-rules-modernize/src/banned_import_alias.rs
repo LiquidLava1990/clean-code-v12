@@ -6,7 +6,7 @@
 //! Mirrors ruff `ICN001` (unconventional-import-alias).
 //!
 //! Phase-9 detector: scan every Python file once for `import <module>
-//! as <alias>` lines. For each entry in [`CANONICAL_ALIASES`], if the
+//! as <alias>` lines. For each entry in `CANONICAL_ALIASES`, if the
 //! actual `<alias>` differs from the canonical one (or duplicates the
 //! module name unnecessarily), flag.
 

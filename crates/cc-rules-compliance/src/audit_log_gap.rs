@@ -3,10 +3,10 @@
 //!
 //! Heuristic: enumerate every [`NodeKind::Function`] (and Method) node
 //! whose `name` looks privileged
-//! ([`PRIVILEGED_NAME_PATTERNS`](crate::helpers::PRIVILEGED_NAME_PATTERNS)
+//! (`PRIVILEGED_NAME_PATTERNS`
 //! — `admin_*`, `delete_*`, `update_role_*`, `grant_*`). For each
 //! function, walk its AST descendants for a [`NodeKind::Call`] whose
-//! callee text matches an [`AUDIT_CALLEES`](crate::helpers::AUDIT_CALLEES)
+//! callee text matches an `AUDIT_CALLEES`
 //! entry. If none is present, emit a Blocker finding.
 //!
 //! `tracing::info!(target = "audit", …)` calls qualify because the

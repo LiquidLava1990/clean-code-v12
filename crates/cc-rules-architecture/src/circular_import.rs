@@ -1,7 +1,7 @@
 //! `cc.arch.circular_import` — Kahn's-algorithm cycle detection on the
 //! per-batch import graph.
 //!
-//! We build the graph once via [`crate::helpers::build_import_graph`],
+//! We build the graph once via `crate::helpers::build_import_graph`,
 //! drain every zero-in-degree node via Kahn's algorithm, and any
 //! module still standing is in a cycle. Each cycle member is flagged
 //! with `related` pointing at the other cycle members so the user

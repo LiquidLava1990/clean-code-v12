@@ -2,8 +2,8 @@
 //! session id, email, path, or URL.
 //!
 //! Heuristic: every [`NodeKind::Call`] whose callee text matches a
-//! metric primitive ([`crate::helpers::METRIC_CALLEES`]) has its `args`
-//! property scanned for any of [`crate::helpers::HIGH_CARDINALITY_LABELS`].
+//! metric primitive (`crate::helpers::METRIC_CALLEES`) has its `args`
+//! property scanned for any of `crate::helpers::HIGH_CARDINALITY_LABELS`.
 //! A match fires the rule.
 
 use cc_cpg::{NodeId, NodeKind};

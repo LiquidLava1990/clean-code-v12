@@ -2,9 +2,9 @@
 //! coexisting with a non-GPL top-level license.
 //!
 //! Heuristic: walk every [`NodeKind::File`] node whose path matches a
-//! [`LICENSE_FILE_PATTERNS`](crate::helpers::LICENSE_FILE_PATTERNS)
+//! `LICENSE_FILE_PATTERNS`
 //! entry. Read the file bytes from the source table, check for any
-//! GPL marker (see [`GPL_MARKERS`](crate::helpers::GPL_MARKERS)).
+//! GPL marker (see `GPL_MARKERS`).
 //!
 //! Phase-5 simplification: only flag when at least one GPL-bearing
 //! license file coexists with at least one non-GPL license file in

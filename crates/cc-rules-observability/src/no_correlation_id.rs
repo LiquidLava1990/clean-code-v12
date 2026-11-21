@@ -3,7 +3,7 @@
 //!
 //! Heuristic (Phase-4 simplification): every [`NodeKind::Call`] whose
 //! callee text matches an outbound HTTP / RPC primitive
-//! ([`crate::helpers::HTTP_CALLEES`]) is checked against the enclosing
+//! (`crate::helpers::HTTP_CALLEES`) is checked against the enclosing
 //! function. If no descendant of that function calls a tracing /
 //! span / instrument primitive, fire.
 

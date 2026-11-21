@@ -3,9 +3,9 @@
 //! Heuristic: walk every [`NodeKind::File`] in the batch; for each
 //! non-test, non-rule-pack file, scan source bytes for the canonical
 //! "red text" patterns enumerated in
-//! [`crate::helpers::COLOR_PATTERNS`]. For each hit, take a five-line
+//! `crate::helpers::COLOR_PATTERNS`. For each hit, take a five-line
 //! window centred on the hit and look for any iconography / aria
-//! marker from [`crate::helpers::ICON_HINT_KEYWORDS`]. If no marker is
+//! marker from `crate::helpers::ICON_HINT_KEYWORDS`. If no marker is
 //! present, the colour is the sole signal — emit a finding.
 //!
 //! Phase-5 simplification: the window is line-oriented. A more precise

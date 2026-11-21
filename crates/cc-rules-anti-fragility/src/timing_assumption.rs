@@ -2,7 +2,7 @@
 //!
 //! Heuristic: in test files, walk every [`NodeKind::Call`] and report
 //! any callee that resolves to a sleep / blocking-delay primitive
-//! (see [`SLEEP_CALLEES`]). Sleeping in tests is the canonical
+//! (see `SLEEP_CALLEES`). Sleeping in tests is the canonical
 //! anti-fragility smell — the test passes locally, then flakes under
 //! CI load because the wall-clock budget runs out.
 //!

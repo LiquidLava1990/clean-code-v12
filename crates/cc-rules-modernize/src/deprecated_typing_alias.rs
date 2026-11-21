@@ -4,7 +4,7 @@
 //! Mirrors ruff `UP006` (use builtin generics) + `UP035` (deprecated
 //! import). Detection scans [`NodeKind::Identifier`] / [`NodeKind::Type`]
 //! / [`NodeKind::Import`] nodes for any of the legacy aliases listed in
-//! [`crate::helpers::LEGACY_TYPING_ALIASES`].
+//! `crate::helpers::LEGACY_TYPING_ALIASES`.
 //!
 //! Severity: `Required` — `typing.List[int]` is officially deprecated
 //! and slated for removal.

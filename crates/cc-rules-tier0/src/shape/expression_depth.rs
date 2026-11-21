@@ -1,7 +1,7 @@
 //! Tier-0 forever rule R-EXPRESSION-DEPTH.
 //!
 //! Flag a function whose body contains a single expression with
-//! operator nesting depth exceeding [`MAX_DEPTH`]. Sonar S1067 caps at
+//! operator nesting depth exceeding `MAX_DEPTH`. Sonar S1067 caps at
 //! 6: deeper expressions force the reader into a parser stack.
 //!
 //! The CPG does not yet emit `BinaryOp` nodes, so this probe falls back

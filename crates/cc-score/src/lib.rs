@@ -1,4 +1,4 @@
-//! Clean Code V12 — deterministic health score over a [`Finding`] stream.
+//! Clean Code V12 — deterministic health score over a [`cc_finding::Finding`] stream.
 //!
 //! The kernel runs every probe pack against a repo, drains a stream of
 //! [`cc_finding::Finding`]s, and asks this crate: *"what is the repo's

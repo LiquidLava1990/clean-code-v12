@@ -16,7 +16,7 @@
 //!
 //! 1. The query inputs (parsed tree, CPG batch, finding list) come from
 //!    foreign types we cannot derive [`salsa::Update`] on — wrapping them in
-//!    local newtypes that carry a manual [`Update`] impl is straightforward
+//!    local newtypes that carry a manual [`salsa::Update`] impl is straightforward
 //!    only when they appear as **return values** of tracked functions, not
 //!    as fields of tracked structs (where salsa needs structural equality).
 //! 2. The cache-invalidation signal is a single `content_hash` field on

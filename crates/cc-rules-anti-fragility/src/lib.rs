@@ -2,7 +2,7 @@
 //! probe pack.
 //!
 //! Phase 4 of Clean Code V12. Ships four probes that all gate on
-//! [`helpers::is_test_file_path`] — they only fire inside test files,
+//! `helpers::is_test_file_path` — they only fire inside test files,
 //! staying silent on production code.
 //!
 //! - [`timing_assumption`] — sleep-based test, time-based logic.

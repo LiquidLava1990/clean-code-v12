@@ -5,7 +5,7 @@
 //! version requires type-flow analysis to know whether the callee
 //! returns `Promise<T>`. We approximate via three signals:
 //!
-//! - The call's [`callee_text`](cc_frontend::query::callee_text) matches
+//! - The call's [`callee_text`] matches
 //!   a known async producer (`fetch`, `axios.get`, `.then(`, `.catch(`).
 //! - The callee identifier ends with `Async` (`saveDataAsync()`).
 //! - The function's declaration text (when the frontend exposes it as

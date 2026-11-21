@@ -25,7 +25,7 @@
 //!   `expect` / `assert` (eslint-plugin-jest expect-expect).
 //!
 //! Every rule in this pack is gated on
-//! [`helpers::is_test_file_path`] — non-test files are silent. Phase-8
+//! `helpers::is_test_file_path` — non-test files are silent. Phase-8
 //! probes intentionally RUN inside test files (their job is to assess
 //! test quality), so they only honour the path gate, not the existing
 //! source-skip helpers.

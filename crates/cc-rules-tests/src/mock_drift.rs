@@ -9,7 +9,7 @@
 //!
 //! For now this rule is registered (so config / docs / surface stays
 //! stable) and silently returns zero findings on every batch. It is
-//! gated on [`crate::helpers::is_test_file_path`] for symmetry with
+//! gated on `crate::helpers::is_test_file_path` for symmetry with
 //! the live rules in this pack — when wired, it will only run on
 //! files that ship mocks, never on production code.
 //

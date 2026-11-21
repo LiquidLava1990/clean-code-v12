@@ -44,7 +44,7 @@
 //! # Phase-3 dataflow scope
 //!
 //! Detection is **same-function** only: a per-function tainted-set is
-//! built top-down by [`helpers::build_tainted_set`], propagating through
+//! built top-down by `helpers::build_tainted_set`, propagating through
 //! `Write` and `Call` parent chains and removed at sanitizer sites.
 //! Cross-function taint is deferred to Phase 4 once the call-graph
 //! resolver lands.

@@ -6,7 +6,7 @@
 //! things — split it.
 //!
 //! Heuristic: read the function's `range` property, count distinct
-//! source lines spanned, fire when count > [`MAX_TEST_LINES`].
+//! source lines spanned, fire when count > `MAX_TEST_LINES`.
 
 use cc_cpg::{CpgWriteBatch, NodeId, NodeKind};
 use cc_finding::{Confidence, Finding, Remediation, Severity};

@@ -2,14 +2,14 @@
 //! encryption-at-rest hint.
 //!
 //! Heuristic: enumerate every [`NodeKind::Variable`] node whose `name`
-//! property matches a [`PII_KEYWORD_TABLE`](crate::helpers::PII_KEYWORD_TABLE)
+//! property matches a `PII_KEYWORD_TABLE`
 //! entry. For each hit, look at:
 //!
 //! - the variable's own `type` / `target_type` / `annotation` props,
 //! - any sibling `Decorator` AST children of the same parent,
 //!
 //! and silence the probe whenever any of those surfaces carry an
-//! [`ENCRYPTION_HINTS`](crate::helpers::ENCRYPTION_HINTS) marker
+//! `ENCRYPTION_HINTS` marker
 //! (`encrypted`, `kms`, `vault`, …).
 //!
 //! Test-file paths and rule-pack-source paths are skipped — the

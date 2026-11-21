@@ -5,7 +5,7 @@
 //! whose argument string evaluates to a literal truthy constant.
 //!
 //! Heuristic: every assertion-shaped Call inside a test file whose
-//! argument text equals one of [`TAUTOLOGIES`] (after lowercase + whitespace
+//! argument text equals one of `TAUTOLOGIES` (after lowercase + whitespace
 //! trim) fires. Matching the *argument text* avoids the need to lift
 //! literal Boolean values from the AST — frontends inconsistently
 //! surface those, but they all stamp a textual `arguments` /

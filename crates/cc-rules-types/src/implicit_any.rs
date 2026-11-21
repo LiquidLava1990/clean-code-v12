@@ -2,7 +2,7 @@
 //! parameter type or return type of any PUBLIC function or class
 //! method.
 //!
-//! Per-language markers (see [`crate::helpers::IMPLICIT_ANY_TABLE`]):
+//! Per-language markers (see `crate::helpers::IMPLICIT_ANY_TABLE`):
 //!
 //! - Python: `Any`, `typing.Any`
 //! - TypeScript / JavaScript: `any`

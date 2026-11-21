@@ -6,11 +6,11 @@
 //!
 //! # Surface
 //!
-//! - [`to_sarif`] — pure mapping function: findings + [`ToolMeta`] →
+//! - [`fn@to_sarif`] — pure mapping function: findings + [`ToolMeta`] →
 //!   [`SarifDocument`].
 //! - [`SarifSink`] — `FindingSink` impl that buffers findings and emits
 //!   one document on `finish()`.
-//! - [`validate`] — self-sanity validator (required fields, level enum,
+//! - [`fn@validate`] — self-sanity validator (required fields, level enum,
 //!   fingerprint hex format).
 //!
 //! Schema-level conformance (full JSON-schema validation) is the

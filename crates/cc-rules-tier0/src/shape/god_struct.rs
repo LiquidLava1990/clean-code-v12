@@ -1,7 +1,7 @@
 //! Tier-0 forever rule R-GOD-STRUCT.
 //!
-//! Flag a class / struct that exceeds BOTH [`MAX_FIELDS`] AND
-//! [`MAX_METHODS`]. The conjunction is deliberate (per OSS source PMD
+//! Flag a class / struct that exceeds BOTH `MAX_FIELDS` AND
+//! `MAX_METHODS`. The conjunction is deliberate (per OSS source PMD
 //! `GodClass` + detekt `LargeClass`):
 //!
 //! - Large data classes (many fields, few methods) get a pass.

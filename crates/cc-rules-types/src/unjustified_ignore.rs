@@ -1,7 +1,7 @@
 //! `cc.type.unjustified_ignore` — flag type-checker silencing comments
 //! that lack a justification clause.
 //!
-//! Per-language markers (see [`crate::helpers::IGNORE_MARKERS`]):
+//! Per-language markers (see `crate::helpers::IGNORE_MARKERS`):
 //!
 //! - Python: `# type: ignore`, `# pyright: ignore`, `# noqa`
 //! - TypeScript: `// @ts-ignore`, `// @ts-expect-error`

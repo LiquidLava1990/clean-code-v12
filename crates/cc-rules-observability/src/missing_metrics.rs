@@ -8,8 +8,8 @@
 //! AST descendants for [`NodeKind::Call`] nodes and ask:
 //!
 //! - is at least one Call's callee text in
-//!   [`crate::helpers::EXTERNAL_IO_CALLEES`]? (critical path)
-//! - is NO Call's callee text in [`crate::helpers::METRIC_CALLEES`]?
+//!   `crate::helpers::EXTERNAL_IO_CALLEES`? (critical path)
+//! - is NO Call's callee text in `crate::helpers::METRIC_CALLEES`?
 //!   (no metric coverage)
 //!
 //! Both true -> fire.

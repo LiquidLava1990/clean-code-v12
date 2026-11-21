@@ -2,8 +2,8 @@
 //!
 //! Heuristic: walk every public [`NodeKind::Function`] / [`NodeKind::Method`]
 //! whose name or `return_type` matches one of the canonical handler
-//! markers ([`crate::helpers::HANDLER_NAME_PATTERNS`] /
-//! [`crate::helpers::RESPONSE_TYPE_PATTERNS`]). For each such function,
+//! markers (`crate::helpers::HANDLER_NAME_PATTERNS` /
+//! `crate::helpers::RESPONSE_TYPE_PATTERNS`). For each such function,
 //! collect every [`NodeKind::Return`] node whose `range` falls inside
 //! the function's `range`. Compute a coarse signature for each return
 //! by tokenising its source-byte slice on `{` / `,` / `:` / `}` and

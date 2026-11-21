@@ -2,13 +2,13 @@
 //! mock / stub / fake / spy, never the real impl.
 //!
 //! Phase-4 simplification: walk every test function (selected by
-//! [`crate::helpers::is_test_file_path`] + [`looks_like_test_name`] /
-//! [`function_has_test_attr`]). Within the function subtree, collect
+//! `crate::helpers::is_test_file_path` + `looks_like_test_name` /
+//! `function_has_test_attr`). Within the function subtree, collect
 //! every Call we recognise as an assertion (per
-//! [`crate::helpers::ASSERT_CALLEES`]). If at least one assertion
+//! `crate::helpers::ASSERT_CALLEES`). If at least one assertion
 //! exists AND every assertion's "target" looks like a mock / fake /
 //! stub / spy (substring match against
-//! [`crate::helpers::MOCK_NAME_NEEDLES`]) — fire.
+//! `crate::helpers::MOCK_NAME_NEEDLES`) — fire.
 //!
 //! "Target" is the receiver / argument text the frontend stamped onto
 //! the assertion's Call node — we look at `receiver`, `target`,

@@ -1,8 +1,8 @@
 //! Tier-0 forever rule R-IDENTIFIER-ENTROPY.
 //!
 //! Flag identifiers (function / variable / class names) whose Shannon
-//! entropy per character falls below [`MIN_BITS_PER_CHAR`] AND whose
-//! length exceeds [`MIN_LENGTH`]. The length floor avoids flagging
+//! entropy per character falls below `MIN_BITS_PER_CHAR` AND whose
+//! length exceeds `MIN_LENGTH`. The length floor avoids flagging
 //! `i`, `id`, `ok`, `err`, etc., which are short by convention.
 //!
 //! Catches `aaaaa`, `xxxxxx`, `foooooo`, `data1234`-style names that

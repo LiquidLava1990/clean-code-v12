@@ -1,9 +1,9 @@
 //! `cc.obs.pii_in_log` — PII keyword found inside a log format string.
 //!
 //! Heuristic (Phase-4 simplification): every [`NodeKind::Call`] whose
-//! callee text matches a log primitive ([`crate::helpers::LOG_CALLEES`])
+//! callee text matches a log primitive (`crate::helpers::LOG_CALLEES`)
 //! has its `format` / `args` property scanned for any of the
-//! [`crate::helpers::PII_KEYWORDS`] substrings (presidio + scrubadub
+//! `crate::helpers::PII_KEYWORDS` substrings (presidio + scrubadub
 //! keyword set).
 //!
 //! Severity: Blocker. PII landing in logs is a privacy / compliance

@@ -4,7 +4,7 @@
 //! testify's `assert.Equal(t, expected, actual)` and `require.Equal`
 //! are routinely written as `assert.Equal(t, got, expected)` — the
 //! arguments compare equal regardless, so the test still passes, but
-//! the diagnostic message ("expected: <got>, actual: <expected>") is
+//! the diagnostic message (`expected: <got>, actual: <expected>`) is
 //! reversed and the failure mode is impossible to read.
 //!
 //! OSS source: golangci-lint `testifylint` (rule `expected-actual`).
