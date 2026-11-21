@@ -29,6 +29,8 @@ jobs:
   clippy:
     name: clippy
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: ""  # pedantic lints stay warnings; deny-level lints still fail
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@1.85

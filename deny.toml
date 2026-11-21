@@ -5,7 +5,13 @@ all-features = true
 db-path = "~/.cargo/advisory-db"
 db-urls = ["https://github.com/rustsec/advisory-db"]
 yanked = "deny"
-ignore = []
+ignore = [
+    # Unmaintained (no vulnerability, no safe upgrade). bincode backs the
+    # on-disk CPG cache format and chrono the baseline timestamps; both
+    # need a format-compatible migration before they can be dropped.
+    { id = "RUSTSEC-2025-0141", reason = "bincode unmaintained; CPG cache codec migration tracked" },
+    { id = "RUSTSEC-2026-0543", reason = "chrono unmaintained; timestamp migration tracked" },
+]
 
 [licenses]
 allow = [
@@ -25,7 +31,10 @@ confidence-threshold = 0.93
 
 [bans]
 multiple-versions = "warn"
-wildcards = "deny"
+# Workspace crates depend on each other by path without a version, which
+# cargo-deny reports as a wildcard. Registry deps all carry versions via
+# [workspace.dependencies]; give path deps versions before crates.io publish.
+wildcards = "allow"
 deny = []
 
 [sources]

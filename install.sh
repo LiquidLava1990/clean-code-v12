@@ -9,6 +9,8 @@
 #   CC_BIN_NAME     installed command name (default: cc, or ccv12 when a
 #                   different `cc` — usually the C compiler — is on PATH)
 #   CC_REPO         GitHub owner/repo to download from
+#   CC_DOWNLOAD_URL base URL holding the release assets (mirrors, air-gapped
+#                   installs); overrides CC_REPO and CC_VERSION
 
 set -eu
 
@@ -37,7 +39,11 @@ detect_target() {
 
 download() {
     if command -v curl > /dev/null 2>&1; then
-        curl --proto '=https' --tlsv1.2 -fsSL "$1" -o "$2"
+        if [ -n "${CC_DOWNLOAD_URL:-}" ]; then
+            curl -fsSL "$1" -o "$2"  # mirror: the user chose the scheme
+        else
+            curl --proto '=https' --tlsv1.2 -fsSL "$1" -o "$2"
+        fi
     elif command -v wget > /dev/null 2>&1; then
         wget -q "$1" -O "$2"
     else
@@ -76,7 +82,9 @@ main() {
     need tar
     target="$(detect_target)"
     archive="cc-${target}.tar.gz"
-    if [ "$VERSION" = latest ]; then
+    if [ -n "${CC_DOWNLOAD_URL:-}" ]; then
+        base="${CC_DOWNLOAD_URL%/}"
+    elif [ "$VERSION" = latest ]; then
         base="https://github.com/${REPO}/releases/latest/download"
     else
         base="https://github.com/${REPO}/releases/download/${VERSION}"

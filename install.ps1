@@ -8,6 +8,9 @@
 #   CC_BIN_NAME     installed command name (default: cc, or ccv12 when a
 #                   different cc.exe is already on PATH)
 #   CC_REPO         GitHub owner/repo to download from
+#   CC_NO_MODIFY_PATH set to 1 to leave the user PATH untouched
+#   CC_DOWNLOAD_URL base URL holding the release assets (mirrors, air-gapped
+#                   installs); overrides CC_REPO and CC_VERSION
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
@@ -19,6 +22,8 @@ function Get-InstallSetting([string]$Name, [string]$Default) {
 }
 
 function Get-ReleaseBaseUrl([string]$Repo, [string]$Version) {
+    $mirror = [Environment]::GetEnvironmentVariable('CC_DOWNLOAD_URL')
+    if (-not [string]::IsNullOrWhiteSpace($mirror)) { return $mirror.TrimEnd('/') }
     if ($Version -eq 'latest') { return "https://github.com/$Repo/releases/latest/download" }
     return "https://github.com/$Repo/releases/download/$Version"
 }
@@ -40,6 +45,10 @@ function Get-BinName([string]$InstallDir) {
 }
 
 function Add-ToUserPath([string]$Dir) {
+    if ([Environment]::GetEnvironmentVariable('CC_NO_MODIFY_PATH') -eq '1') {
+        Write-Host "cc-install: CC_NO_MODIFY_PATH=1, so add $Dir to PATH yourself"
+        return
+    }
     $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
     $entries = @($userPath -split ';' | Where-Object { $_ })
     if ($entries -contains $Dir) { return }

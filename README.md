@@ -176,6 +176,7 @@ on: [push, pull_request]
 permissions:
   contents: read
   security-events: write
+  actions: read
 jobs:
   cc:
     runs-on: ubuntu-latest
