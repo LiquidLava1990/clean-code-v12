@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-i18n-a11y",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.i18n.hardcoded_locale",
+    "cc.i18n.unicode_unsafe_op",
+    "cc.a11y.missing_alt",
+    "cc.a11y.color_only_signal",
+    "cc.a11y.keyboard_trap"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-i18n-a11y:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-i18n-a11y:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-i18n-a11y:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-i18n-a11y:0.1.0"
+    }
+  ]
+}

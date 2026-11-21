@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-bugs",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.bug.null_propagation",
+    "cc.bug.off_by_one",
+    "cc.bug.type_confusion",
+    "cc.bug.state_machine",
+    "cc.bug.time_bomb",
+    "cc.bug.float_money",
+    "cc.bug.locale_dependent",
+    "cc.bug.equals_hashcode_pair",
+    "cc.bug.identity_binary_expr",
+    "cc.bug.cmp_to_nan",
+    "cc.bug.shift_amount_oor",
+    "cc.bug.format_string_drift",
+    "cc.bug.regex_invalid",
+    "cc.bug.deferred_close_no_err",
+    "cc.bug.mutate_during_iteration",
+    "cc.bug.tick_leak",
+    "cc.bug.dead_thread",
+    "cc.bug.always_throws",
+    "cc.bug.use_after_move",
+    "cc.bug.html_url_javascript",
+    "cc.bug.mutable_arg_default",
+    "cc.bug.unused_loop_variable",
+    "cc.bug.fn_call_in_default_arg",
+    "cc.bug.assert_with_tuple",
+    "cc.bug.broad_pytest_raises",
+    "cc.bug.body_close_missing",
+    "cc.bug.errcheck_json",
+    "cc.bug.err_named_inconsistently",
+    "cc.bug.nilerr",
+    "cc.bug.absurd_extreme_comparison",
+    "cc.bug.bad_bit_mask",
+    "cc.bug.cast_nan_to_int",
+    "cc.bug.cast_possible_truncation",
+    "cc.bug.cast_precision_loss",
+    "cc.bug.furb_implicit_int_str_concat",
+    "cc.bug.furb_dict_get_with_none_default",
+    "cc.bug.furb_for_else_loop_unused",
+    "cc.bug.duplicate_dict_keys",
+    "cc.bug.arithmetic_side_effects",
+    "cc.bug.as_conversions",
+    "cc.bug.clone_on_ref_ptr",
+    "cc.bug.default_numeric_fallback",
+    "cc.bug.govet_unreachable_code",
+    "cc.bug.govet_lostcancel",
+    "cc.bug.govet_assign_to_self",
+    "cc.bug.govet_copylocks",
+    "cc.bug.govet_unkeyed_composite",
+    "cc.bug.govet_nilness_check",
+    "cc.bug.govet_printf_format",
+    "cc.bug.govet_struct_tag_well_formed",
+    "cc.bug.python_assert_in_production"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+    }
+  ]
+}

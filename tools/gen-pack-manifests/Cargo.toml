@@ -1,0 +1,51 @@
+[package]
+name = "gen-pack-manifests"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Emit one OCI artifact manifest per registered Clean-Code-V12 rule pack."
+publish = false
+
+[[bin]]
+name = "gen-pack-manifests"
+path = "src/main.rs"
+
+[dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+camino.workspace = true
+anyhow.workspace = true
+cc-rules = { path = "../../crates/cc-rules" }
+cc-rules-tier0 = { path = "../../crates/cc-rules-tier0" }
+cc-rules-slop = { path = "../../crates/cc-rules-slop" }
+cc-rules-secrets = { path = "../../crates/cc-rules-secrets" }
+cc-rules-perf = { path = "../../crates/cc-rules-perf" }
+cc-rules-completeness = { path = "../../crates/cc-rules-completeness" }
+cc-rules-bugs = { path = "../../crates/cc-rules-bugs" }
+cc-rules-concurrency = { path = "../../crates/cc-rules-concurrency" }
+cc-rules-time-math = { path = "../../crates/cc-rules-time-math" }
+cc-rules-taint = { path = "../../crates/cc-rules-taint" }
+cc-rules-memory = { path = "../../crates/cc-rules-memory" }
+cc-rules-types = { path = "../../crates/cc-rules-types" }
+cc-rules-architecture = { path = "../../crates/cc-rules-architecture" }
+cc-rules-tests = { path = "../../crates/cc-rules-tests" }
+cc-rules-database = { path = "../../crates/cc-rules-database" }
+cc-rules-anti-fragility = { path = "../../crates/cc-rules-anti-fragility" }
+cc-rules-observability = { path = "../../crates/cc-rules-observability" }
+cc-rules-api = { path = "../../crates/cc-rules-api" }
+cc-rules-deploy = { path = "../../crates/cc-rules-deploy" }
+cc-rules-ops = { path = "../../crates/cc-rules-ops" }
+cc-rules-ci = { path = "../../crates/cc-rules-ci" }
+cc-rules-history = { path = "../../crates/cc-rules-history" }
+cc-rules-docs = { path = "../../crates/cc-rules-docs" }
+cc-rules-compliance = { path = "../../crates/cc-rules-compliance" }
+cc-rules-i18n-a11y = { path = "../../crates/cc-rules-i18n-a11y" }
+cc-rules-modernize = { path = "../../crates/cc-rules-modernize" }
+cc-rules-test-design = { path = "../../crates/cc-rules-test-design" }
+cc-rules-supplychain = { path = "../../crates/cc-rules-supplychain" }
+cc-rules-formatting = { path = "../../crates/cc-rules-formatting" }
+cc-rules-iac = { path = "../../crates/cc-rules-iac" }
+
+[lints]
+workspace = true

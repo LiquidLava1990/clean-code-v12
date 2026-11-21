@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-slop",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.slop.comment_vs_code",
+    "cc.slop.fake_thoughtful_name",
+    "cc.slop.over_commented_obvious",
+    "cc.slop.defensive_pure_fn",
+    "cc.slop.unused_helper",
+    "cc.slop.premature_abstraction",
+    "cc.slop.drift_from_project",
+    "cc.slop.llm_texture"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-slop:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-slop:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-slop:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-slop:0.1.0"
+    }
+  ]
+}

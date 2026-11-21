@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-supplychain",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.supplychain.unpinned_action",
+    "cc.supplychain.dangerous_workflow_pr_target",
+    "cc.supplychain.no_dependabot_config",
+    "cc.supplychain.no_codeowners",
+    "cc.supplychain.no_security_md",
+    "cc.supplychain.npm_outdated_majors",
+    "cc.supplychain.cargo_unpinned_git_dep",
+    "cc.supplychain.npm_dangerous_install_script",
+    "cc.supplychain.docker_apk_no_pin",
+    "cc.supplychain.action_version_skew"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-supplychain:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-supplychain:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-supplychain:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-supplychain:0.1.0"
+    }
+  ]
+}

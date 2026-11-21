@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-compliance",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.compliance.pii_handling",
+    "cc.compliance.gdpr_pattern",
+    "cc.compliance.audit_log_gap",
+    "cc.compliance.license_violation"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-compliance:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-compliance:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-compliance:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-compliance:0.1.0"
+    }
+  ]
+}

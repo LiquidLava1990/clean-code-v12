@@ -1,0 +1,97 @@
+name: 'Clean Code V12'
+description: 'Run cc check and upload SARIF to the GitHub Security tab.'
+author: 'LiquidLava1990'
+
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  path:
+    description: 'Path to scan (defaults to the repo root).'
+    required: false
+    default: '.'
+  baseline:
+    description: 'Optional path to a baseline JSON produced by a prior cc run. Empty = no baseline.'
+    required: false
+    default: ''
+  format:
+    description: 'Output format: sarif | rdjson | json | tty.'
+    required: false
+    default: 'sarif'
+  output:
+    description: 'Output file path. Defaults to cc-results.<ext> derived from format.'
+    required: false
+    default: ''
+  version:
+    description: 'cc release tag to install (e.g. v0.1.0), or latest.'
+    required: false
+    default: 'latest'
+  upload-sarif:
+    description: 'Upload SARIF to GitHub code scanning. Only honoured when format=sarif.'
+    required: false
+    default: 'true'
+  category:
+    description: 'SARIF category passed to upload-sarif.'
+    required: false
+    default: 'clean-code-v12'
+
+outputs:
+  output-file:
+    description: 'Path to the generated cc output file.'
+    value: ${{ steps.run.outputs.output-file }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install cc (prebuilt release binary)
+      shell: bash
+      env:
+        CC_VERSION: ${{ inputs.version }}
+        CC_INSTALL_DIR: ${{ runner.temp }}/cc-bin
+        CC_BIN_NAME: cc
+        CC_REPO: LiquidLava1990/clean-code-v12
+      run: |
+        if [ "$RUNNER_OS" = Windows ]; then
+          pwsh -NoProfile -Command "irm https://github.com/$CC_REPO/releases/latest/download/install.ps1 | iex"
+        else
+          curl -fsSL "https://github.com/$CC_REPO/releases/latest/download/install.sh" | sh
+        fi
+        echo "$CC_INSTALL_DIR" >> "$GITHUB_PATH"
+
+    - name: Run cc check
+      id: run
+      shell: bash
+      run: |
+        FORMAT='${{ inputs.format }}'
+        case "$FORMAT" in
+          sarif)  EXT=sarif ;;
+          rdjson) EXT=rdjson ;;
+          json)   EXT=json ;;
+          tty)    EXT=txt ;;
+          *) echo "::error::unknown format: $FORMAT"; exit 2 ;;
+        esac
+
+        OUT='${{ inputs.output }}'
+        if [ -z "$OUT" ]; then
+          OUT="cc-results.$EXT"
+        fi
+
+        BASELINE_ARG=""
+        if [ -n '${{ inputs.baseline }}' ]; then
+          BASELINE_ARG="--baseline ${{ inputs.baseline }}"
+        fi
+
+        "$RUNNER_TEMP/cc-bin/cc" check '${{ inputs.path }}' \
+          --format "$FORMAT" \
+          --output "$OUT" \
+          $BASELINE_ARG || true
+
+        echo "output-file=$OUT" >> "$GITHUB_OUTPUT"
+
+    - name: Upload SARIF
+      if: ${{ inputs.format == 'sarif' && inputs.upload-sarif == 'true' }}
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ steps.run.outputs.output-file }}
+        category: ${{ inputs.category }}

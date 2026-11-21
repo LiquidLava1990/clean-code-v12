@@ -1,0 +1,65 @@
+# Clean Code V12 — Reference Corpus (Phase 1 G2 exit gate)
+#
+# Five canonical repositories used to validate the kernel runs against real-world
+# polyglot codebases without panics, with reasonable findings, and within the
+# performance budget (G3: p95 < 5s on warm cache).
+#
+# The fixture runner clones (or `git fetch`-updates) each repo into
+# `tests/fixtures/reference/<name>/` before scanning. Pinning to a fixed
+# commit guarantees deterministic Findings + scores across CI runs.
+
+[[repos]]
+name = "cpython"
+language = "python"
+url = "https://github.com/python/cpython"
+pin = "v3.13.1"
+description = "CPython interpreter — broad Python idioms, 1.5M LOC"
+expected_loc = 1_500_000
+expected_runtime_warm_p95_ms = 4500
+notes = "Canonical Python corpus; many advanced features (async, decorators, ABCs)."
+
+[[repos]]
+name = "typescript"
+language = "typescript"
+url = "https://github.com/microsoft/TypeScript"
+pin = "v5.7.2"
+description = "TypeScript compiler — 3M LOC, complex async + generics"
+expected_loc = 3_000_000
+expected_runtime_warm_p95_ms = 4800
+notes = "TS-on-TS dogfooding target — exercises generics, conditional types."
+
+[[repos]]
+name = "kubernetes"
+language = "go"
+url = "https://github.com/kubernetes/kubernetes"
+pin = "v1.31.4"
+description = "Kubernetes — 5M LOC, large polyglot Go monorepo"
+expected_loc = 5_000_000
+expected_runtime_warm_p95_ms = 4900
+notes = "Stresses dep resolution + interface taxonomies."
+
+[[repos]]
+name = "rustc"
+language = "rust"
+url = "https://github.com/rust-lang/rust"
+pin = "1.83.0"
+description = "Rust compiler — 3M LOC, deep trait + lifetime usage"
+expected_loc = 3_000_000
+expected_runtime_warm_p95_ms = 4700
+notes = "Rust-on-Rust dogfood; heavy macro + unsafe blocks."
+
+[[repos]]
+name = "home-assistant"
+language = "polyglot"
+url = "https://github.com/home-assistant/core"
+pin = "2026.1.0"
+description = "Home Assistant — Python core + TS frontend, 2M LOC"
+expected_loc = 2_000_000
+expected_runtime_warm_p95_ms = 4600
+notes = "Polyglot mono — exercises cross-language CPG construction."
+
+[runner]
+fixtures_dir = "tests/fixtures/reference"
+parallel_clones = 3
+shallow_clone_depth = 1
+update_strategy = "fetch-prune"

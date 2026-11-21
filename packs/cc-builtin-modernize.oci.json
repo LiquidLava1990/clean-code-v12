@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-modernize",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.modernize.string_format_legacy",
+    "cc.modernize.deprecated_typing_alias",
+    "cc.modernize.os_path_join",
+    "cc.modernize.var_for_let",
+    "cc.modernize.commonjs_require",
+    "cc.modernize.callbacks_over_promises",
+    "cc.modernize.deprecated_unwrap",
+    "cc.modernize.legacy_format_macro",
+    "cc.modernize.thread_spawn_no_join",
+    "cc.modernize.sync_in_async_runtime",
+    "cc.modernize.simplify_boolean_expr",
+    "cc.modernize.template_over_concat",
+    "cc.modernize.no_array_for_each",
+    "cc.modernize.use_pathlib_over_os",
+    "cc.modernize.bare_reraise_lossy",
+    "cc.modernize.dict_literal_over_call",
+    "cc.modernize.list_call_in_set_call",
+    "cc.modernize.string_format_to_fstring",
+    "cc.modernize.deprecated_unittest_aliases",
+    "cc.modernize.consistent_function_scoping",
+    "cc.modernize.logging_fstring",
+    "cc.modernize.try_consider_else",
+    "cc.modernize.collapsible_if",
+    "cc.modernize.banned_import_alias",
+    "cc.modernize.try_except_pass",
+    "cc.modernize.django_url_path_param_required",
+    "cc.modernize.django_locals_in_render",
+    "cc.modernize.numpy_legacy_random",
+    "cc.modernize.pandas_chained_assignment",
+    "cc.modernize.manual_let_else",
+    "cc.modernize.redundant_closure",
+    "cc.modernize.unnecessary_lazy_evaluations",
+    "cc.modernize.python_walrus_for_assign_in_cond",
+    "cc.modernize.python_match_case_for_chain",
+    "cc.modernize.python_dataclass_for_class_with_init"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-modernize:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-modernize:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-modernize:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-modernize:0.1.0"
+    }
+  ]
+}

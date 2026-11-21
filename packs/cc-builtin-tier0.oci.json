@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-tier0",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.shape.fn_length",
+    "cc.shape.file_length",
+    "cc.shape.nesting_depth",
+    "cc.shape.param_count",
+    "cc.shape.cyclomatic",
+    "cc.shape.cognitive",
+    "cc.shape.no_inheritance",
+    "cc.error.bare",
+    "cc.error.broad_catch",
+    "cc.shape.duplication",
+    "cc.shape.dead_code",
+    "cc.type.coverage",
+    "cc.shape.naming_drift",
+    "cc.shape.nesting_early_return",
+    "cc.error.no_action",
+    "cc.meta.refactor_drift",
+    "cc.meta.new_file_clean",
+    "cc.shape.return_count",
+    "cc.shape.boolean_complexity",
+    "cc.shape.local_var_count",
+    "cc.shape.statement_count",
+    "cc.shape.identifier_entropy",
+    "cc.shape.lambda_complexity",
+    "cc.shape.public_surface_size",
+    "cc.shape.god_struct",
+    "cc.shape.expression_depth",
+    "cc.shape.swallowed_with_log_no_recovery"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tier0:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tier0:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tier0:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tier0:0.1.0"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+cognitive-complexity-threshold = 15
+too-many-lines-threshold = 50
+type-complexity-threshold = 250
+max-fn-params-bools = 2

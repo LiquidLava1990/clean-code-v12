@@ -1,0 +1,24 @@
+[package]
+name = "cc-runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — runtime cost layer (pprof / OTLP ingest, query)."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+tracing.workspace = true
+camino.workspace = true
+prost.workspace = true
+flate2.workspace = true
+
+[dev-dependencies]
+# Synthetic-fixture construction in tests.
+flate2.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,21 @@
+[package]
+name = "cc-test-fixtures"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — golden fixture corpus for kernel + rule integration tests."
+include = ["src/**", "tests/fixtures/**", "Cargo.toml"]
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde = { workspace = true, features = ["derive"] }
+camino.workspace = true
+
+[dev-dependencies]
+expect-test.workspace = true
+tempfile.workspace = true
+
+[lints]
+workspace = true

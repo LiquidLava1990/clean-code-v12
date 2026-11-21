@@ -1,0 +1,22 @@
+[package]
+name = "cc-score"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — deterministic health score over a Finding stream."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+tracing.workspace = true
+cc-finding = { path = "../cc-finding" }
+
+[dev-dependencies]
+expect-test.workspace = true
+serde_json.workspace = true
+camino.workspace = true
+
+[lints]
+workspace = true

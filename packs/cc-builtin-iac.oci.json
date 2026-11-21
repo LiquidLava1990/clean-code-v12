@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-iac",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.iac.dockerfile_no_user",
+    "cc.iac.dockerfile_latest_tag",
+    "cc.iac.dockerfile_apt_no_clean",
+    "cc.iac.k8s_no_resource_limits",
+    "cc.iac.k8s_no_security_context",
+    "cc.iac.terraform_no_lifecycle_protection",
+    "cc.iac.helm_no_chart_lock",
+    "cc.iac.cloudformation_no_drift_detection",
+    "cc.iac.compose_default_network",
+    "cc.iac.workflow_inline_secret",
+    "cc.deploy.tf_unrestricted_ssh",
+    "cc.deploy.tf_unencrypted_storage",
+    "cc.deploy.tf_overpermissive_iam",
+    "cc.deploy.tf_public_s3_bucket",
+    "cc.deploy.tf_no_state_encryption",
+    "cc.deploy.k8s_run_as_root",
+    "cc.deploy.k8s_latest_tag",
+    "cc.deploy.k8s_writable_root_fs",
+    "cc.deploy.k8s_privileged",
+    "cc.deploy.k8s_host_network"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-iac:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-iac:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-iac:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-iac:0.1.0"
+    }
+  ]
+}

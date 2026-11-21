@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-types",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.type.implicit_any",
+    "cc.type.unjustified_ignore",
+    "cc.type.protocol_drift",
+    "cc.type.no_floating_promise",
+    "cc.type.no_misused_promise",
+    "cc.type.no_unsafe_argument",
+    "cc.type.no_unsafe_return",
+    "cc.type.switch_exhaustiveness",
+    "cc.bug.lock_held_across_await",
+    "cc.type.async_returns_null",
+    "cc.type.await_thenable",
+    "cc.type.no_unnecessary_condition",
+    "cc.type.exhaustruct",
+    "cc.type.no_explicit_any",
+    "cc.type.no_non_null_assertion",
+    "cc.type.strict_boolean_expressions",
+    "cc.type.no_base_to_string",
+    "cc.type.no_confusing_void_expression",
+    "cc.type.no_unsafe_enum_comparison",
+    "cc.type.ban_ts_comment",
+    "cc.type.no_unused_expressions",
+    "cc.type.no_var_requires",
+    "cc.type.consistent_type_imports"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-types:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-types:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-types:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-types:0.1.0"
+    }
+  ]
+}

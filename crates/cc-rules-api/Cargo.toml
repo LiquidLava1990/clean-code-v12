@@ -1,0 +1,22 @@
+[package]
+name = "cc-rules-api"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — Family 9 (API + schema drift) probe pack."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+tracing.workspace = true
+camino.workspace = true
+cc-cpg = { path = "../cc-cpg" }
+cc-finding = { path = "../cc-finding" }
+cc-rules = { path = "../cc-rules" }
+cc-config = { path = "../cc-config" }
+cc-frontend = { path = "../cc-frontend" }
+
+[lints]
+workspace = true

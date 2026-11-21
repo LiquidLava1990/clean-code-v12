@@ -1,0 +1,172 @@
+# Root package: exists only so pre-commit's `language: rust` hook
+# (`cargo install --path .`) can build the CLI. End users install the
+# `cc` binary from `crates/cc-cli` or a prebuilt release instead.
+[package]
+name = "clean-code-v12"
+description = "pre-commit shim for the Clean Code V12 `cc` linter."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+autobins = false
+autoexamples = false
+autotests = false
+autobenches = false
+
+[[bin]]
+name = "cc-pre-commit"
+path = "tools/pre-commit/main.rs"
+
+[dependencies]
+cc-cli = { path = "crates/cc-cli" }
+clap.workspace = true
+
+[lints]
+workspace = true
+
+[workspace]
+resolver = "2"
+members = [
+    ".",
+    "crates/cc-cli",
+    "crates/cc-kernel",
+    "crates/cc-cpg",
+    "crates/cc-cpg-store",
+    "crates/cc-frontend",
+    "crates/cc-frontend-python",
+    "crates/cc-frontend-typescript",
+    "crates/cc-frontend-go",
+    "crates/cc-frontend-rust",
+    "crates/cc-incremental",
+    "crates/cc-rules",
+    "crates/cc-rules-tier0",
+    "crates/cc-rules-slop",
+    "crates/cc-rules-secrets",
+    "crates/cc-rules-perf",
+    "crates/cc-rules-completeness",
+    "crates/cc-rules-bugs",
+    "crates/cc-rules-concurrency",
+    "crates/cc-rules-time-math",
+    "crates/cc-rules-taint",
+    "crates/cc-rules-memory",
+    "crates/cc-rules-types",
+    "crates/cc-rules-architecture",
+    "crates/cc-rules-tests",
+    "crates/cc-rules-database",
+    "crates/cc-rules-anti-fragility",
+    "crates/cc-rules-observability",
+    "crates/cc-rules-api",
+    "crates/cc-rules-deploy",
+    "crates/cc-rules-ops",
+    "crates/cc-rules-ci",
+    "crates/cc-rules-history",
+    "crates/cc-rules-docs",
+    "crates/cc-rules-compliance",
+    "crates/cc-rules-i18n-a11y",
+    "crates/cc-rules-modernize",
+    "crates/cc-rules-supplychain",
+    "crates/cc-rules-formatting",
+    "crates/cc-rules-test-design",
+    "crates/cc-rules-iac",
+    "crates/cc-finding",
+    "crates/cc-sarif",
+    "crates/cc-rdformat",
+    "crates/cc-baseline",
+    "crates/cc-fingerprint",
+    "crates/cc-score",
+    "crates/cc-runtime",
+    "crates/cc-llm",
+    "crates/cc-config",
+    "crates/cc-diagnostics",
+    "crates/cc-lsp",
+    "crates/cc-mcp",
+    "crates/cc-test-fixtures",
+    "tools/gen-pack-manifests",
+]
+# Plain `cargo build` / `cargo test` at the root cover the whole workspace
+# (a root package would otherwise narrow them to just the shim).
+default-members = [
+    ".",
+    "crates/*",
+    "tools/gen-pack-manifests",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/LiquidLava1990/clean-code-v12"
+homepage = "https://github.com/LiquidLava1990/clean-code-v12"
+
+[workspace.dependencies]
+# Foundational
+anyhow = "1"
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+bincode = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+camino = { version = "1", features = ["serde1"] }
+chrono = { version = "0.4", default-features = false, features = ["std", "clock", "serde"] }
+
+# Storage + cache
+redb = "2"
+salsa = "0.18"
+
+# Parsing
+tree-sitter = "0.24"
+tree-sitter-python = "0.23"
+tree-sitter-typescript = "0.23"
+tree-sitter-go = "0.23"
+tree-sitter-rust = "0.23"
+
+# Async + LSP + watch
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs"] }
+tower-lsp = "0.20"
+notify = "7"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Profile ingest (cc-runtime)
+prost = "0.13"
+flate2 = "1"
+
+# Hashing + crypto
+sha2 = "0.10"
+ahash = "0.8"
+uuid = { version = "1", features = ["v7", "serde"] }
+
+# Config parsing + glob matching
+toml = "0.8"
+globset = "0.4"
+once_cell = "1"
+ignore = "0.4"
+rayon = "1"
+tempfile = "3"
+
+# Terminal output
+owo-colors = "4"
+
+# Testing
+insta = "1"
+expect-test = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+cognitive_complexity = "deny"
+too_many_lines = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

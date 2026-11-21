@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-architecture",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.arch.layer_violation",
+    "cc.arch.circular_import",
+    "cc.arch.fan_in_outlier",
+    "cc.arch.fan_out_outlier",
+    "cc.arch.ownership_gap",
+    "cc.arch.layer_violation_import",
+    "cc.arch.god_module_imports",
+    "cc.arch.cross_module_private_access"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-architecture:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-architecture:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-architecture:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-architecture:0.1.0"
+    }
+  ]
+}

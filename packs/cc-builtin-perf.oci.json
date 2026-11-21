@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-perf",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.perf.n_plus_one_orm",
+    "cc.perf.sync_in_async",
+    "cc.perf.alloc_in_loop",
+    "cc.perf.wrong_collection",
+    "cc.perf.regex_compile_in_loop",
+    "cc.perf.missing_memoization",
+    "cc.perf.gil_trap",
+    "cc.perf.gc_pressure",
+    "cc.perf.string_concat_loop",
+    "cc.perf.makezero_with_append",
+    "cc.perf.prealloc_slice_in_loop",
+    "cc.perf.no_context_in_http",
+    "cc.perf.wasted_assign",
+    "cc.perf.cloned_instead_of_copied",
+    "cc.perf.cmp_owned",
+    "cc.perf.box_collection",
+    "cc.perf.boxed_local",
+    "cc.perf.branches_sharing_code",
+    "cc.perf.collection_is_never_read",
+    "cc.perf.useless_collect",
+    "cc.perf.format_in_format_args",
+    "cc.perf.regex_compile_in_function",
+    "cc.perf.string_concat_in_recursion",
+    "cc.perf.dict_iteration_with_keys"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-perf:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-perf:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-perf:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-perf:0.1.0"
+    }
+  ]
+}

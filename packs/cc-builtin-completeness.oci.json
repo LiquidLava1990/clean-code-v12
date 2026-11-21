@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-completeness",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.observe.public_fn_untraced",
+    "cc.observe.span_name_drift",
+    "cc.observe.missing_correlation_id",
+    "cc.observe.silent_io",
+    "cc.meta.fn_missing_decoration",
+    "cc.meta.side_effect_undeclared",
+    "cc.meta.envelope_missing",
+    "cc.meta.io_schema_missing",
+    "cc.meta.duplicate_registration",
+    "cc.contract.precondition_missing",
+    "cc.contract.postcondition_missing",
+    "cc.contract.invariant_unmonitored",
+    "cc.contract.event_unsigned",
+    "cc.contract.errata_anchor_invalid",
+    "cc.error.no_typed_class",
+    "cc.error.no_errcode",
+    "cc.error.errcode_collision",
+    "cc.error.bare_reraise",
+    "cc.error.swallowed_with_log",
+    "cc.decoration.timeout_missing",
+    "cc.decoration.retry_no_backoff",
+    "cc.decoration.circuit_breaker_missing",
+    "cc.decoration.rate_limit_missing",
+    "cc.chain.fn_in_pathway_no_registry",
+    "cc.chain.fn_no_typed_error",
+    "cc.chain.fn_no_event_emit",
+    "cc.chain.event_no_consumer",
+    "cc.chain.consumer_no_emitter",
+    "cc.complete.public_fn_no_test",
+    "cc.complete.unsafe_block_no_safety_comment"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-completeness:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-completeness:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-completeness:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-completeness:0.1.0"
+    }
+  ]
+}

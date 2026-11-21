@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-formatting",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.fmt.trailing_whitespace",
+    "cc.fmt.mixed_indentation",
+    "cc.fmt.tab_in_python",
+    "cc.fmt.crlf_line_endings",
+    "cc.fmt.bom_present",
+    "cc.fmt.no_final_newline",
+    "cc.fmt.multiple_blank_lines",
+    "cc.fmt.inconsistent_string_quotes",
+    "cc.fmt.long_line",
+    "cc.fmt.todo_no_owner"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-formatting:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-formatting:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-formatting:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-formatting:0.1.0"
+    }
+  ]
+}

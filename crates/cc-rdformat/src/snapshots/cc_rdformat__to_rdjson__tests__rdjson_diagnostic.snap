@@ -1,0 +1,29 @@
+---
+source: crates/cc-rdformat/src/to_rdjson_tests.rs
+expression: json
+---
+{
+  "message": "function exceeds 50 lines — see docs: https://example.org/fn_length",
+  "location": {
+    "path": "src/lib.rs",
+    "range": {
+      "start": {
+        "line": 10,
+        "column": 5
+      },
+      "end": {
+        "line": 10,
+        "column": 25
+      }
+    }
+  },
+  "severity": "ERROR",
+  "source": {
+    "name": "clean-code-v12",
+    "url": "https://example.org/cc"
+  },
+  "code": {
+    "value": "cc.shape.fn_length",
+    "url": "https://docs.example.org/rules/shape/cc.shape.fn_length.md"
+  }
+}

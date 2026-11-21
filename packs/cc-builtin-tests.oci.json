@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-tests",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.test.assertion_free",
+    "cc.test.mock_drift",
+    "cc.test.flaky",
+    "cc.test.coverage_hole_on_diff",
+    "cc.test.tests_the_mock",
+    "cc.test.mutation_survivor_density",
+    "cc.test.truth_score",
+    "cc.test.parallel_test_uses_shared_t",
+    "cc.test.testify_assertion_misuse",
+    "cc.test.assertion_free_jest"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tests:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tests:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tests:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-tests:0.1.0"
+    }
+  ]
+}

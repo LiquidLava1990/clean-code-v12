@@ -1,0 +1,42 @@
+name: dogfood
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  contents: read
+  security-events: write
+
+concurrency:
+  group: dogfood-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tier0-self-check:
+    name: cc check (Tier-0 against own source)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dtolnay/rust-toolchain@1.85
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build cc binary
+        run: cargo build --release -p cc-cli
+
+      - name: cc check (full repo, fail on Blocker)
+        run: ./target/release/cc check . --severity=blocker --format=sarif --output=cc-results.sarif
+
+      - name: Upload SARIF to GitHub code scanning
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: cc-results.sarif
+          category: clean-code-v12
+

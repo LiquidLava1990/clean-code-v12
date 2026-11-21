@@ -1,0 +1,64 @@
+[package]
+name = "cc-kernel"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — orchestration: walk repo, parse, lift, run rules, score, emit."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+camino.workspace = true
+globset.workspace = true
+ignore.workspace = true
+rayon.workspace = true
+cc-cpg = { path = "../cc-cpg" }
+cc-config = { path = "../cc-config" }
+cc-finding = { path = "../cc-finding" }
+cc-rules = { path = "../cc-rules" }
+cc-rules-tier0 = { path = "../cc-rules-tier0" }
+cc-rules-slop = { path = "../cc-rules-slop" }
+cc-rules-secrets = { path = "../cc-rules-secrets" }
+cc-rules-perf = { path = "../cc-rules-perf" }
+cc-rules-completeness = { path = "../cc-rules-completeness" }
+cc-rules-bugs = { path = "../cc-rules-bugs" }
+cc-rules-concurrency = { path = "../cc-rules-concurrency" }
+cc-rules-time-math = { path = "../cc-rules-time-math" }
+cc-rules-taint = { path = "../cc-rules-taint" }
+cc-rules-memory = { path = "../cc-rules-memory" }
+cc-rules-types = { path = "../cc-rules-types" }
+cc-rules-architecture = { path = "../cc-rules-architecture" }
+cc-rules-tests = { path = "../cc-rules-tests" }
+cc-rules-database = { path = "../cc-rules-database" }
+cc-rules-anti-fragility = { path = "../cc-rules-anti-fragility" }
+cc-rules-observability = { path = "../cc-rules-observability" }
+cc-rules-api = { path = "../cc-rules-api" }
+cc-rules-deploy = { path = "../cc-rules-deploy" }
+cc-rules-ops = { path = "../cc-rules-ops" }
+cc-rules-ci = { path = "../cc-rules-ci" }
+cc-rules-history = { path = "../cc-rules-history" }
+cc-rules-docs = { path = "../cc-rules-docs" }
+cc-rules-compliance = { path = "../cc-rules-compliance" }
+cc-rules-i18n-a11y = { path = "../cc-rules-i18n-a11y" }
+cc-rules-modernize = { path = "../cc-rules-modernize" }
+cc-rules-supplychain = { path = "../cc-rules-supplychain" }
+cc-rules-test-design = { path = "../cc-rules-test-design" }
+cc-rules-formatting = { path = "../cc-rules-formatting" }
+cc-rules-iac = { path = "../cc-rules-iac" }
+cc-frontend = { path = "../cc-frontend" }
+cc-frontend-python = { path = "../cc-frontend-python" }
+cc-frontend-typescript = { path = "../cc-frontend-typescript" }
+cc-frontend-go = { path = "../cc-frontend-go" }
+cc-frontend-rust = { path = "../cc-frontend-rust" }
+cc-score = { path = "../cc-score" }
+cc-fingerprint = { path = "../cc-fingerprint" }
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

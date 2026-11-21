@@ -1,0 +1,20 @@
+[package]
+name = "cc-frontend"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — language-agnostic frontend trait and lift helpers."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde = { workspace = true }
+tracing.workspace = true
+camino.workspace = true
+ahash.workspace = true
+tree-sitter.workspace = true
+cc-cpg = { path = "../cc-cpg" }
+
+[lints]
+workspace = true

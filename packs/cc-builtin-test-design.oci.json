@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-test-design",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.test.unconditional_assert_true",
+    "cc.test.disabled_test",
+    "cc.test.shared_setup_in_assertion",
+    "cc.test.flaky_iteration",
+    "cc.test.no_negative_case",
+    "cc.test.assertion_count_zero",
+    "cc.test.private_helper_imported_into_test",
+    "cc.test.non_isolated_state",
+    "cc.test.test_imports_test_module",
+    "cc.test.gigantic_test_function",
+    "cc.test.pt_fixture_returns_value",
+    "cc.test.pt_parametrize_no_kwargs",
+    "cc.test.pt_raises_simple_block",
+    "cc.test.pt_assert_in_finally",
+    "cc.test.pt_missing_test_classname_prefix"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-test-design:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-test-design:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-test-design:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-test-design:0.1.0"
+    }
+  ]
+}

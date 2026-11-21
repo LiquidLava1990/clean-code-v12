@@ -1,0 +1,93 @@
+{
+  "name": "clean-code-v12",
+  "displayName": "Clean Code V12",
+  "description": "Squiggles, hovers, and quick-fixes from the Clean Code V12 linter (cc-lsp).",
+  "version": "0.1.0",
+  "publisher": "clean-code",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LiquidLava1990/clean-code-v12"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "lint",
+    "linter",
+    "clean-code",
+    "static-analysis",
+    "lsp"
+  ],
+  "activationEvents": [
+    "onLanguage:python",
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:rust",
+    "onLanguage:go"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      { "id": "python" },
+      { "id": "typescript" },
+      { "id": "javascript" },
+      { "id": "rust" },
+      { "id": "go" }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Clean Code V12",
+      "properties": {
+        "cleanCodeV12.cli.path": {
+          "type": "string",
+          "default": "cc",
+          "markdownDescription": "Path to the `cc` CLI binary. The extension will try `<cli.path>` with the `lsp` subcommand first; if that fails it falls back to spawning `cc-lsp` (the standalone LSP daemon binary). Either binary must be on `PATH`, or this setting must point at the binary directly."
+        },
+        "cleanCodeV12.server.path": {
+          "type": "string",
+          "default": "cc-lsp",
+          "markdownDescription": "Path to the standalone `cc-lsp` daemon binary (used when the `cc lsp` subcommand is unavailable). Defaults to `cc-lsp` which must be on `PATH`."
+        },
+        "cleanCodeV12.severity": {
+          "type": "string",
+          "enum": ["blocker", "required", "nit"],
+          "default": "required",
+          "markdownDescription": "Minimum finding severity surfaced as a diagnostic. Mirrors the `--severity` flag on `cc check`."
+        },
+        "cleanCodeV12.trace.server": {
+          "type": "string",
+          "enum": ["off", "messages", "verbose"],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the cc-lsp server."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "cleanCodeV12.restart",
+        "title": "Clean Code V12: Restart Server",
+        "category": "Clean Code V12"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}

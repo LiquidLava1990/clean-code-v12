@@ -1,0 +1,24 @@
+[package]
+name = "cc-frontend-go"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — Go frontend (tree-sitter-go -> CPG)."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde = { workspace = true }
+tracing.workspace = true
+camino.workspace = true
+tree-sitter.workspace = true
+tree-sitter-go.workspace = true
+cc-cpg = { path = "../cc-cpg" }
+cc-frontend = { path = "../cc-frontend" }
+
+[dev-dependencies]
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,27 @@
+[package]
+name = "cc-rules-slop"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — Family 1 slop & drift rules (8 probes)."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+serde.workspace = true
+camino.workspace = true
+cc-cpg = { path = "../cc-cpg" }
+cc-finding = { path = "../cc-finding" }
+cc-rules = { path = "../cc-rules" }
+cc-config = { path = "../cc-config" }
+cc-frontend = { path = "../cc-frontend" }
+cc-fingerprint = { path = "../cc-fingerprint" }
+
+[dev-dependencies]
+expect-test.workspace = true
+insta.workspace = true
+
+[lints]
+workspace = true

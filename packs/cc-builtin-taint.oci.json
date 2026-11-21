@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-taint",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.taint.sql_injection",
+    "cc.taint.xss",
+    "cc.taint.command_injection",
+    "cc.taint.unsafe_deserialization",
+    "cc.taint.path_traversal",
+    "cc.taint.repr_on_untrusted",
+    "cc.taint.ssrf",
+    "cc.taint.weak_password_hash",
+    "cc.taint.path_traversal_join",
+    "cc.taint.eval_dynamic_code",
+    "cc.taint.gosec_sql_concat",
+    "cc.taint.gosec_command_injection_exec",
+    "cc.taint.gosec_unsafe_pointer_use",
+    "cc.taint.gosec_template_html_unescaped",
+    "cc.taint.gosec_filepath_traversal"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-taint:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-taint:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-taint:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-taint:0.1.0"
+    }
+  ]
+}

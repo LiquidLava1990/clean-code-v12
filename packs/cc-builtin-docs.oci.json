@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
+  "name": "cc-builtin-docs",
+  "version": "0.1.0",
+  "kernel-api": {
+    "min": 1,
+    "max": null
+  },
+  "rules": [
+    "cc.docs.readme_install_broken",
+    "cc.docs.docstring_signature_drift",
+    "cc.docs.docstring_coverage",
+    "cc.docs.dead_link",
+    "cc.docs.example_doesnt_compile",
+    "cc.docs.docstring_first_line_period",
+    "cc.docs.docstring_first_line_imperative",
+    "cc.docs.docstring_summary_blank_line"
+  ],
+  "sources": [
+    {
+      "language": "python",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-docs:0.1.0"
+    },
+    {
+      "language": "typescript",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-docs:0.1.0"
+    },
+    {
+      "language": "go",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-docs:0.1.0"
+    },
+    {
+      "language": "rust",
+      "url": "ghcr.io/liquidlava1990/cc-builtin-docs:0.1.0"
+    }
+  ]
+}

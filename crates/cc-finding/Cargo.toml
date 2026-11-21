@@ -1,0 +1,23 @@
+[package]
+name = "cc-finding"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+camino.workspace = true
+sha2.workspace = true
+uuid.workspace = true
+owo-colors.workspace = true
+
+[dev-dependencies]
+insta.workspace = true
+
+[lints]
+workspace = true

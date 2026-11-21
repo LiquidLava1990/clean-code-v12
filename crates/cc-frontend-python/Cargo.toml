@@ -1,0 +1,24 @@
+[package]
+name = "cc-frontend-python"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — Python frontend (tree-sitter-python -> CPG)."
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde = { workspace = true }
+tracing.workspace = true
+camino.workspace = true
+tree-sitter.workspace = true
+tree-sitter-python.workspace = true
+cc-cpg = { path = "../cc-cpg" }
+cc-frontend = { path = "../cc-frontend" }
+
+[dev-dependencies]
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

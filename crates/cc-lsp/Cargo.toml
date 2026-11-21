@@ -1,0 +1,39 @@
+[package]
+name = "cc-lsp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Clean Code V12 — Language Server Protocol daemon (stdio)."
+
+[[bin]]
+name = "cc-lsp"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber = { workspace = true, features = ["env-filter", "fmt"] }
+camino.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "io-std", "io-util", "sync"] }
+tower-lsp = { workspace = true }
+cc-cpg = { path = "../cc-cpg" }
+cc-config = { path = "../cc-config" }
+cc-finding = { path = "../cc-finding" }
+cc-rules = { path = "../cc-rules" }
+cc-rules-tier0 = { path = "../cc-rules-tier0" }
+cc-frontend = { path = "../cc-frontend" }
+cc-frontend-python = { path = "../cc-frontend-python" }
+cc-frontend-typescript = { path = "../cc-frontend-typescript" }
+cc-frontend-go = { path = "../cc-frontend-go" }
+cc-frontend-rust = { path = "../cc-frontend-rust" }
+cc-incremental = { path = "../cc-incremental" }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "io-std", "io-util", "sync", "time"] }
+
+[lints]
+workspace = true

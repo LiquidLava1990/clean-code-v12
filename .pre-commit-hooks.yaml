@@ -1,0 +1,37 @@
+# Clean Code V12 — pre-commit framework integration.
+#
+# Discovered by https://pre-commit.com when this repo is added as a
+# `repos:` source. `language: rust` runs `cargo install --path .` at the
+# repo root, which builds the root package's `cc-pre-commit` binary (the
+# same CLI as `cc`, see tools/pre-commit/main.rs) inside the hook
+# environment. `cc check` scans the repository as a whole (cross-file
+# rules need the full tree), so filenames are not passed. The first run
+# compiles the linter (a few minutes); later runs reuse the cached
+# environment.
+#
+# Usage in a downstream `.pre-commit-config.yaml`:
+#
+#   repos:
+#     - repo: https://github.com/LiquidLava1990/clean-code-v12
+#       rev: v0.1.0
+#       hooks:
+#         - id: cc-lint           # warn at required+
+#         - id: cc-lint-blocker   # CI gate — blockers only
+
+- id: cc-lint
+  name: Clean Code V12 linter
+  description: Run cc check on the repository at required severity (developer feedback).
+  entry: cc-pre-commit check
+  language: rust
+  types: [text]
+  pass_filenames: false
+  args: [--severity, required, .]
+
+- id: cc-lint-blocker
+  name: Clean Code V12 (blocker only)
+  description: Run cc check at blocker severity — suitable as a CI merge gate.
+  entry: cc-pre-commit check
+  language: rust
+  types: [text]
+  pass_filenames: false
+  args: [--severity, blocker, .]

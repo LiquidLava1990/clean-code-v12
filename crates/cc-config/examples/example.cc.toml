@@ -1,0 +1,105 @@
+# Clean Code V12 — example .cc/config.toml
+#
+# Drop this file at <repo-root>/.cc/config.toml. Every field below is
+# OPTIONAL — an empty file is a valid config. The defaults shown here
+# are exactly what `cc init` writes.
+#
+# Tier-0 (Family 0) rules are forever-on. They cannot be disabled.
+# You CAN downgrade their severity from Blocker -> Required, but never
+# all the way to Nit (that would be effectively "off"). See the
+# [rules] section near the bottom for examples.
+#
+# Run `cc explain <rule-id>` for the rationale + threshold of any rule.
+
+# ---------------------------------------------------------------------------
+# Project metadata
+# ---------------------------------------------------------------------------
+[project]
+# Friendly name. Defaults to the repo directory name.
+name = ""
+# Force-detect specific languages (empty = auto via tree-sitter).
+# Useful for fixture dirs where extension-based detection misfires.
+# Examples: ["python"], ["typescript", "go"]
+languages = []
+# Optional marker file that identifies the repo root. Defaults to this
+# config file. Set to e.g. "Cargo.toml" or ".git" for unusual layouts.
+marker = ".cc/config.toml"
+
+# ---------------------------------------------------------------------------
+# Repo-wide ignore list
+# ---------------------------------------------------------------------------
+[ignore]
+# Glob patterns to skip entirely. Uses `globset` syntax — `**` matches
+# any number of path segments, `*` matches one segment.
+paths = []
+# Auto-skip files heuristically identified as generated:
+#   *.pb.go, *_pb2.py, *.gen.ts, *.g.dart, ...
+generated = true
+# Auto-skip vendored deps: vendor/, node_modules/, .venv/, target/, ...
+vendored = true
+# Additional file extensions to ignore (no leading dot).
+extensions = ["lock", "snap"]
+
+# ---------------------------------------------------------------------------
+# Baseline file + drift mode
+# ---------------------------------------------------------------------------
+[baseline]
+# Path to the baseline JSON (relative to repo root).
+path = ".cc/baseline.json"
+# How drift is handled:
+#   "suppress" — findings whose suppress_key is in baseline are dropped
+#   "report"   — all findings emitted; baseline is informational
+#   "strict"   — any new finding fails CI even if absent from baseline
+mode = "suppress"
+
+# ---------------------------------------------------------------------------
+# Runtime data ingest (L0 layer — Phase 1 stub)
+# ---------------------------------------------------------------------------
+[runtime]
+# Set true to ingest pprof / OTLP profile data when available. The
+# `cc-runtime` crate is stubbed in Phase 1; this is forward-compat.
+ingest = false
+# Path to a pprof file or OTLP endpoint URL.
+# source = "build/profile.pb.gz"
+
+# ---------------------------------------------------------------------------
+# Project fingerprint / drift detection
+# ---------------------------------------------------------------------------
+[fingerprint]
+path = ".cc/fingerprint.json"
+# Sigma threshold — a file scoring > drift_sigma standard deviations
+# from the project distribution is flagged as drift.
+drift_sigma = 3.0
+# Refresh the fingerprint on every full scan. Disable for stable repos.
+auto_refresh = true
+
+# ---------------------------------------------------------------------------
+# Per-rule overrides
+# ---------------------------------------------------------------------------
+# Keyed by full rule_id, e.g. "cc.shape.fn_length".
+# Every entry is optional — defaults are: enabled=true, no override,
+# no thresholds, no path scope.
+#
+# Available knobs per rule:
+#   enabled            (bool)             — set to false to skip (BLOCKED for Tier-0)
+#   severity_override  ("required"|"nit") — downgrade only; upgrades rejected
+#   thresholds         (table)            — rule-specific tunables
+#   paths.include      (list of globs)    — apply only to matching paths
+#   paths.exclude      (list of globs)    — never apply to matching paths
+#
+# --- Example 1: tune the function-length threshold ---
+# [rules."cc.shape.fn_length"]
+# thresholds = { max_loc = 75 }    # default: 50
+#
+# --- Example 2: scope a rule to one directory ---
+# [rules."cc.shape.duplication".paths]
+# include = ["src/**", "lib/**"]
+# exclude = ["src/legacy/**"]
+#
+# --- Example 3: downgrade Tier-0 from Blocker -> Required ---
+# [rules."cc.shape.naming"]
+# severity_override = "required"   # "nit" is REJECTED for Tier-0 rules
+
+# Default: no overrides defined. The empty `[rules]` table below is
+# kept so `toml::from_str` round-trips cleanly. Delete or extend.
+[rules]

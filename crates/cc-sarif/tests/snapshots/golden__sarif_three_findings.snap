@@ -1,0 +1,231 @@
+---
+source: crates/cc-sarif/tests/golden.rs
+assertion_line: 89
+expression: json
+---
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "clean-code-v12",
+          "version": "0.1.0",
+          "informationUri": "https://github.com/LiquidLava1990/clean-code-v12",
+          "rules": [
+            {
+              "id": "cc.docs.missing",
+              "name": "cc.docs.missing",
+              "shortDescription": {
+                "text": "see `cc explain cc.docs.missing` for details"
+              },
+              "helpUri": "https://cleancode.dev/docs/rules/docs/cc.docs.missing.md",
+              "defaultConfiguration": {
+                "level": "note",
+                "enabled": true
+              }
+            },
+            {
+              "id": "cc.shape.fn_length",
+              "name": "cc.shape.fn_length",
+              "shortDescription": {
+                "text": "see `cc explain cc.shape.fn_length` for details"
+              },
+              "helpUri": "https://cleancode.dev/docs/rules/shape/cc.shape.fn_length.md",
+              "defaultConfiguration": {
+                "level": "error",
+                "enabled": true
+              }
+            },
+            {
+              "id": "cc.slop.duplication",
+              "name": "cc.slop.duplication",
+              "shortDescription": {
+                "text": "see `cc explain cc.slop.duplication` for details"
+              },
+              "helpUri": "https://cleancode.dev/docs/rules/slop/cc.slop.duplication.md",
+              "defaultConfiguration": {
+                "level": "warning",
+                "enabled": true
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "cc.shape.fn_length",
+          "level": "error",
+          "message": {
+            "text": "function exceeds 50 LOC",
+            "markdown": "**function exceeds 50 LOC**\n\nLong functions hide control flow and resist testing."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/foo.rs",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 4,
+                  "endLine": 15,
+                  "endColumn": 1,
+                  "byteOffset": 120,
+                  "byteLength": 120,
+                  "snippet": {
+                    "text": "fn long() { /* ... */ }"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "cc/v1": "5e97e636405ffd3f18d836afb73dae2e5973230ab42779baef4dc7f9c8c119fa"
+          },
+          "properties": {
+            "category": "shape",
+            "confidence": 0.8999999761581421,
+            "cost": {
+              "kind": "blocking_debt",
+              "weight": 5
+            },
+            "kernel_version": "0.1.0-test",
+            "probe_version": {
+              "kernel_api_max": null,
+              "kernel_api_min": 1,
+              "pack_id": "cc-tier0",
+              "pack_semver": "0.1.0"
+            }
+          }
+        },
+        {
+          "ruleId": "cc.slop.duplication",
+          "level": "warning",
+          "message": {
+            "text": "function exceeds 50 LOC",
+            "markdown": "**function exceeds 50 LOC**\n\nLong functions hide control flow and resist testing."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/foo.rs",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 4,
+                  "endLine": 15,
+                  "endColumn": 1,
+                  "byteOffset": 120,
+                  "byteLength": 120,
+                  "snippet": {
+                    "text": "fn long() { /* ... */ }"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "cc/v1": "4f1b090d43c77a06478c84f7a6088dc503b7aca9e05c66f1f12cb88d140736c3"
+          },
+          "fixes": [
+            {
+              "description": {
+                "text": "auto-fix for cc.slop.duplication"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/foo.rs",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "endLine": 15,
+                        "endColumn": 1,
+                        "byteOffset": 120,
+                        "byteLength": 120
+                      },
+                      "insertedContent": {
+                        "text": "fn short() {}\n"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "category": "shape",
+            "confidence": 0.8999999761581421,
+            "cost": {
+              "kind": "blocking_debt",
+              "weight": 5
+            },
+            "kernel_version": "0.1.0-test",
+            "probe_version": {
+              "kernel_api_max": null,
+              "kernel_api_min": 1,
+              "pack_id": "cc-tier0",
+              "pack_semver": "0.1.0"
+            }
+          }
+        },
+        {
+          "ruleId": "cc.docs.missing",
+          "level": "note",
+          "message": {
+            "text": "function exceeds 50 LOC",
+            "markdown": "**function exceeds 50 LOC**\n\nLong functions hide control flow and resist testing."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/foo.rs",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 4,
+                  "endLine": 15,
+                  "endColumn": 1,
+                  "byteOffset": 120,
+                  "byteLength": 120,
+                  "snippet": {
+                    "text": "fn long() { /* ... */ }"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "cc/v1": "a53834c15e715ee099128e949a4f9c23bf9035b5fa47b8e46307d4c5833e317b"
+          },
+          "properties": {
+            "category": "shape",
+            "confidence": 0.8999999761581421,
+            "cost": {
+              "kind": "blocking_debt",
+              "weight": 5
+            },
+            "kernel_version": "0.1.0-test",
+            "probe_version": {
+              "kernel_api_max": null,
+              "kernel_api_min": 1,
+              "pack_id": "cc-tier0",
+              "pack_semver": "0.1.0"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
