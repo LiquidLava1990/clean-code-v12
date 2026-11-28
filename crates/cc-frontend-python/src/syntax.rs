@@ -65,39 +65,50 @@ impl<'s> Imports<'s> {
             scopes: HashMap::new(),
         };
         for node in preorder(root) {
-            match node.kind() {
-                "import_statement" | "import_from_statement" => imports.add_import(node),
-                "assignment"
-                | "augmented_assignment"
-                | "for_statement"
-                | "for_in_clause"
-                | "named_expression" => {
-                    let target = node
-                        .child_by_field_name("left")
-                        .or_else(|| node.child_by_field_name("name"));
-                    if let Some(target) = target {
-                        imports.shadow_pattern(scope(node), target, node.end_byte());
-                    }
-                }
-                "as_pattern" => {
-                    if let Some(alias) = node.child_by_field_name("alias") {
-                        imports.shadow_pattern(scope(node), alias, alias.end_byte());
-                    }
-                }
-                "function_definition" | "class_definition" | "lambda" => {
-                    if let Some(name) = node.child_by_field_name("name") {
-                        imports.shadow_pattern(scope(node), name, name.end_byte());
-                    }
-                    if let Some(params) = node.child_by_field_name("parameters") {
-                        for param in children(params) {
-                            imports.shadow_pattern(Some(node), param, node.start_byte());
-                        }
-                    }
-                }
-                _ => {}
-            }
+            imports.index_node(node);
         }
         imports
+    }
+
+    fn index_node(&mut self, node: Node<'_>) {
+        match node.kind() {
+            "import_statement" | "import_from_statement" => self.add_import(node),
+            "assignment"
+            | "augmented_assignment"
+            | "for_statement"
+            | "for_in_clause"
+            | "named_expression" => self.shadow_assignment_target(node),
+            "as_pattern" => {
+                if let Some(alias) = node.child_by_field_name("alias") {
+                    self.shadow_pattern(scope(node), alias, alias.end_byte());
+                }
+            }
+            "function_definition" | "class_definition" | "lambda" => {
+                self.shadow_definition(node);
+            }
+            _ => {}
+        }
+    }
+
+    fn shadow_assignment_target(&mut self, node: Node<'_>) {
+        let target = node
+            .child_by_field_name("left")
+            .or_else(|| node.child_by_field_name("name"));
+        if let Some(target) = target {
+            self.shadow_pattern(scope(node), target, node.end_byte());
+        }
+    }
+
+    fn shadow_definition(&mut self, node: Node<'_>) {
+        if let Some(name) = node.child_by_field_name("name") {
+            self.shadow_pattern(scope(node), name, name.end_byte());
+        }
+        let Some(params) = node.child_by_field_name("parameters") else {
+            return;
+        };
+        for param in children(params) {
+            self.shadow_pattern(Some(node), param, node.start_byte());
+        }
     }
 
     /// Resolve the import visible to an identifier at its use site.

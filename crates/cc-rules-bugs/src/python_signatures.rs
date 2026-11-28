@@ -76,35 +76,47 @@ impl Syntax<'_> {
                 visit(self.definition(class))
             }
             "call" => self.with_class(field(receiver, "function")?, visit),
-            "identifier" => {
-                if let Some(value) = python_calls::identifier_assignment(receiver, self.imports)
-                    .and_then(|assignment| field(assignment, "right"))
-                {
-                    return self.with_receiver_class(value, remaining, visit);
-                }
-                self.with_class(parameter_type(receiver, self.source)?, visit)
-            }
-            "attribute" => {
-                let member = name(receiver, self.source)?;
-                self.with_receiver_class(field(receiver, "object")?, remaining, &|class| {
-                    let syntax = Syntax {
-                        path: class.path,
-                        source: class.source,
-                        imports: class.imports,
-                        context: self.context,
-                    };
-                    match attribute_origin(class.node, member, class.source)? {
-                        AttributeOrigin::Value(value) => {
-                            syntax.with_receiver_class(value, remaining, visit)
-                        }
-                        AttributeOrigin::Annotation(annotation) => {
-                            syntax.with_class(annotation, visit)
-                        }
-                    }
-                })
-            }
+            "identifier" => self.with_identifier_class(receiver, remaining, visit),
+            "attribute" => self.with_attribute_class(receiver, remaining, visit),
             _ => None,
         }
+    }
+
+    fn with_identifier_class<T>(
+        &self,
+        receiver: Node<'_>,
+        remaining: usize,
+        visit: &dyn Fn(Definition<'_>) -> Option<T>,
+    ) -> Option<T> {
+        let assigned = python_calls::identifier_assignment(receiver, self.imports)
+            .and_then(|assignment| field(assignment, "right"));
+        if let Some(value) = assigned {
+            return self.with_receiver_class(value, remaining, visit);
+        }
+        self.with_class(parameter_type(receiver, self.source)?, visit)
+    }
+
+    fn with_attribute_class<T>(
+        &self,
+        receiver: Node<'_>,
+        remaining: usize,
+        visit: &dyn Fn(Definition<'_>) -> Option<T>,
+    ) -> Option<T> {
+        let member = name(receiver, self.source)?;
+        self.with_receiver_class(field(receiver, "object")?, remaining, &|class| {
+            let syntax = Syntax {
+                path: class.path,
+                source: class.source,
+                imports: class.imports,
+                context: self.context,
+            };
+            match attribute_origin(class.node, member, class.source)? {
+                AttributeOrigin::Value(value) => {
+                    syntax.with_receiver_class(value, remaining, visit)
+                }
+                AttributeOrigin::Annotation(annotation) => syntax.with_class(annotation, visit),
+            }
+        })
     }
 
     fn with_class<T>(
@@ -124,28 +136,36 @@ impl Syntax<'_> {
         visit: &dyn Fn(Definition<'_>) -> Option<T>,
     ) -> Option<T> {
         if let Some(target) = self.imports.qualified_name(reference) {
-            let (module, symbol) = target.rsplit_once('.')?;
-            let module = if module.is_empty() && target.starts_with('.') {
-                "."
-            } else {
-                module
-            };
-            let paths = module_paths(self.path, module)?;
-            let path = self.import_path(&paths)?;
-            let source = std::str::from_utf8(self.context.source.get(&path)).ok()?;
-            let tree = PythonFrontend::new().parse(source).ok()?;
-            let root = tree.root_node();
-            let decl = direct_definition(root, symbol, source)?;
-            let imports = Imports::new(root, source);
-            return visit(Definition {
-                node: decl,
-                source,
-                imports: &imports,
-                path: &path,
-            });
+            return self.with_imported_definition(&target, visit);
         }
         let decl = visible_definition(reference, name(reference, self.source)?, self.source)?;
         visit(self.definition(decl))
+    }
+
+    fn with_imported_definition<T>(
+        &self,
+        target: &str,
+        visit: &dyn Fn(Definition<'_>) -> Option<T>,
+    ) -> Option<T> {
+        let (module, symbol) = target.rsplit_once('.')?;
+        let module = if module.is_empty() && target.starts_with('.') {
+            "."
+        } else {
+            module
+        };
+        let paths = module_paths(self.path, module)?;
+        let path = self.import_path(&paths)?;
+        let source = std::str::from_utf8(self.context.source.get(&path)).ok()?;
+        let tree = PythonFrontend::new().parse(source).ok()?;
+        let root = tree.root_node();
+        let decl = direct_definition(root, symbol, source)?;
+        let imports = Imports::new(root, source);
+        visit(Definition {
+            node: decl,
+            source,
+            imports: &imports,
+            path: &path,
+        })
     }
 
     fn definition<'a>(&'a self, node: Node<'a>) -> Definition<'a> {

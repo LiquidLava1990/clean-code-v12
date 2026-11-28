@@ -62,28 +62,46 @@ impl Rule for UnboundedDetailTextRule {
     }
 }
 
+type SinkParts<'s, 'tree> = (Option<&'s str>, Node<'tree>);
+
+fn sink_parts<'s, 'tree>(sink: Node<'tree>, syntax: &Syntax<'s>) -> Option<SinkParts<'s, 'tree>> {
+    match sink.kind() {
+        "assignment" => assignment_parts(sink, syntax),
+        "pair" => pair_parts(sink, syntax),
+        "keyword_argument" => keyword_parts(sink, syntax),
+        _ => Some((None, sink)),
+    }
+}
+
+fn pair_parts<'s, 'tree>(sink: Node<'tree>, syntax: &Syntax<'s>) -> Option<SinkParts<'s, 'tree>> {
+    let label = detail_key(field(sink, "key")?, syntax)?;
+    Some((Some(label), field(sink, "value")?))
+}
+
+fn keyword_parts<'s, 'tree>(
+    sink: Node<'tree>,
+    syntax: &Syntax<'s>,
+) -> Option<SinkParts<'s, 'tree>> {
+    let label = text(field(sink, "name")?, syntax.source);
+    Some((Some(label), field(sink, "value")?))
+}
+
+fn assignment_parts<'s, 'tree>(
+    sink: Node<'tree>,
+    syntax: &Syntax<'s>,
+) -> Option<SinkParts<'s, 'tree>> {
+    let (target, value) = assigned_sink(sink, syntax.imports)?;
+    let label = if target.kind() == "attribute" {
+        name(target, syntax.source)?
+    } else {
+        detail_key(target, syntax)?
+    };
+    Some((Some(label), value))
+}
+
 fn check_sink(syntax: &Syntax<'_>, sink: Node<'_>) -> Option<Finding> {
     let source = syntax.source;
-    let (destination, value) = match sink.kind() {
-        "assignment" => {
-            let (target, value) = assigned_sink(sink, syntax.imports)?;
-            let label = if target.kind() == "attribute" {
-                name(target, source)?
-            } else {
-                detail_key(target, syntax)?
-            };
-            (Some(label), value)
-        }
-        "pair" => (
-            Some(detail_key(field(sink, "key")?, syntax)?),
-            field(sink, "value")?,
-        ),
-        "keyword_argument" => (
-            Some(text(field(sink, "name")?, source)),
-            field(sink, "value")?,
-        ),
-        _ => (None, sink),
-    };
+    let (destination, value) = sink_parts(sink, syntax)?;
     let input = unbounded_input(value, syntax, 48)?;
     let label = match destination {
         Some(label) if detail_name(label) => label.into(),
@@ -154,21 +172,11 @@ fn unbounded_input<'s>(value: Node<'_>, syntax: &Syntax<'s>, depth: usize) -> Op
     let nested = |node| unbounded_input(node, syntax, remaining);
     let value = unparenthesized(value);
     match value.kind() {
-        "identifier" => nested(field(
-            python_calls::identifier_assignment(value, syntax.imports)?,
-            "right",
-        )?),
-        "interpolation" | "format_expression" => {
-            let expression = field(value, "expression")?;
-            risky_name(expression, syntax.source, syntax.imports, remaining)
-                .or_else(|| nested(expression))
-        }
+        "identifier" => nested(assigned_value(value, syntax)?),
+        "interpolation" | "format_expression" => unbounded_interpolation(value, syntax, remaining),
         "call" => unbounded_call(value, syntax, remaining),
         "subscript" if !has_slice_bound(value) => nested(field(value, "value")?),
-        "conditional_expression" => {
-            let mut expressions = children(value).filter(|child| child.kind() != "comment");
-            nested(expressions.next()?).or_else(|| nested(expressions.last()?))
-        }
+        "conditional_expression" => unbounded_branch(value, syntax, remaining),
         "string"
         | "concatenated_string"
         | "binary_operator"
@@ -178,6 +186,34 @@ fn unbounded_input<'s>(value: Node<'_>, syntax: &Syntax<'s>, depth: usize) -> Op
         "keyword_argument" => nested(field(value, "value")?),
         _ => None,
     }
+}
+
+fn assigned_value<'tree>(identifier: Node<'tree>, syntax: &Syntax<'_>) -> Option<Node<'tree>> {
+    field(
+        python_calls::identifier_assignment(identifier, syntax.imports)?,
+        "right",
+    )
+}
+
+fn unbounded_interpolation<'s>(
+    value: Node<'_>,
+    syntax: &Syntax<'s>,
+    depth: usize,
+) -> Option<&'s str> {
+    let expression = field(value, "expression")?;
+    risky_name(expression, syntax.source, syntax.imports, depth)
+        .or_else(|| unbounded_input(expression, syntax, depth))
+}
+
+fn unbounded_branch<'s>(
+    conditional: Node<'_>,
+    syntax: &Syntax<'s>,
+    depth: usize,
+) -> Option<&'s str> {
+    let mut expressions = children(conditional).filter(|child| child.kind() != "comment");
+    let first = expressions.next()?;
+    unbounded_input(first, syntax, depth)
+        .or_else(|| unbounded_input(expressions.last()?, syntax, depth))
 }
 
 fn unbounded_call<'s>(call: Node<'_>, syntax: &Syntax<'s>, depth: usize) -> Option<&'s str> {

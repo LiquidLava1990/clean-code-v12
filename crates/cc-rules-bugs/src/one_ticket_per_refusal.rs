@@ -211,24 +211,34 @@ fn records_key(step: Node<'_>, key: Node<'_>, container: Node<'_>, source: &str)
     })
 }
 
-fn recorded_key<'tree>(operation: Node<'tree>, source: &str) -> Option<(Node<'tree>, Node<'tree>)> {
+type KeyedWrite<'tree> = (Node<'tree>, Node<'tree>);
+
+fn recorded_key<'tree>(operation: Node<'tree>, source: &str) -> Option<KeyedWrite<'tree>> {
     match operation.kind() {
-        "call" => {
-            let callee = field(operation, "function")?;
-            if !matches!(name(callee, source), Some("add" | "append" | "setdefault")) {
-                return None;
-            }
-            let args = field(operation, "arguments")?;
-            let key = children(args).find(|node| node.kind() != "comment")?;
-            Some((field(callee, "object")?, key))
-        }
-        "assignment" => {
-            field(operation, "right")?;
-            let target = field(operation, "left").filter(|node| node.kind() == "subscript")?;
-            Some((field(target, "value")?, field(target, "subscript")?))
-        }
+        "call" => recorded_call_key(operation, source),
+        "assignment" => recorded_assignment_key(operation),
         _ => None,
     }
+}
+
+fn recorded_call_key<'tree>(call: Node<'tree>, source: &str) -> Option<KeyedWrite<'tree>> {
+    let callee = field(call, "function")?;
+    if !matches!(name(callee, source), Some("add" | "append" | "setdefault")) {
+        return None;
+    }
+    let key = first_argument(call)?;
+    Some((field(callee, "object")?, key))
+}
+
+fn first_argument(call: Node<'_>) -> Option<Node<'_>> {
+    let args = field(call, "arguments")?;
+    children(args).find(|node| node.kind() != "comment")
+}
+
+fn recorded_assignment_key(assignment: Node<'_>) -> Option<KeyedWrite<'_>> {
+    field(assignment, "right")?;
+    let target = field(assignment, "left").filter(|node| node.kind() == "subscript")?;
+    Some((field(target, "value")?, field(target, "subscript")?))
 }
 
 fn is_dedupe_setup(step: Node<'_>, source: &str) -> bool {
