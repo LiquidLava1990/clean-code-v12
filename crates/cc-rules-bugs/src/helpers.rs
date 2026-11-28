@@ -65,7 +65,7 @@ pub(crate) fn location_from_node(batch: &CpgWriteBatch, id: NodeId, file: Utf8Pa
 /// True iff `path` looks like a test file across the four supported
 /// languages.
 #[must_use]
-pub(crate) fn is_test_file_path(path: &Utf8PathBuf) -> bool {
+pub(crate) fn is_test_file_path(path: &camino::Utf8Path) -> bool {
     let s = path.as_str().replace('\\', "/");
     let lower = s.to_ascii_lowercase();
     if has_test_segment(&lower) {

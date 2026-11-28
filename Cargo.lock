@@ -240,7 +240,7 @@ dependencies = [
 
 [[package]]
 name = "cc-baseline"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -255,7 +255,7 @@ dependencies = [
 
 [[package]]
 name = "cc-cli"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -280,7 +280,7 @@ dependencies = [
 
 [[package]]
 name = "cc-config"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -294,7 +294,7 @@ dependencies = [
 
 [[package]]
 name = "cc-cpg"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ahash",
  "anyhow",
@@ -309,7 +309,7 @@ dependencies = [
 
 [[package]]
 name = "cc-cpg-store"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "bincode",
@@ -326,7 +326,7 @@ dependencies = [
 
 [[package]]
 name = "cc-diagnostics"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -337,7 +337,7 @@ dependencies = [
 
 [[package]]
 name = "cc-finding"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -353,7 +353,7 @@ dependencies = [
 
 [[package]]
 name = "cc-fingerprint"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ahash",
  "anyhow",
@@ -367,7 +367,7 @@ dependencies = [
 
 [[package]]
 name = "cc-frontend"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ahash",
  "anyhow",
@@ -381,7 +381,7 @@ dependencies = [
 
 [[package]]
 name = "cc-frontend-go"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -397,7 +397,7 @@ dependencies = [
 
 [[package]]
 name = "cc-frontend-python"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -413,7 +413,7 @@ dependencies = [
 
 [[package]]
 name = "cc-frontend-rust"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -429,7 +429,7 @@ dependencies = [
 
 [[package]]
 name = "cc-frontend-typescript"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -445,7 +445,7 @@ dependencies = [
 
 [[package]]
 name = "cc-incremental"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -469,7 +469,7 @@ dependencies = [
 
 [[package]]
 name = "cc-kernel"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -526,7 +526,7 @@ dependencies = [
 
 [[package]]
 name = "cc-llm"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "cc-finding",
@@ -540,7 +540,7 @@ dependencies = [
 
 [[package]]
 name = "cc-lsp"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -566,7 +566,7 @@ dependencies = [
 
 [[package]]
 name = "cc-mcp"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -616,7 +616,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rdformat"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -630,7 +630,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -645,7 +645,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-anti-fragility"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -661,7 +661,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-api"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -677,7 +677,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-architecture"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -694,7 +694,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-bugs"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -702,15 +702,17 @@ dependencies = [
  "cc-cpg",
  "cc-finding",
  "cc-frontend",
+ "cc-frontend-python",
  "cc-rules",
  "serde",
  "thiserror",
  "tracing",
+ "tree-sitter",
 ]
 
 [[package]]
 name = "cc-rules-ci"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -726,7 +728,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-completeness"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -743,7 +745,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-compliance"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -759,7 +761,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-concurrency"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -775,7 +777,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-conventions"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -792,7 +794,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-database"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -808,7 +810,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-deploy"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -824,7 +826,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-docs"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -840,7 +842,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-formatting"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -858,7 +860,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-history"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -874,7 +876,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-i18n-a11y"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -890,7 +892,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-iac"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -908,7 +910,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-memory"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -924,7 +926,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-modernize"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -940,7 +942,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-observability"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -956,7 +958,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-ops"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -972,7 +974,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-perf"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -988,7 +990,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-secrets"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1006,7 +1008,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-slop"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1025,7 +1027,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-supplychain"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1041,7 +1043,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-taint"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1059,7 +1061,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-test-design"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1075,7 +1077,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-tests"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1091,7 +1093,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-tier0"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1109,7 +1111,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-time-math"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1127,7 +1129,7 @@ dependencies = [
 
 [[package]]
 name = "cc-rules-types"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1143,7 +1145,7 @@ dependencies = [
 
 [[package]]
 name = "cc-runtime"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1157,7 +1159,7 @@ dependencies = [
 
 [[package]]
 name = "cc-sarif"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1172,7 +1174,7 @@ dependencies = [
 
 [[package]]
 name = "cc-score"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1186,7 +1188,7 @@ dependencies = [
 
 [[package]]
 name = "cc-test-fixtures"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",
@@ -1262,7 +1264,7 @@ checksum = "c8d4a3bb8b1e0c1050499d1815f5ab16d04f0959b233085fb31653fbfc9d98f9"
 
 [[package]]
 name = "clean-code-v12"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "cc-cli",
  "clap",
@@ -1580,7 +1582,7 @@ dependencies = [
 
 [[package]]
 name = "gen-pack-manifests"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "camino",

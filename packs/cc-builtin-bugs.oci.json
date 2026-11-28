@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "mediaType": "application/vnd.cleancode.v12.rulepack.v1+json",
   "name": "cc-builtin-bugs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "kernel-api": {
     "min": 1,
     "max": null
@@ -58,24 +58,27 @@
     "cc.bug.govet_nilness_check",
     "cc.bug.govet_printf_format",
     "cc.bug.govet_struct_tag_well_formed",
-    "cc.bug.python_assert_in_production"
+    "cc.bug.python_assert_in_production",
+    "cc.bug.callout_under_lock",
+    "cc.bug.one_ticket_per_refusal",
+    "cc.bug.unbounded_detail_text"
   ],
   "sources": [
     {
       "language": "python",
-      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.2.0"
     },
     {
       "language": "typescript",
-      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.2.0"
     },
     {
       "language": "go",
-      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.2.0"
     },
     {
       "language": "rust",
-      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.1.0"
+      "url": "ghcr.io/liquidlava1990/cc-builtin-bugs:0.2.0"
     }
   ]
 }

@@ -103,7 +103,7 @@ order. Probe counts come from `gen-pack-manifests`'s output:
 | `cc-builtin-secrets` | 21 |
 | `cc-builtin-perf` | 24 |
 | `cc-builtin-completeness` | 30 |
-| `cc-builtin-bugs` | 51 |
+| `cc-builtin-bugs` | 54 |
 | `cc-builtin-concurrency` | 9 |
 | `cc-builtin-time-math` | 5 |
 | `cc-builtin-taint` | 15 |
@@ -128,7 +128,7 @@ order. Probe counts come from `gen-pack-manifests`'s output:
 | `cc-builtin-supplychain` | 10 |
 | `cc-builtin-formatting` | 10 |
 | `cc-builtin-iac` | 20 |
-| **total** | **391** |
+| **total** | **394** |
 
 ## Planned
 

@@ -17,6 +17,8 @@ cc-finding = { path = "../cc-finding" }
 cc-rules = { path = "../cc-rules" }
 cc-config = { path = "../cc-config" }
 cc-frontend = { path = "../cc-frontend" }
+cc-frontend-python = { path = "../cc-frontend-python" }
+tree-sitter.workspace = true
 
 [lints]
 workspace = true

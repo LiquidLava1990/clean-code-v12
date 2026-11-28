@@ -1,4 +1,4 @@
-//! [`BuiltinBugsPack`] — registers the fifty-one Family-3 probes.
+//! [`BuiltinBugsPack`] — registers the fifty-four Family-3 probes.
 
 use cc_rules::{Rule, RulePack, KERNEL_API_VERSION};
 
@@ -10,6 +10,7 @@ use crate::assert_with_tuple::AssertWithTupleRule;
 use crate::bad_bit_mask::BadBitMaskRule;
 use crate::body_close_missing::BodyCloseMissingRule;
 use crate::broad_pytest_raises::BroadPytestRaisesRule;
+use crate::callout_under_lock::CalloutUnderLockRule;
 use crate::cast_nan_to_int::CastNanToIntRule;
 use crate::cast_possible_truncation::CastPossibleTruncationRule;
 use crate::cast_precision_loss::CastPrecisionLossRule;
@@ -44,6 +45,7 @@ use crate::mutate_during_iteration::MutateDuringIterationRule;
 use crate::nilerr::NilerrRule;
 use crate::null_propagation::NullPropagationRule;
 use crate::off_by_one::OffByOneRule;
+use crate::one_ticket_per_refusal::OneTicketPerRefusalRule;
 use crate::python_assert_in_production::PythonAssertInProductionRule;
 use crate::regex_invalid::RegexInvalidRule;
 use crate::shift_amount_oor::ShiftAmountOorRule;
@@ -51,10 +53,11 @@ use crate::state_machine::StateMachineRule;
 use crate::tick_leak::TickLeakRule;
 use crate::time_bomb::TimeBombRule;
 use crate::type_confusion::TypeConfusionRule;
+use crate::unbounded_detail_text::UnboundedDetailTextRule;
 use crate::unused_loop_variable::UnusedLoopVariableRule;
 use crate::use_after_move::UseAfterMoveRule;
 
-/// Built-in Family-3 [`RulePack`] — fifty-one probes registered at
+/// Built-in Family-3 [`RulePack`] — fifty-four probes registered at
 /// boot (Phase 3 + Phase 7 + Phase 8 + Phase 9 Python/Go/Rust + Phase
 /// 10 Python long-tail + Phase 10 Batch L cross-cutting + Phase 10
 /// Rust long-tail + Phase 11 Go govet long-tail + Phase 12 final
@@ -143,6 +146,9 @@ static GOVET_NILNESS_CHECK: GovetNilnessCheckRule = GovetNilnessCheckRule;
 static GOVET_PRINTF_FORMAT: GovetPrintfFormatRule = GovetPrintfFormatRule;
 static GOVET_STRUCT_TAG_WELL_FORMED: GovetStructTagWellFormedRule = GovetStructTagWellFormedRule;
 static PYTHON_ASSERT_IN_PRODUCTION: PythonAssertInProductionRule = PythonAssertInProductionRule;
+static CALLOUT_UNDER_LOCK: CalloutUnderLockRule = CalloutUnderLockRule;
+static ONE_TICKET_PER_REFUSAL: OneTicketPerRefusalRule = OneTicketPerRefusalRule;
+static UNBOUNDED_DETAIL_TEXT: UnboundedDetailTextRule = UnboundedDetailTextRule;
 
 static RULES: &[&'static dyn Rule] = &[
     &NULL_PROPAGATION,
@@ -204,6 +210,10 @@ static RULES: &[&'static dyn Rule] = &[
     &GOVET_PRINTF_FORMAT,
     &GOVET_STRUCT_TAG_WELL_FORMED,
     &PYTHON_ASSERT_IN_PRODUCTION,
+    // Batch 2 (Python reliability probes).
+    &CALLOUT_UNDER_LOCK,
+    &ONE_TICKET_PER_REFUSAL,
+    &UNBOUNDED_DETAIL_TEXT,
 ];
 
 impl RulePack for BuiltinBugsPack {

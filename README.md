@@ -9,7 +9,7 @@ analysis tool written in Rust.** It helps developers and teams find bugs,
 security issues, and technical debt in **Python, JavaScript, TypeScript, Go,
 and Rust** codebases — god functions, deep nesting, bare `except`, missing type
 hints, hardcoded secrets, SQL injection and other taint flows, race conditions,
-slow code, and Terraform / Kubernetes / Docker misconfigurations — with 391
+slow code, and Terraform / Kubernetes / Docker misconfigurations — with 394
 checks in one static binary. It prints a single repository health score and
 plugs into CI with SARIF, pre-commit, and a GitHub Action.
 
@@ -23,7 +23,7 @@ irm https://github.com/LiquidLava1990/clean-code-v12/releases/latest/download/in
 - **Multi-language static analysis** — one linter for Python, JavaScript, TypeScript, Go and Rust (tree-sitter parsing plus a code-property graph for dataflow).
 - **Code quality and clean-code rules** — function length, cyclomatic and cognitive complexity, nesting depth, duplication, dead code, naming, type coverage.
 - **Security scanning (SAST)** — secret detection, taint analysis for SQL injection, command injection, SSRF and path traversal, supply-chain checks.
-- **Bug and performance detection** — 51 correctness probes, concurrency and race checks, N+1 queries, performance smells.
+- **Bug and performance detection** — 54 correctness probes, concurrency and race checks, N+1 queries, performance smells.
 - **Infrastructure-as-code checks** — Terraform, Kubernetes and Dockerfile misconfigurations.
 - **Technical-debt tracking** — one health score per repo, baselines so only new findings fail CI, git-history hotspots.
 - **CI/CD integration** — SARIF for GitHub code scanning, reviewdog rdjson for PR comments, JSON, pre-commit hooks, a GitHub Action.
@@ -227,7 +227,7 @@ and pytest on `PATH`; Rust / Go / TypeScript support is planned.
 
 ## Pack catalog
 
-The default build registers 30 packs / 391 probes. `cargo run -p gen-pack-manifests -- --out packs`
+The default build registers 30 packs / 394 probes. `cargo run -p gen-pack-manifests -- --out packs`
 regenerates the OCI manifests in [`packs/`](./packs/); each release pushes them to
 `ghcr.io/liquidlava1990/<pack>:<version>`.
 
@@ -238,7 +238,7 @@ regenerates the OCI manifests in [`packs/`](./packs/); each release pushes them 
 | `cc-builtin-secrets` | 21 | Secrets, config leakage, hardcoded keys |
 | `cc-builtin-perf` | 24 | Static performance smells |
 | `cc-builtin-completeness` | 30 | Structural completeness (errors, registries, events) |
-| `cc-builtin-bugs` | 51 | Off-by-one, null-deref, common correctness traps |
+| `cc-builtin-bugs` | 54 | Off-by-one, null-deref, common correctness traps |
 | `cc-builtin-concurrency` | 9 | Lock-order, races, async correctness, unclaimed shared-`data/` writes |
 | `cc-builtin-time-math` | 5 | Time + arithmetic correctness |
 | `cc-builtin-taint` | 15 | Taint flow, injection, SSRF, path traversal |

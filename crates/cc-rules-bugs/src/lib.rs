@@ -1,6 +1,6 @@
 //! `cc-rules-bugs` — Family 3 (bugs / correctness) probe pack.
 //!
-//! Phases 3 + 7 + 8 + 9 + 10 + 11 + 12 of Clean Code V12. Ships fifty-one probes.
+//! Phases 3 + 7 + 8 + 9 + 10 + 11 + 12 of Clean Code V12. Ships fifty-four probes.
 //!
 //! Phase 3 (original seven):
 //!
@@ -134,6 +134,15 @@
 //! Every public item carries doc comments (`deny(missing_docs)`), no
 //! function exceeds 50 LOC, no nesting deeper than three levels, and
 //! the crate forbids `unsafe_code`.
+//!
+//! Batch 2 (Python reliability probes, tree-sitter based):
+//!
+//! - [`callout_under_lock`]                 — external call made while a
+//!   lock is held.
+//! - [`one_ticket_per_refusal`]             — ticket filing without a
+//!   prior dedupe check.
+//! - [`unbounded_detail_text`]              — unbounded text stored in a
+//!   detail field.
 
 #![forbid(unsafe_code)]
 #![deny(missing_docs)]
@@ -146,6 +155,7 @@ pub mod assert_with_tuple;
 pub mod bad_bit_mask;
 pub mod body_close_missing;
 pub mod broad_pytest_raises;
+pub mod callout_under_lock;
 pub mod cast_nan_to_int;
 pub mod cast_possible_truncation;
 pub mod cast_precision_loss;
@@ -181,14 +191,18 @@ pub mod mutate_during_iteration;
 pub mod nilerr;
 pub mod null_propagation;
 pub mod off_by_one;
+pub mod one_ticket_per_refusal;
 mod pack;
 pub mod python_assert_in_production;
+mod python_calls;
+mod python_signatures;
 pub mod regex_invalid;
 pub mod shift_amount_oor;
 pub mod state_machine;
 pub mod tick_leak;
 pub mod time_bomb;
 pub mod type_confusion;
+pub mod unbounded_detail_text;
 pub mod unused_loop_variable;
 pub mod use_after_move;
 

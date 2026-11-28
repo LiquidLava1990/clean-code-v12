@@ -43,6 +43,7 @@
 
 mod lift;
 mod parser;
+pub mod syntax;
 
 use cc_cpg::{CpgWriteBatch, NodeId};
 use cc_frontend::{FileId, LanguageFrontend, LiftError, ParseError, TreeSitterTree};
